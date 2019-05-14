@@ -2,8 +2,6 @@
 
 namespace AvroToPhp\Compiler\Avro;
 
-use AvroToPhp\Compiler\Errors\NotImplementedException;
-
 class AvroField {
     /** @var string */
     public $name;
@@ -33,8 +31,8 @@ class AvroField {
     }
 
     private function configurePhpType() {
-        $recordClass = $this->record ? $this->record->getQualifiedPhpType() : null;
-        $this->phpType = $this->type->getPhpType($recordClass);
+        $recordType = $this->record ? $this->record->name : null;
+        $this->phpType = $this->type->getPhpType($recordType);
     }
 
     public static function fromStdClass(\stdClass $field): AvroField {

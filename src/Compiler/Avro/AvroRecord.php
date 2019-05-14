@@ -26,6 +26,9 @@ class AvroRecord
     /** @var string */
     public $phpNamespace;
 
+    /** @var string[] */
+    public $imports;
+
     public function __construct(string $namespace, string $name, ?string $doc, array $fields, string $schema)
     {
         $this->namespace = $namespace;
@@ -34,6 +37,7 @@ class AvroRecord
         $this->fields = $fields;
         $this->schema = $schema;
         $this->configurePhpNamespace();
+        $this->configureImports();
     }
 
     private function configurePhpNamespace() {
@@ -44,8 +48,18 @@ class AvroRecord
         $this->phpNamespace = join('\\', $newParts);
     }
 
+    private function configureImports() {
+        $imports = [];
+        foreach($this->fields as $field) {
+            if ($field->record) {
+                $imports[] = $field->record->getQualifiedPhpType();
+            }
+        }
+        $this->imports = $imports;
+    }
+
     public function getCompilePath(): string {
-        $namespace = preg_replace('/\./', DIRECTORY_SEPARATOR, $this->namespace);
+        $namespace = preg_replace("/\\\/", DIRECTORY_SEPARATOR, $this->phpNamespace);
         return Utils::joinPaths($namespace, $this->name.'.php');
     }
 
@@ -72,7 +86,7 @@ class AvroRecord
             return AvroField::fromStdClass($field);
         }, $record->fields);
 
-        return new self($record->namespace, $record->name, $record->doc, $fields, json_encode($record));
+        return new self($record->namespace, $record->name, $record->doc, $fields, json_encode($record, JSON_PRETTY_PRINT));
     }
 
 }

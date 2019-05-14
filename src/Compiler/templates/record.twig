@@ -1,6 +1,12 @@
 <?php
 
 namespace {{ record.phpNamespace }};
+{% for import in record.imports %}
+{% if loop.first %}
+
+{% endif %}
+use {{ import }};
+{% endfor %}
 
 class {{ record.name }} {
 
