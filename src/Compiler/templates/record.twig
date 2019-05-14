@@ -1,0 +1,34 @@
+<?php
+{# Format namespace #}
+{% set parts = record.namespace|split('.') %}
+{% set newParts = [] %}
+{% for part in parts %}
+    {%- set newParts = newParts|merge([part|capitalize]) %}
+{% endfor %}
+
+namespace {{ newParts|join('\\') }};
+
+class {{ record.name }} {
+
+    {% for field in record.fields -%}
+    /** @var {{ field.phpType }} */
+    private ${{ field.name }};
+
+    {% endfor -%}
+
+    {% for field in record.fields -%}
+    public function set{{ field.name | capitalize }}({{ field.phpType }} ${{ field.name }}): {{ record.name }} {
+        $this->{{ field.name }} = ${{ field.name }};
+        return $this;
+    }
+
+    public function get{{ field.name | capitalize }}(): {{ field.phpType }} {
+        return $this->{{ field.name }};
+    }
+
+    {% endfor -%}
+    public const schema = <<<SCHEMA
+{{ record.schema|raw }}
+SCHEMA;
+
+}
