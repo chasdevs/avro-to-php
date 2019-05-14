@@ -7,7 +7,7 @@ use PHPUnit\Framework\TestCase;
 class CompilerTest extends TestCase
 {
 
-    private const avscDir = '../fixtures/avsc';
+    private const avscDir = '../fixtures/avsc/sample-events';
     private const avscFile = '../fixtures/avsc/ExampleEvent.avsc';
     private const outDir = '../data/compiled';
 

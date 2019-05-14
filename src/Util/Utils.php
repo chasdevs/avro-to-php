@@ -6,20 +6,18 @@ use RecursiveDirectoryIterator;
 use RecursiveIteratorIterator;
 use RegexIterator;
 
-class Utils {
+class Utils
+{
 
     /**
      * @param string $path
      * @throws \Throwable
      */
-    static function ensureDir(string $path): void {
-        try {
-            $path = preg_match('/\.\w+$/', $path) ?  dirname($path) : $path;
+    static function ensureDir(string $path): void
+    {
+        $path = preg_match('/\.\w+$/', $path) ? dirname($path) : $path;
+        if (!file_exists($path)) {
             mkdir($path, 0777, true);
-        } catch (\Throwable $t) {
-            if (!preg_match('/File exists/', $t->getMessage())) {
-                throw $t;
-            }
         }
     }
 
@@ -28,22 +26,26 @@ class Utils {
      * @param string ...$paths
      * @return string
      */
-    static function joinPaths(string ...$paths): string {
+    static function joinPaths(string ...$paths): string
+    {
         $filteredPaths = [];
 
         foreach ($paths as $path) {
-            if ($path !== '') { $filteredPaths[] = $path; }
+            if ($path !== '') {
+                $filteredPaths[] = $path;
+            }
         }
 
-        return preg_replace('#/+#',DIRECTORY_SEPARATOR, join(DIRECTORY_SEPARATOR, $filteredPaths));
+        return preg_replace('#/+#', DIRECTORY_SEPARATOR, join(DIRECTORY_SEPARATOR, $filteredPaths));
     }
 
-    static function find(string $folder, ?string $pattern = '/.*/') {
+    static function find(string $folder, ?string $pattern = '/.*/')
+    {
         $dir = new RecursiveDirectoryIterator($folder);
         $ite = new RecursiveIteratorIterator($dir);
         $files = new RegexIterator($ite, $pattern, RegexIterator::GET_MATCH);
         $fileList = array();
-        foreach($files as $file) {
+        foreach ($files as $file) {
             $fileList = array_merge($fileList, $file);
         }
         return $fileList;
@@ -53,11 +55,10 @@ class Utils {
      * @param string $path
      * @throws \Throwable
      */
-    static function rmDir(string $path): void {
-        try {
+    static function rmDir(string $path): void
+    {
+        if (file_exists($path)) {
             rmdir($path);
-        } catch (\Throwable $t) {
-            throw $t;
         }
     }
 }

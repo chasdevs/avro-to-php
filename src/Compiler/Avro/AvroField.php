@@ -2,6 +2,8 @@
 
 namespace AvroToPhp\Compiler\Avro;
 
+use AvroToPhp\Compiler\Errors\NotImplementedException;
+
 class AvroField {
     /** @var string */
     public $name;
@@ -26,6 +28,10 @@ class AvroField {
     }
 
     public static function fromStdClass(\stdClass $field): AvroField {
+        if (is_object($field->type)) {
+            throw new NotImplementedException('Need to implement sub-records');
+        }
+
         return new self($field->name, $field->doc, new AvroType($field->type), $field->default);
     }
 }
