@@ -20,7 +20,7 @@ class Compiler
     public function compile(string $sourceDir, string $outDir): void {
 
         // Find all avsc files.
-        $avscFiles = Utils::rsearch($sourceDir, '/.*\.avsc$/');
+        $avscFiles = Utils::find($sourceDir, '/.*\.avsc$/');
 
         // Compile each avsc file.
         foreach ($avscFiles as $avscFile) {
