@@ -1,0 +1,24 @@
+{
+  "type" : "record",
+  "name" : "UserEvent",
+  "namespace" : "sample.user",
+  "fields" : [ {
+    "name" : "meta",
+    "type" : {
+      "type" : "record",
+      "name" : "SharedMeta",
+      "namespace" : "sample.common",
+      "fields" : [ {
+        "name" : "uuid",
+        "type" : "string"
+      } ]
+    }
+  }, {
+    "name" : "userId",
+    "type" : "int"
+  }, {
+    "name" : "name",
+    "type" : "string",
+    "default" : ""
+  } ]
+}

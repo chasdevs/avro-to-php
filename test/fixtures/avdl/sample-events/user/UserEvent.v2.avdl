@@ -1,0 +1,9 @@
+@namespace("sample.user.v1")
+protocol SampleEvents {
+  import idl "../common/SharedMeta.v1.avdl";
+  record UserEvent {
+    sample.common.SharedMeta meta;
+    int userId;
+    string name = "";
+  }
+}
