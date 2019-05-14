@@ -1,6 +1,6 @@
 <?php
 
-namespace StoryblocksEvents\Compiler\Avro;
+namespace AvroToPhp\Compiler\Avro;
 
 use MyCLabs\Enum\Enum;
 

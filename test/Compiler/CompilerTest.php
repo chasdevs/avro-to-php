@@ -1,6 +1,6 @@
 <?php
 
-use StoryblocksEvents\Compiler\Compiler;
+use AvroToPhp\Compiler\Compiler;
 use PHPUnit\Framework\TestCase;
 
 class CompilerTest extends TestCase {

@@ -1,8 +1,8 @@
 <?php
 
-namespace StoryblocksEvents\Compiler\Avro;
+namespace AvroToPhp\Compiler\Avro;
 
-use StoryblocksEvents\Compiler\Errors\NotImplementedException;
+use AvroToPhp\Compiler\Errors\NotImplementedException;
 
 class AvroRecord
 {

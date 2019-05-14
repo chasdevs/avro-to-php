@@ -1,6 +1,6 @@
 <?php
 
-namespace StoryblocksEvents\Compiler\Avro;
+namespace AvroToPhp\Compiler\Avro;
 
 class AvroField {
     /** @var string */

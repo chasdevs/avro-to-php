@@ -1,8 +1,8 @@
 <?php 
 
-namespace StoryblocksEvents\Compiler;
+namespace AvroToPhp\Compiler;
 
-use StoryblocksEvents\Compiler\Avro\AvroRecord;
+use AvroToPhp\Compiler\Avro\AvroRecord;
 use Twig\Environment;
 use Twig\Loader\FilesystemLoader;
 use Twig\TemplateWrapper;
