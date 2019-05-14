@@ -1,15 +1,32 @@
 <?php
 
 use AvroToPhp\Compiler\Compiler;
+use AvroToPhp\Util\Utils;
 use PHPUnit\Framework\TestCase;
 
 class CompilerTest extends TestCase {
 
-    private $avscFile = '../fixtures/avsc/ExampleEvent.avsc';
+    private const avscDir = '../fixtures/avsc';
+    private const avscFile = '../fixtures/avsc/ExampleEvent.avsc';
+    private const outDir = '../data';
 
     public function testCompile() {
         $compiler = new Compiler();
-        $output = $compiler->avscFileToPhp($this->avscFile);
+        $compiler->compile(self::avscDir, self::outDir);
+
+        // verify folder structure
+        $output = Utils::rsearch(self::outDir, '/^[^\.]/');
+        var_dump($output);
+        $this->assertEquals([], $output);
+
+        // verify file contents
+
+        $this->fail('WIP');
+    }
+
+    public function testCompileFile() {
+        $compiler = new Compiler();
+        $output = $compiler->compileFile(self::avscFile);
         $expected = file_get_contents('../fixtures/expected/ExampleEvent.php');
         $this->assertIsString($output);
 

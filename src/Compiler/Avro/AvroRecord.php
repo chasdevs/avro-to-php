@@ -3,6 +3,7 @@
 namespace AvroToPhp\Compiler\Avro;
 
 use AvroToPhp\Compiler\Errors\NotImplementedException;
+use AvroToPhp\Util\Utils;
 
 class AvroRecord
 {
@@ -29,6 +30,11 @@ class AvroRecord
         $this->doc = $doc;
         $this->fields = $fields;
         $this->schema = $schema;
+    }
+
+    public function getCompilePath(): string {
+        $namespace = preg_replace('/\./', DIRECTORY_SEPARATOR, $this->namespace);
+        return Utils::joinPaths($namespace, $this->name.'.php');
     }
 
     /**

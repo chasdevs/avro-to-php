@@ -9,6 +9,20 @@ use RegexIterator;
 class Utils {
 
     /**
+     * @param string $path
+     * @throws \Throwable
+     */
+    static function ensureDir(string $path): void {
+        try {
+            mkdir(dirname($path), 0777, true);
+        } catch (\Throwable $t) {
+            if (!preg_match('/File exists/', $t->getMessage())) {
+                throw $t;
+            }
+        }
+    }
+
+    /**
      * @see https://stackoverflow.com/a/15575293
      * @param string ...$paths
      * @return string
