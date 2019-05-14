@@ -24,7 +24,6 @@ class CompilerTest extends TestCase
 
         // verify folder structure
         $output = Utils::find(self::outDir, '/^[^\.]/');
-        var_dump($output);
         $this->assertEquals([], $output);
 
         // verify file contents
