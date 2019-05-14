@@ -8,7 +8,22 @@ use RegexIterator;
 
 class Utils {
 
-    static function rsearch(string $folder, string $pattern) {
+    /**
+     * @see https://stackoverflow.com/a/15575293
+     * @param string ...$paths
+     * @return string
+     */
+    static function joinPaths(string ...$paths): string {
+        $filteredPaths = [];
+
+        foreach ($paths as $path) {
+            if ($path !== '') { $filteredPaths[] = $path; }
+        }
+
+        return preg_replace('#/+#',DIRECTORY_SEPARATOR, join(DIRECTORY_SEPARATOR, $filteredPaths));
+    }
+
+    static function rsearch(string $folder, ?string $pattern = '/.*/') {
         $dir = new RecursiveDirectoryIterator($folder);
         $ite = new RecursiveIteratorIterator($dir);
         $files = new RegexIterator($ite, $pattern, RegexIterator::GET_MATCH);
