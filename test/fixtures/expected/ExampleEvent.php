@@ -14,37 +14,43 @@ class ExampleEvent
     /** @var int */
     private $salary;
 
+    /** @return string */
+    public function getName(): string
+    {
+        return $this->name;
+    }
+
+    /** @param string $name */
     public function setName(string $name): ExampleEvent
     {
         $this->name = $name;
         return $this;
     }
 
-    public function getName(): string
+    /** @return bool */
+    public function getActive(): bool
     {
-        return $this->name;
+        return $this->active;
     }
 
+    /** @param bool $active */
     public function setActive(bool $active): ExampleEvent
     {
         $this->active = $active;
         return $this;
     }
 
-    public function getActive(): bool
+    /** @return int */
+    public function getSalary(): int
     {
-        return $this->active;
+        return $this->salary;
     }
 
+    /** @param int $salary */
     public function setSalary(int $salary): ExampleEvent
     {
         $this->salary = $salary;
         return $this;
-    }
-
-    public function getSalary(): int
-    {
-        return $this->salary;
     }
 
     public const schema = <<<SCHEMA
