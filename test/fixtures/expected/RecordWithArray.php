@@ -31,8 +31,27 @@ class RecordWithArray {
     "namespace": "testrecords",
     "fields": [
         {
-            "name": "salary",
-            "type": "long"
+            "name": "things",
+            "type": {
+                "type": "array",
+                "items": {
+                    "type": "record",
+                    "name": "Thing",
+                    "fields": [
+                        {
+                            "name": "id",
+                            "type": "int"
+                        }
+                    ]
+                }
+            }
+        },
+        {
+            "name": "numbers",
+            "type": {
+                "type": "array",
+                "items": "int"
+            }
         }
     ]
 }
