@@ -22,12 +22,21 @@ class Utils
     }
 
     /**
+     * Gets the realpath of the provided combined paths. If a relative link, it will assume relative to the cwd.
+     * @param string ...$paths
+     * @return string
+     */
+    static function resolve(string ...$paths): string
+    {
+        return realpath(self::joinPaths(...$paths));
+    }
+
+    /**
      * @see https://stackoverflow.com/a/15575293
      * @param string ...$paths
      * @return string
      */
-    static function joinPaths(string ...$paths): string
-    {
+    static function joinPaths(string ...$paths): string {
         $filteredPaths = [];
 
         foreach ($paths as $path) {
@@ -48,7 +57,7 @@ class Utils
         $ignored = ['.', '..', '.gitignore'];
         foreach ($files as $file) {
             if (!in_array(basename($file[0]), $ignored)) {
-                $fileList[] = $file[0];
+                $fileList[] = self::resolve($file[0]);
             }
         }
         return $fileList;
@@ -61,6 +70,8 @@ class Utils
      */
     static function rmDir(string $dir): bool
     {
+        $dir = self::resolve($dir);
+
         if (!file_exists($dir)) {
             return true;
         }

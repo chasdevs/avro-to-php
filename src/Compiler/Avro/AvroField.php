@@ -33,7 +33,7 @@ class AvroField {
 
     public static function create(\stdClass $field): AvroField {
         $type = AvroTypeFactory::create($field->type);
-        return new AvroField($field->name, $field->doc, $type, $field->default);
+        return new AvroField($field->name, $field->doc ?? null, $type, $field->default ?? null);
     }
 
 }
