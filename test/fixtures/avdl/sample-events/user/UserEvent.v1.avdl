@@ -3,7 +3,6 @@ protocol SampleEvents {
   import idl "../common/SharedMeta.v1.avdl";
   record UserEvent {
     sample.common.SharedMeta meta;
-    array<sample.common.SharedMeta> searchResults;
     int userId;
   }
 }

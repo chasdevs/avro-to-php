@@ -14,12 +14,6 @@
       } ]
     }
   }, {
-    "name" : "searchResults",
-    "type" : {
-      "type" : "array",
-      "items" : "sample.common.SharedMeta"
-    }
-  }, {
     "name" : "userId",
     "type" : "int"
   } ]
