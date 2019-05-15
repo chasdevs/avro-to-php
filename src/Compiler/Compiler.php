@@ -7,6 +7,7 @@ use AvroToPhp\Util\Utils;
 use Twig\Environment;
 use Twig\Loader\FilesystemLoader;
 use Twig\TemplateWrapper;
+use Twig\TwigFilter;
 
 class Compiler
 {
@@ -54,6 +55,7 @@ class Compiler
     private function configureTwig(): TemplateWrapper {
         $loader = new FilesystemLoader(__DIR__.'/templates');
         $twig = new Environment($loader);
+        $twig->addFilter(new TwigFilter('ucFirst', 'ucFirst'));
         $template = $twig->load('record.twig');
         return $template;
     }

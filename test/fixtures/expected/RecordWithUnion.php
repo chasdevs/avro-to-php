@@ -7,18 +7,17 @@ class RecordWithUnion
     private $optionalString;
 
     /** @return string|null */
-    public function getOptionalString(): ?string
+    public function getOptionalString()
     {
         return $this->optionalString;
     }
 
     /** @param string|null $optionalString */
-    public function setOptionalString(?string $optionalString): RecordWithUnion
+    public function setOptionalString($optionalString): RecordWithUnion
     {
         $this->optionalString = $optionalString;
         return $this;
     }
-
 
     public const schema = <<<SCHEMA
 {
@@ -27,7 +26,10 @@ class RecordWithUnion
     "fields": [
         {
             "name": "optionalString",
-            "type" : [ "string", "null" ]
+            "type": [
+                "string",
+                "null"
+            ]
         }
     ]
 }

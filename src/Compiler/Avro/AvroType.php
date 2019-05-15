@@ -17,6 +17,7 @@ use MyCLabs\Enum\Enum;
  * @method static AvroType ARRAY()
  * @method static AvroType MAP()
  * @method static AvroType FIXED()
+ * @method static AvroType NULL()
  */
 class AvroType extends Enum implements AvroTypeInterface
 {
@@ -29,6 +30,7 @@ class AvroType extends Enum implements AvroTypeInterface
     private const DOUBLE = 'double';
     private const BYTES = 'bytes';
     private const STRING = 'string';
+    private const NULL = 'null';
 
     // Complex Types
     private const RECORD = 'record';
@@ -49,7 +51,8 @@ class AvroType extends Enum implements AvroTypeInterface
             self::FLOAT => 'float',
             self::DOUBLE => 'float',
             self::BYTES => 'string',
-            self::STRING => 'string'
+            self::STRING => 'string',
+            self::NULL => 'null'
         ];
         return $map[$this->getValue()];
     }
