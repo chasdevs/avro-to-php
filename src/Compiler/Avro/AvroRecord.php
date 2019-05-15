@@ -51,8 +51,8 @@ class AvroRecord implements AvroTypeInterface
     private function configureImports() {
         $imports = [];
         foreach($this->fields as $field) {
-            if ($field->ref) {
-                $imports[] = $field->ref->getQualifiedPhpType();
+            if ($field->type instanceof AvroRecord) {
+                $imports[] = $field->type->getQualifiedPhpType();
             }
         }
         $this->imports = $imports;
@@ -84,11 +84,11 @@ class AvroRecord implements AvroTypeInterface
     }
 
     public static function create(\stdClass $record): AvroRecord {
-        if ($record->order) {
+        if (isset($record->order)) {
             throw new NotImplementedException('order field not implemented in compiler.');
         }
 
-        if ($record->aliases) {
+        if (isset($record->aliases)) {
             throw new NotImplementedException('aliases field not implemented in compiler.');
         }
 
@@ -96,6 +96,6 @@ class AvroRecord implements AvroTypeInterface
             return AvroField::create($field);
         }, $record->fields);
 
-        return new self($record->name, $record->namespace, $record->doc, $fields, json_encode($record, JSON_PRETTY_PRINT));
+        return new self($record->name, $record->namespace ?? null, $record->doc ?? null, $fields, json_encode($record, JSON_PRETTY_PRINT));
     }
 }
