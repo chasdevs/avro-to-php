@@ -5,14 +5,14 @@ namespace AvroToPhp\Compiler\Avro;
 use AvroToPhp\Compiler\Errors\NotImplementedException;
 use AvroToPhp\Util\Utils;
 
-class AvroRecord
+class AvroRecord implements AvroTypeInterface
 {
 
     /** @var string */
-    public $namespace;
-
-    /** @var string */
     public $name;
+
+    /** @var string|null */
+    public $namespace;
 
     /** @var string */
     public $doc;
@@ -29,10 +29,10 @@ class AvroRecord
     /** @var string[] */
     public $imports;
 
-    public function __construct(string $namespace, string $name, ?string $doc, array $fields, string $schema)
+    public function __construct(string $name, ?string $namespace, ?string $doc, array $fields, string $schema)
     {
-        $this->namespace = $namespace;
         $this->name = $name;
+        $this->namespace = $namespace;
         $this->doc = $doc;
         $this->fields = $fields;
         $this->schema = $schema;
@@ -51,8 +51,8 @@ class AvroRecord
     private function configureImports() {
         $imports = [];
         foreach($this->fields as $field) {
-            if ($field->record) {
-                $imports[] = $field->record->getQualifiedPhpType();
+            if ($field->ref) {
+                $imports[] = $field->ref->getQualifiedPhpType();
             }
         }
         $this->imports = $imports;
@@ -67,13 +67,18 @@ class AvroRecord
         return $this->phpNamespace . '\\' . $this->name;
     }
 
+    public function getPhpType(): string
+    {
+        return $this->name;
+    }
+
     public static function parse(string $json): AvroRecord
     {
         $decoded = json_decode($json);
-        return self::fromStdClass($decoded, $json);
+        return self::create($decoded, $json);
     }
 
-    public static function fromStdClass(\stdClass $record): AvroRecord {
+    public static function create(\stdClass $record): AvroRecord {
         if ($record->order) {
             throw new NotImplementedException('order field not implemented in compiler.');
         }
@@ -83,10 +88,9 @@ class AvroRecord
         }
 
         $fields = array_map(function (\stdClass $field) {
-            return AvroField::fromStdClass($field);
+            return AvroTypeFactory::create($field->type);
         }, $record->fields);
 
-        return new self($record->namespace, $record->name, $record->doc, $fields, json_encode($record, JSON_PRETTY_PRINT));
+        return new self($record->name, $record->namespace, $record->doc, $fields, json_encode($record, JSON_PRETTY_PRINT));
     }
-
 }

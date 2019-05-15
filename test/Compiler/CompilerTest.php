@@ -8,7 +8,6 @@ class CompilerTest extends TestCase
 {
 
     private const avscDir = '../fixtures/avsc/sample-events';
-    private const avscFile = '../fixtures/avsc/ExampleEvent.avsc';
     private const outDir = '../data/compiled';
 
     public static function setUpBeforeClass()
@@ -34,12 +33,26 @@ class CompilerTest extends TestCase
 
     public function testCompileFile()
     {
-        $compiler = new Compiler();
-        $output = $compiler->compileFile(self::avscFile);
         $expected = file_get_contents('../fixtures/expected/ExampleEvent.php');
-        $this->assertIsString($output);
 
-        $this->assertEquals($expected, $output);
+        $compiler = new Compiler();
+        $actual = $compiler->compileFile('../fixtures/avsc/ExampleEvent.avsc');
+
+        $this->assertIsString($actual);
+        $this->assertEquals($expected, $actual);
+    }
+
+    public function testCompileFileWithArray()
+    {
+        $expected = file_get_contents('../fixtures/expected/RecordWithArray.php');
+
+        $compiler = new Compiler();
+        $actual = $compiler->compileFile('../fixtures/avsc/RecordWithArray.avsc');
+
+        echo $actual;
+
+        $this->assertIsString($actual);
+        $this->assertEquals($expected, $actual);
     }
 
 }
