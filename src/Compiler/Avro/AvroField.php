@@ -16,6 +16,9 @@ class AvroField {
     /** @var string */
     public $phpType;
 
+    /** @var string */
+    public $phpDocType;
+
     /** @var mixed|null */
     public $default;
 
@@ -24,11 +27,8 @@ class AvroField {
         $this->doc = $doc;
         $this->type = $type;
         $this->default = $default;
-        $this->configurePhpType();
-    }
-
-    private function configurePhpType() {
         $this->phpType = $this->type->getPhpType();
+        $this->phpDocType = $this->type->getPhpDocType();
     }
 
     public static function create(\stdClass $field): AvroField {

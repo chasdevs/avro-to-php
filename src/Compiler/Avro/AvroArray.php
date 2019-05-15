@@ -20,6 +20,11 @@ class AvroArray implements AvroTypeInterface
 
     public function getPhpType(): string
     {
+        return 'array';
+    }
+
+    public function getPhpDocType(): string
+    {
         return $this->items->getPhpType().'[]';
     }
 }

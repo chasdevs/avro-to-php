@@ -8,22 +8,27 @@ namespace {{ record.phpNamespace }};
 use {{ import }};
 {% endfor %}
 
-class {{ record.name }} {
+class {{ record.name }}
+{
 
     {% for field in record.fields -%}
-    /** @var {{ field.phpType }} */
+    /** @var {{ field.phpDocType }} */
     private ${{ field.name }};
 
     {% endfor -%}
 
     {% for field in record.fields -%}
-    public function set{{ field.name | capitalize }}({{ field.phpType }} ${{ field.name }}): {{ record.name }} {
-        $this->{{ field.name }} = ${{ field.name }};
-        return $this;
+    /** @return {{ field.phpDocType }} */
+    public function get{{ field.name | capitalize }}(): {{ field.phpType }}
+    {
+        return $this->{{ field.name }};
     }
 
-    public function get{{ field.name | capitalize }}(): {{ field.phpType }} {
-        return $this->{{ field.name }};
+    /** @param {{ field.phpDocType }} ${{ field.name }} */
+    public function set{{ field.name | capitalize }}({{ field.phpType }} ${{ field.name }}): {{ record.name }}
+    {
+        $this->{{ field.name }} = ${{ field.name }};
+        return $this;
     }
 
     {% endfor -%}

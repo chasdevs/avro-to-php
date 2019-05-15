@@ -49,8 +49,6 @@ class CompilerTest extends TestCase
         $compiler = new Compiler();
         $actual = $compiler->compileFile('../fixtures/avsc/RecordWithArray.avsc');
 
-        echo $actual;
-
         $this->assertIsString($actual);
         $this->assertEquals($expected, $actual);
     }

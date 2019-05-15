@@ -72,6 +72,11 @@ class AvroRecord implements AvroTypeInterface
         return $this->name;
     }
 
+    public function getPhpDocType(): string
+    {
+        return $this->getPhpType();
+    }
+
     public static function parse(string $json): AvroRecord
     {
         $decoded = json_decode($json);
@@ -88,7 +93,7 @@ class AvroRecord implements AvroTypeInterface
         }
 
         $fields = array_map(function (\stdClass $field) {
-            return AvroTypeFactory::create($field->type);
+            return AvroField::create($field);
         }, $record->fields);
 
         return new self($record->name, $record->namespace, $record->doc, $fields, json_encode($record, JSON_PRETTY_PRINT));

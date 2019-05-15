@@ -1,28 +1,41 @@
 <?php
 
-namespace TestRecords;
+namespace Testrecords;
 
-class RecordWithArray {
+class RecordWithArray
+{
 
     /** @var Thing[] */
     private $things;
 
+    /** @var int[] */
+    private $numbers;
+
+    /** @return Thing[] */
     public function getThings(): array
     {
         return $this->things;
     }
 
-    /**
-     * @param Thing[] $things
-     * @return RecordWithArray
-     */
+    /** @param Thing[] $things */
     public function setThings(array $things): RecordWithArray
     {
         $this->things = $things;
         return $this;
     }
 
+    /** @return int[] */
+    public function getNumbers(): array
+    {
+        return $this->numbers;
+    }
 
+    /** @param int[] $numbers */
+    public function setNumbers(array $numbers): RecordWithArray
+    {
+        $this->numbers = $numbers;
+        return $this;
+    }
 
     public const schema = <<<SCHEMA
 {

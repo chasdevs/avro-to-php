@@ -1,8 +1,9 @@
 <?php
 
-namespace TestRecords;
+namespace Testrecords;
 
-class Thing {
+class Thing
+{
 
     /** @var int */
     private $id;

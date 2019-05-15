@@ -2,7 +2,8 @@
 
 namespace Storyblocks\Example;
 
-class ExampleEvent {
+class ExampleEvent
+{
 
     /** @var string */
     private $name;
@@ -13,30 +14,36 @@ class ExampleEvent {
     /** @var int */
     private $salary;
 
-    public function setName(string $name): ExampleEvent {
+    public function setName(string $name): ExampleEvent
+    {
         $this->name = $name;
         return $this;
     }
 
-    public function getName(): string {
+    public function getName(): string
+    {
         return $this->name;
     }
 
-    public function setActive(bool $active): ExampleEvent {
+    public function setActive(bool $active): ExampleEvent
+    {
         $this->active = $active;
         return $this;
     }
 
-    public function getActive(): bool {
+    public function getActive(): bool
+    {
         return $this->active;
     }
 
-    public function setSalary(int $salary): ExampleEvent {
+    public function setSalary(int $salary): ExampleEvent
+    {
         $this->salary = $salary;
         return $this;
     }
 
-    public function getSalary(): int {
+    public function getSalary(): int
+    {
         return $this->salary;
     }
 
