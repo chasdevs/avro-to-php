@@ -1,5 +1,5 @@
 @namespace("sample.common")
-protocol SampleEvents {
+protocol x {
   record SharedMeta {
     string uuid;
   }

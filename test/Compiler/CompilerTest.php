@@ -33,24 +33,12 @@ class CompilerTest extends TestCase
 
     public function testCompileFile()
     {
+        $compiler = new Compiler();
+        $output = $compiler->compileFile('../fixtures/avsc/ExampleEvent.avsc');
         $expected = file_get_contents('../fixtures/expected/ExampleEvent.php');
+        $this->assertIsString($output);
 
-        $compiler = new Compiler();
-        $actual = $compiler->compileFile('../fixtures/avsc/ExampleEvent.avsc');
-
-        $this->assertIsString($actual);
-        $this->assertEquals($expected, $actual);
-    }
-
-    public function testCompileFileWithArray()
-    {
-        $expected = file_get_contents('../fixtures/expected/RecordWithArray.php');
-
-        $compiler = new Compiler();
-        $actual = $compiler->compileFile('../fixtures/avsc/RecordWithArray.avsc');
-
-        $this->assertIsString($actual);
-        $this->assertEquals($expected, $actual);
+        $this->assertEquals($expected, $output);
     }
 
 }
