@@ -1,6 +1,6 @@
 <?php
 
-namespace StoryblocksEvents\Compiler\Errors;
+namespace AvroToPhp\Compiler\Errors;
 
 use Exception;
 

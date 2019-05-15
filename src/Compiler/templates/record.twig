@@ -1,12 +1,12 @@
 <?php
-{# Format namespace #}
-{% set parts = record.namespace|split('.') %}
-{% set newParts = [] %}
-{% for part in parts %}
-    {%- set newParts = newParts|merge([part|capitalize]) %}
-{% endfor %}
 
-namespace {{ newParts|join('\\') }};
+namespace {{ record.phpNamespace }};
+{% for import in record.imports %}
+{% if loop.first %}
+
+{% endif %}
+use {{ import }};
+{% endfor %}
 
 class {{ record.name }} {
 

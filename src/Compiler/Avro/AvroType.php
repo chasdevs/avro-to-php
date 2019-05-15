@@ -1,6 +1,6 @@
 <?php
 
-namespace StoryblocksEvents\Compiler\Avro;
+namespace AvroToPhp\Compiler\Avro;
 
 use MyCLabs\Enum\Enum;
 
@@ -34,9 +34,10 @@ class AvroType extends Enum
     private const FIXED = 'fixed';
 
     /**
+     * @param string|null $recordClass
      * @return string|int|float|bool
      */
-    public function getPhpType() {
+    public function getPhpType(?string $recordClass) {
         $map = [
             self::BOOLEAN => 'bool',
             self::INT => 'int',
@@ -45,7 +46,7 @@ class AvroType extends Enum
             self::DOUBLE => 'float',
             self::BYTES => 'string',
             self::STRING => 'string',
-            self::RECORD => '',
+            self::RECORD => $recordClass,
             self::ENUM => '',
             self::ARRAY => '',
             self::MAP => '',

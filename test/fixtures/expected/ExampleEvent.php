@@ -42,25 +42,25 @@ class ExampleEvent {
 
     public const schema = <<<SCHEMA
 {
-  "type": "record",
-  "name": "ExampleEvent",
-  "namespace": "storyblocks.example",
-  "doc": "This is an example schema.",
-  "fields": [
-    {
-      "name": "name",
-      "type": "string"
-    },
-    {
-      "name": "active",
-      "type": "boolean",
-      "default": true
-    },
-    {
-      "name": "salary",
-      "type": "long"
-    }
-  ]
+    "type": "record",
+    "name": "ExampleEvent",
+    "namespace": "storyblocks.example",
+    "doc": "This is an example schema.",
+    "fields": [
+        {
+            "name": "name",
+            "type": "string"
+        },
+        {
+            "name": "active",
+            "type": "boolean",
+            "default": true
+        },
+        {
+            "name": "salary",
+            "type": "long"
+        }
+    ]
 }
 SCHEMA;
 
