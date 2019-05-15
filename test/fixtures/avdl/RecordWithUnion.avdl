@@ -1,7 +1,7 @@
 protocol x {
 
   record RecordWithUnion {
-    union { null, string } optionalString;
+    union { string, null } optionalString;
   }
 
 }

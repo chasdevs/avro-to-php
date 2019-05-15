@@ -53,4 +53,15 @@ class CompilerTest extends TestCase
         $this->assertEquals($expected, $actual);
     }
 
+    public function testCompileRecordWithUnion()
+    {
+        $expected = file_get_contents('../fixtures/expected/RecordWithUnion.php');
+
+        $compiler = new Compiler();
+        $actual = $compiler->compileFile('../fixtures/avsc/RecordWithUnion.avsc');
+
+        $this->assertIsString($actual);
+        $this->assertEquals($expected, $actual);
+    }
+
 }
