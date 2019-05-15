@@ -1,4 +1,4 @@
-@namespace("sample.user.v1")
+@namespace("sample.user.v2")
 protocol SampleEvents {
   import idl "../common/SharedMeta.v1.avdl";
   record UserEvent {

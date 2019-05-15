@@ -1,7 +1,7 @@
 {
   "type" : "record",
   "name" : "UserEvent",
-  "namespace" : "sample.user",
+  "namespace" : "sample.user.v1",
   "fields" : [ {
     "name" : "meta",
     "type" : {
@@ -12,6 +12,12 @@
         "name" : "uuid",
         "type" : "string"
       } ]
+    }
+  }, {
+    "name" : "searchResults",
+    "type" : {
+      "type" : "array",
+      "items" : "sample.common.SharedMeta"
     }
   }, {
     "name" : "userId",
