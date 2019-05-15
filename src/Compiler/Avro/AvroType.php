@@ -18,9 +18,10 @@ use MyCLabs\Enum\Enum;
  * @method static AvroType MAP()
  * @method static AvroType FIXED()
  */
-class AvroType extends Enum
+class AvroType extends Enum implements AvroTypeInterface
 {
-    private const RECORD = 'record';
+
+    // Primitive Types
     private const BOOLEAN = 'boolean';
     private const INT = 'int';
     private const LONG = 'long';
@@ -28,16 +29,19 @@ class AvroType extends Enum
     private const DOUBLE = 'double';
     private const BYTES = 'bytes';
     private const STRING = 'string';
+
+    // Complex Types
+    private const RECORD = 'record';
     private const ENUM = 'enum';
     private const ARRAY = 'array';
     private const MAP = 'map';
     private const FIXED = 'fixed';
 
-    /**
-     * @param string|null $recordClass
-     * @return string|int|float|bool
-     */
-    public function getPhpType(?string $recordClass) {
+    public function is(string $value) {
+        return $this->equals(new AvroType($value));
+    }
+
+    public function getPhpType(): string {
         $map = [
             self::BOOLEAN => 'bool',
             self::INT => 'int',
@@ -45,13 +49,13 @@ class AvroType extends Enum
             self::FLOAT => 'float',
             self::DOUBLE => 'float',
             self::BYTES => 'string',
-            self::STRING => 'string',
-            self::RECORD => $recordClass,
-            self::ENUM => '',
-            self::ARRAY => '',
-            self::MAP => '',
-            self::FIXED => '',
+            self::STRING => 'string'
         ];
         return $map[$this->getValue()];
+    }
+
+    public function getPhpDocType(): string
+    {
+        return $this->getPhpType();
     }
 }

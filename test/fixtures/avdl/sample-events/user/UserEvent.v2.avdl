@@ -1,5 +1,5 @@
 @namespace("sample.user.v2")
-protocol SampleEvents {
+protocol x {
   import idl "../common/SharedMeta.v1.avdl";
   record UserEvent {
     sample.common.SharedMeta meta;

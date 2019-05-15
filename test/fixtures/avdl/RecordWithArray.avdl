@@ -1,0 +1,13 @@
+@namespace("testrecords")
+protocol x {
+
+  record Thing {
+    int id;
+  }
+
+  record RecordWithArray {
+    array<Thing> things;
+    array<int> numbers;
+  }
+
+}

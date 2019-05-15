@@ -2,7 +2,8 @@
 
 namespace Storyblocks\Example;
 
-class ExampleEvent {
+class ExampleEvent
+{
 
     /** @var string */
     private $name;
@@ -13,31 +14,43 @@ class ExampleEvent {
     /** @var int */
     private $salary;
 
-    public function setName(string $name): ExampleEvent {
+    /** @return string */
+    public function getName(): string
+    {
+        return $this->name;
+    }
+
+    /** @param string $name */
+    public function setName(string $name): ExampleEvent
+    {
         $this->name = $name;
         return $this;
     }
 
-    public function getName(): string {
-        return $this->name;
+    /** @return bool */
+    public function getActive(): bool
+    {
+        return $this->active;
     }
 
-    public function setActive(bool $active): ExampleEvent {
+    /** @param bool $active */
+    public function setActive(bool $active): ExampleEvent
+    {
         $this->active = $active;
         return $this;
     }
 
-    public function getActive(): bool {
-        return $this->active;
+    /** @return int */
+    public function getSalary(): int
+    {
+        return $this->salary;
     }
 
-    public function setSalary(int $salary): ExampleEvent {
+    /** @param int $salary */
+    public function setSalary(int $salary): ExampleEvent
+    {
         $this->salary = $salary;
         return $this;
-    }
-
-    public function getSalary(): int {
-        return $this->salary;
     }
 
     public const schema = <<<SCHEMA

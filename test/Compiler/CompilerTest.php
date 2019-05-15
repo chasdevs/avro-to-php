@@ -8,7 +8,6 @@ class CompilerTest extends TestCase
 {
 
     private const avscDir = '../fixtures/avsc/sample-events';
-    private const avscFile = '../fixtures/avsc/ExampleEvent.avsc';
     private const outDir = '../data/compiled';
 
     public static function setUpBeforeClass()
@@ -35,7 +34,7 @@ class CompilerTest extends TestCase
     public function testCompileFile()
     {
         $compiler = new Compiler();
-        $output = $compiler->compileFile(self::avscFile);
+        $output = $compiler->compileFile('../fixtures/avsc/ExampleEvent.avsc');
         $expected = file_get_contents('../fixtures/expected/ExampleEvent.php');
         $this->assertIsString($output);
 
