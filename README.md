@@ -13,3 +13,17 @@ Compile Avro .avsc files into usable PHP classes.
 ```bash
 # TODO: Setup CLI interface.
 ```
+
+### Roadmap
+
+- [x] Basic Records
+- [x] Arrays
+- [x] Unions
+- [ ] CLI
+- [ ] Serialization Tests
+- [ ] Enums
+- [ ] Maps
+- [ ] Logical types
+- [ ] Fixed
+- [ ] Sort Order
+- [ ] Aliases
