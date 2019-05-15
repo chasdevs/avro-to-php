@@ -44,9 +44,12 @@ class Utils
         $dir = new RecursiveDirectoryIterator($folder);
         $ite = new RecursiveIteratorIterator($dir);
         $files = new RegexIterator($ite, $pattern, RegexIterator::GET_MATCH);
-        $fileList = array();
+        $fileList = [];
+        $ignored = ['.', '..', '.gitignore'];
         foreach ($files as $file) {
-            $fileList = array_merge($fileList, $file);
+            if (!in_array(basename($file[0]), $ignored)) {
+                $fileList[] = $file[0];
+            }
         }
         return $fileList;
     }

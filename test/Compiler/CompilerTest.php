@@ -23,12 +23,13 @@ class CompilerTest extends TestCase
         $compiler->compile(self::avscDir, self::outDir);
 
         // verify folder structure
-        $output = Utils::find(self::outDir, '/^[^\.]/');
-        $this->assertEquals([], $output);
+        $output = Utils::find(self::outDir, '/.*/');
+        $this->assertEquals([
+            Utils::joinPaths(self::outDir, 'Sample/User/V1/UserEvent.php'),
+            Utils::joinPaths(self::outDir, 'Sample/User/V2/UserEvent.php'),
+            Utils::joinPaths(self::outDir, 'Sample/Common/SharedMeta.php'),
+        ], $output);
 
-        // verify file contents
-
-        $this->fail('WIP');
     }
 
     public function testCompileFile()
