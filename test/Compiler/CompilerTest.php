@@ -7,8 +7,8 @@ use PHPUnit\Framework\TestCase;
 class CompilerTest extends TestCase
 {
 
-    private const avscDir = '../fixtures/avsc/sample-events';
-    private const outDir = '../data/compiled';
+    private const avscDir = __DIR__.'../fixtures/avsc/sample-events';
+    private const outDir = __DIR__.'../data/compiled';
 
     public static function setUpBeforeClass()
     {

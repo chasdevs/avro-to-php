@@ -12,12 +12,12 @@ class UtilsTest extends TestCase {
         $this->assertEquals($expected, $actual);
     }
     public function testRsearch() {
-        $results = Utils::find('../fixtures', '/.*.avsc$/');
-        $this->assertEquals(['../fixtures/avsc/ExampleEvent.avsc'], $results);
+        $results = Utils::find(__DIR__.'/../fixtures/sampleUtilDir', '/.*.txt/');
+        $this->assertEquals([Utils::joinPaths(__DIR__, '../fixtures/sampleUtilDir.txt')], $results);
     }
 
     public function testDirCreateRm() {
-        $file = '../data/test-util/a-directory/file.txt';
+        $file = __DIR__.'/../data/test-util/a-directory/file.txt';
         $dir = dirname($file);
         Utils::ensureDir($file);
         $this->assertDirectoryExists($dir);
