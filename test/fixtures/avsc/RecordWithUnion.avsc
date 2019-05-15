@@ -1,0 +1,8 @@
+{
+  "type" : "record",
+  "name" : "RecordWithUnion",
+  "fields" : [ {
+    "name" : "optionalString",
+    "type" : [ "string", "null" ]
+  } ]
+}
