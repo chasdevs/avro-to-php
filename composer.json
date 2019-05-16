@@ -45,5 +45,5 @@
     },
     "minimum-stability": "dev",
     "prefer-stable": true,
-    "bin": ["avro-to-php"]
+    "bin": ["builds/avro-to-php"]
 }
