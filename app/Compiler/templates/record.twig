@@ -42,6 +42,15 @@ class {{ record.name }}
     }
 
     {% endfor -%}
+    public function data(): array
+    {
+        return [
+            {% for field in record.fields %}
+            "{{ field.name }}" => get{{ field.name|ucFirst }}(),
+            {% endfor -%}
+        ];
+    }
+
     public const schema = <<<SCHEMA
 {{ record.schema|raw }}
 SCHEMA;
