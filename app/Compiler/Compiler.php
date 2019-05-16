@@ -3,6 +3,7 @@
 namespace App\Compiler;
 
 use App\Compiler\Avro\AvroRecord;
+use App\Compiler\Twig\TemplateEngine;
 use App\Util\Utils;
 use Twig\Environment;
 use Twig\Loader\FilesystemLoader;
@@ -26,9 +27,8 @@ class Compiler
         $avscFiles = Utils::find($sourceDir, '/.*\.avsc$/');
 
         // Copy BaseRecord
-        $baseRecordFile = Utils::resolve(__DIR__, '../BaseRecord.php');
-        $baseRecord = file_get_contents($baseRecordFile);
-        file_put_contents(Utils::joinPaths($outDir, basename($baseRecordFile)), $baseRecord);
+        $baseRecord = $this->compileBaseRecord($outDir);
+        file_put_contents(Utils::joinPaths($outDir, 'BaseRecord.php'), $baseRecord);
 
         // Compile each avsc file.
         foreach ($avscFiles as $avscFile) {
@@ -38,32 +38,32 @@ class Compiler
 
             //TODO: dry-run
             Utils::ensureDir($compiledPath);
-            file_put_contents($compiledPath, $this->recordToPhp($record));
+            file_put_contents($compiledPath, $this->compileRecord($record));
         }
 
     }
 
     public function compileFile(string $avscFile): string {
         $record = $this->parseRecord($avscFile);
-        return $this->recordToPhp($record);
+        return $this->compileRecord($record);
     }
 
-    public function recordToPhp(AvroRecord $record): string
-    {
-        $twig = $this->configureTwig();
-        return $twig->render(['record' => $record]);
+    public function compileRecord(AvroRecord $record): string {
+        return $this->templateEngine()->renderRecord($record);
     }
 
-    public function parseRecord(string $avscPath): AvroRecord {
+    public function compileBaseRecord(string $outDir): string {
+        $namespace = ucfirst(basename($outDir));
+        return $this->templateEngine()->renderBaseRecord($namespace);
+    }
+
+    private function parseRecord(string $avscPath): AvroRecord {
         $avsc = file_get_contents($avscPath);
         return AvroRecord::parse($avsc);
     }
 
-    private function configureTwig(): TemplateWrapper {
-        $loader = new FilesystemLoader(__DIR__ . '/templates');
-        $twig = new Environment($loader);
-        $twig->addFilter(new TwigFilter('ucFirst', 'ucFirst'));
-        $template = $twig->load('record.twig');
-        return $template;
+    private function templateEngine(): TemplateEngine {
+        return (new TemplateEngine());
     }
+
 }

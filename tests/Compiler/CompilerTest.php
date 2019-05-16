@@ -13,6 +13,7 @@ class CompilerTest extends TestCase
     private const outDir = __DIR__ . '/../data/compiled';
     private const avscDir = __DIR__ . '/../fixtures/avsc/sample-events';
 
+    private const expectedBaseRecord = self::FIXTURES . '/expected/BaseRecord.php';
     private const expectedExampleRecord = self::FIXTURES . '/expected/ExampleEvent.php';
     private const exampleRecord = self::FIXTURES . '/avsc/ExampleEvent.avsc';
     private const expectedRecordWithArray = self::FIXTURES . '/expected/RecordWithArray.php';
@@ -47,6 +48,18 @@ class CompilerTest extends TestCase
 
         $compiler = new Compiler();
         $actual = $compiler->compileFile(self::exampleRecord);
+
+        $this->assertIsString($actual);
+        $this->assertEquals($expected, $actual);
+    }
+
+    public function testCompileBaseRecord()
+    {
+        $namespace = 'Expected';
+        $expected = file_get_contents(Utils::resolve(self::expectedBaseRecord));
+
+        $compiler = new Compiler();
+        $actual = $compiler->compileBaseRecord($namespace);
 
         $this->assertIsString($actual);
         $this->assertEquals($expected, $actual);
