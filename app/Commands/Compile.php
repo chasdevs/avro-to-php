@@ -2,33 +2,37 @@
 
 namespace App\Commands;
 
-use Illuminate\Console\Scheduling\Schedule;
+use App\Compiler\Compiler;
+use App\Util\Utils;
 use LaravelZero\Framework\Commands\Command;
 
 class Compile extends Command
 {
-    /**
-     * The signature of the command.
-     *
-     * @var string
-     */
-    protected $signature = 'compile';
 
-    /**
-     * The description of the command.
-     *
-     * @var string
-     */
-    protected $description = 'Compile a directory of Avro .avsc files into typed PHP classes.';
+    protected $signature = 'compile {file} {outputDirectory=.} {--p|print}';
 
-    /**
-     * Execute the console command.
-     *
-     * @return mixed
-     */
-    public function handle()
+    protected $description = 'Compile an Avro .avsc files into a typed PHP class.';
+
+    public function handle(Compiler $compiler)
     {
-        $this->info('Compiling...');
+        $fileArg = $this->argument('file');
+        $outputDir = $this->argument('outputDirectory');
+        $print = $this->hasOption('p');
+
+        $this->comment('Compiling Avro schema to PHP: ' . $fileArg);
+
+        $file = Utils::resolve($fileArg);
+        $compiled = $compiler->compileFile($file);
+
+        if ($print) {
+            $this->comment('Compiler output:');
+            $this->info($compiled);
+        } else {
+            $fileName = pathinfo($fileArg, PATHINFO_FILENAME);
+            $path = Utils::joinPaths($outputDir, $fileName.'.php');
+            file_put_contents($path, $compiled);
+            $this->comment('Compiled PHP class: '.$path);
+        }
     }
 
 }
