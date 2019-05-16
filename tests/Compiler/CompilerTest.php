@@ -13,18 +13,17 @@ class CompilerTest extends TestCase
     private const outDir = __DIR__ . '/../data/compiled';
     private const avscDir = __DIR__ . '/../fixtures/avsc/sample-events';
 
-    private const expectedExampleRecord = self::FIXTURES.'/expected/ExampleEvent.php';
-    private const exampleRecord = self::FIXTURES.'/avsc/ExampleEvent.avsc';
-    private const expectedRecordWithArray = self::FIXTURES.'/expected/RecordWithArray.php';
-    private const recordWithArray = self::FIXTURES.'/avsc/RecordWithArray.avsc';
-    private const expectedRecordWithUnion = self::FIXTURES.'/expected/RecordWithUnion.php';
-    private const recordWithUnion = self::FIXTURES.'/avsc/RecordWithUnion.avsc';
+    private const expectedExampleRecord = self::FIXTURES . '/expected/ExampleEvent.php';
+    private const exampleRecord = self::FIXTURES . '/avsc/ExampleEvent.avsc';
+    private const expectedRecordWithArray = self::FIXTURES . '/expected/RecordWithArray.php';
+    private const recordWithArray = self::FIXTURES . '/avsc/RecordWithArray.avsc';
+    private const expectedRecordWithUnion = self::FIXTURES . '/expected/RecordWithUnion.php';
+    private const recordWithUnion = self::FIXTURES . '/avsc/RecordWithUnion.avsc';
 
     public static function setUpBeforeClass()
     {
         Utils::rmDir(self::outDir);
     }
-
 
     public function testCompile()
     {
