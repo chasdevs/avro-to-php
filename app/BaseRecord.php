@@ -2,8 +2,15 @@
 
 namespace App;
 
-abstract class BaseRecord
+use JsonSerializable;
+
+abstract class BaseRecord implements JsonSerializable
 {
-    public abstract function subject(): string;
-    public abstract function data(): array;
+    public function data(): array {
+        return $this->encode($this);
+    }
+
+    protected function encode($mixed) {
+        return json_decode(json_encode($mixed), true);
+    }
 }

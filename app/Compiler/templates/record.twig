@@ -2,7 +2,9 @@
 {% if record.phpNamespace %}
 
 namespace {{ record.phpNamespace }};
-{% endif -%}
+{% endif %}
+
+use App\BaseRecord;
 {% for import in record.imports -%}
 {% if loop.first %}
 
@@ -10,7 +12,7 @@ namespace {{ record.phpNamespace }};
 use {{ import }};
 {% endfor %}
 
-class {{ record.name }}
+class {{ record.name }} extends BaseRecord
 {
 
     {% for field in record.fields -%}
@@ -42,12 +44,14 @@ class {{ record.name }}
     }
 
     {% endfor -%}
-    public function data(): array
+    public function jsonSerialize()
     {
         return [
-            {% for field in record.fields %}
-            "{{ field.name }}" => get{{ field.name|ucFirst }}(),
-            {% endfor -%}
+            {%- for field in record.fields %}
+
+            "{{ field.name }}" => $this->encode($this->{{ field.name }}),
+            {%- endfor %}
+
         ];
     }
 

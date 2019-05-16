@@ -1,6 +1,8 @@
 <?php
 
-class RecordWithUnion
+use App\BaseRecord;
+
+class RecordWithUnion extends BaseRecord
 {
 
     /** @var string|null */
@@ -17,6 +19,13 @@ class RecordWithUnion
     {
         $this->optionalString = $optionalString;
         return $this;
+    }
+
+    public function jsonSerialize()
+    {
+        return [
+            "optionalString" => $this->encode($this->optionalString),
+        ];
     }
 
     public const schema = <<<SCHEMA

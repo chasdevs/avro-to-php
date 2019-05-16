@@ -2,7 +2,9 @@
 
 namespace Storyblocks\Example;
 
-class ExampleEvent
+use App\BaseRecord;
+
+class ExampleEvent extends BaseRecord
 {
 
     /** @var string */
@@ -51,6 +53,15 @@ class ExampleEvent
     {
         $this->salary = $salary;
         return $this;
+    }
+
+    public function jsonSerialize()
+    {
+        return [
+            "name" => $this->encode($this->name),
+            "active" => $this->encode($this->active),
+            "salary" => $this->encode($this->salary),
+        ];
     }
 
     public const schema = <<<SCHEMA

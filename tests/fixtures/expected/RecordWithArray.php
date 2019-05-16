@@ -2,7 +2,9 @@
 
 namespace Testrecords;
 
-class RecordWithArray
+use App\BaseRecord;
+
+class RecordWithArray extends BaseRecord
 {
 
     /** @var Thing[] */
@@ -35,6 +37,14 @@ class RecordWithArray
     {
         $this->numbers = $numbers;
         return $this;
+    }
+
+    public function jsonSerialize()
+    {
+        return [
+            "things" => $this->encode($this->things),
+            "numbers" => $this->encode($this->numbers),
+        ];
     }
 
     public const schema = <<<SCHEMA

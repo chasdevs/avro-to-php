@@ -2,7 +2,7 @@
 
 namespace Testrecords;
 
-class Thing
+class Thing implements \JsonSerializable
 {
 
     /** @var int */
@@ -13,9 +13,25 @@ class Thing
         return $this->id;
     }
 
-    public function setId(int $id): void
+    public function setId(int $id): Thing
     {
         $this->id = $id;
+        return $this;
+    }
+
+    public function data(): array {
+        return $this->encode($this);
+    }
+
+    private function encode($mixed) {
+        return json_decode(json_encode($mixed), true);
+    }
+
+    public function jsonSerialize()
+    {
+        return [
+            "id" => $this->encode($this->id)
+        ];
     }
 
     public const schema = <<<SCHEMA

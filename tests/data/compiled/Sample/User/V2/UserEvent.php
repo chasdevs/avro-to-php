@@ -2,9 +2,11 @@
 
 namespace Sample\User\V2;
 
+use App\BaseRecord;
+
 use Sample\Common\SharedMeta;
 
-class UserEvent
+class UserEvent extends BaseRecord
 {
 
     /** @var SharedMeta */
@@ -53,6 +55,15 @@ class UserEvent
     {
         $this->name = $name;
         return $this;
+    }
+
+    public function jsonSerialize()
+    {
+        return [
+            "meta" => $this->encode($this->meta),
+            "userId" => $this->encode($this->userId),
+            "name" => $this->encode($this->name),
+        ];
     }
 
     public const schema = <<<SCHEMA

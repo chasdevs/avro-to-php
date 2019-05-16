@@ -2,7 +2,9 @@
 
 namespace Sample\Common;
 
-class SharedMeta
+use App\BaseRecord;
+
+class SharedMeta extends BaseRecord
 {
 
     /** @var string */
@@ -19,6 +21,13 @@ class SharedMeta
     {
         $this->uuid = $uuid;
         return $this;
+    }
+
+    public function jsonSerialize()
+    {
+        return [
+            "uuid" => $this->encode($this->uuid),
+        ];
     }
 
     public const schema = <<<SCHEMA
