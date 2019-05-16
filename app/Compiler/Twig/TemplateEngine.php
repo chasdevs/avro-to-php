@@ -19,10 +19,10 @@ class TemplateEngine
         return $twig->render(['namespace' => $namespace]);
     }
 
-    public function renderRecord(AvroRecord $record): string
+    public function renderRecord(AvroRecord $record, string $namespace): string
     {
         $twig = $this->configureRecordTemplate();
-        return $twig->render(['record' => $record]);
+        return $twig->render(['namespace' => $namespace, 'record' => $record]);
     }
 
     private function configureBaseRecordTemplate(): TemplateWrapper {

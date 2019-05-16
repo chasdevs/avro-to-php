@@ -1,6 +1,8 @@
 <?php
 
-use App\BaseRecord;
+namespace Tests\Expected;
+
+use Tests\Expected\BaseRecord;
 
 class RecordWithUnion extends BaseRecord
 {

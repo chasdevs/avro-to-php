@@ -22,12 +22,13 @@ class Compiler
     public function compile(string $sourceDir, string $outDir): void {
 
         $outDir = Utils::ensureDir($outDir);
+        $namespace = ucfirst(basename($outDir));
 
         // Find all avsc files.
         $avscFiles = Utils::find($sourceDir, '/.*\.avsc$/');
 
         // Copy BaseRecord
-        $baseRecord = $this->compileBaseRecord($outDir);
+        $baseRecord = $this->compileBaseRecord($namespace);
         file_put_contents(Utils::joinPaths($outDir, 'BaseRecord.php'), $baseRecord);
 
         // Compile each avsc file.
@@ -38,22 +39,21 @@ class Compiler
 
             //TODO: dry-run
             Utils::ensureDir($compiledPath);
-            file_put_contents($compiledPath, $this->compileRecord($record));
+            file_put_contents($compiledPath, $this->compileRecord($record, $namespace));
         }
 
     }
 
-    public function compileFile(string $avscFile): string {
+    public function compileFile(string $avscFile, string $namespace): string {
         $record = $this->parseRecord($avscFile);
-        return $this->compileRecord($record);
+        return $this->compileRecord($record, $namespace);
     }
 
-    public function compileRecord(AvroRecord $record): string {
-        return $this->templateEngine()->renderRecord($record);
+    public function compileRecord(AvroRecord $record, string $namespace): string {
+        return $this->templateEngine()->renderRecord($record, $namespace);
     }
 
-    public function compileBaseRecord(string $outDir): string {
-        $namespace = ucfirst(basename($outDir));
+    public function compileBaseRecord(string $namespace): string {
         return $this->templateEngine()->renderBaseRecord($namespace);
     }
 

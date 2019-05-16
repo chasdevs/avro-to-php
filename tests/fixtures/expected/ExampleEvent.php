@@ -1,8 +1,8 @@
 <?php
 
-namespace Storyblocks\Example;
+namespace Tests\Expected\Storyblocks\Example;
 
-use App\BaseRecord;
+use Tests\Expected\BaseRecord;
 
 class ExampleEvent extends BaseRecord
 {

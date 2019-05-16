@@ -9,6 +9,7 @@ use PHPUnit\Framework\TestCase;
 class CompilerTest extends TestCase
 {
 
+    private const NAMESPACE = 'Tests\Expected';
     private const FIXTURES = __DIR__ . '/../fixtures';
     private const outDir = __DIR__ . '/../data/compiled';
     private const avscDir = __DIR__ . '/../fixtures/avsc/sample-events';
@@ -47,7 +48,7 @@ class CompilerTest extends TestCase
         $expected = file_get_contents(Utils::resolve(self::expectedExampleRecord));
 
         $compiler = new Compiler();
-        $actual = $compiler->compileFile(self::exampleRecord);
+        $actual = $compiler->compileFile(self::exampleRecord, self::NAMESPACE);
 
         $this->assertIsString($actual);
         $this->assertEquals($expected, $actual);
@@ -55,11 +56,10 @@ class CompilerTest extends TestCase
 
     public function testCompileBaseRecord()
     {
-        $namespace = 'Expected';
         $expected = file_get_contents(Utils::resolve(self::expectedBaseRecord));
 
         $compiler = new Compiler();
-        $actual = $compiler->compileBaseRecord($namespace);
+        $actual = $compiler->compileBaseRecord(self::NAMESPACE);
 
         $this->assertIsString($actual);
         $this->assertEquals($expected, $actual);
@@ -70,7 +70,7 @@ class CompilerTest extends TestCase
         $expected = file_get_contents(Utils::resolve(self::expectedRecordWithArray));
 
         $compiler = new Compiler();
-        $actual = $compiler->compileFile(self::recordWithArray);
+        $actual = $compiler->compileFile(self::recordWithArray, self::NAMESPACE);
 
         $this->assertIsString($actual);
         $this->assertEquals($expected, $actual);
@@ -81,7 +81,7 @@ class CompilerTest extends TestCase
         $expected = file_get_contents(Utils::resolve(self::expectedRecordWithUnion));
 
         $compiler = new Compiler();
-        $actual = $compiler->compileFile(self::recordWithUnion);
+        $actual = $compiler->compileFile(self::recordWithUnion, self::NAMESPACE);
 
         $this->assertIsString($actual);
         $this->assertEquals($expected, $actual);

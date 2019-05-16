@@ -1,8 +1,8 @@
 <?php
 
-namespace Testrecords;
+namespace Tests\Expected\Testrecords;
 
-use App\BaseRecord;
+use Tests\Expected\BaseRecord;
 
 class RecordWithArray extends BaseRecord
 {

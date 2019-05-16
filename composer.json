@@ -31,8 +31,7 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "Tests\\": "tests/",
-            "Testrecords\\": "tests/fixtures/expected/"
+            "Tests\\": "tests/"
         }
     },
     "config": {

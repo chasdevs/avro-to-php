@@ -1,10 +1,12 @@
 <?php
-{% if record.phpNamespace %}
 
-namespace {{ record.phpNamespace }};
+{% if record.phpNamespace %}
+namespace {{ namespace }}\{{ record.phpNamespace }};
+{% else %}
+namespace {{ namespace }};
 {% endif %}
 
-use App\BaseRecord;
+use {{ namespace }}\BaseRecord;
 {% for import in record.imports -%}
 {% if loop.first %}
 
