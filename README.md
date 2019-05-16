@@ -19,7 +19,7 @@ Compile Avro .avsc files into usable PHP classes.
 - [x] Basic Records
 - [x] Arrays
 - [x] Unions
-- [ ] CLI
+- [x] CLI
 - [ ] Serialization Tests
 - [ ] Enums
 - [ ] Maps
