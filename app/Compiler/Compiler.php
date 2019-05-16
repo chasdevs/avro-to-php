@@ -20,8 +20,15 @@ class Compiler
      */
     public function compile(string $sourceDir, string $outDir): void {
 
+        $outDir = Utils::ensureDir($outDir);
+
         // Find all avsc files.
         $avscFiles = Utils::find($sourceDir, '/.*\.avsc$/');
+
+        // Copy BaseRecord
+        $baseRecordFile = Utils::resolve(__DIR__, '../BaseRecord.php');
+        $baseRecord = file_get_contents($baseRecordFile);
+        file_put_contents(Utils::joinPaths($outDir, basename($baseRecordFile)), $baseRecord);
 
         // Compile each avsc file.
         foreach ($avscFiles as $avscFile) {

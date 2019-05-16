@@ -37,6 +37,7 @@ class CompilerTest extends TestCase
             Utils::resolve(self::outDir, 'Sample/User/V1/UserEvent.php'),
             Utils::resolve(self::outDir, 'Sample/User/V2/UserEvent.php'),
             Utils::resolve(self::outDir, 'Sample/Common/SharedMeta.php'),
+            Utils::resolve(self::outDir, 'BaseRecord.php'),
         ], $output);
 
     }
