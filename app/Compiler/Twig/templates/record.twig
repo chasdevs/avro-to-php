@@ -3,7 +3,7 @@
 {% if record.phpNamespace %}
 namespace {{ namespace }}\{{ record.phpNamespace }};
 {% else %}
-namespace {{ namespace }};
+namespace {{ namespace }};sss
 {% endif %}
 
 use {{ namespace }}\BaseRecord;
@@ -11,7 +11,7 @@ use {{ namespace }}\BaseRecord;
 {% if loop.first %}
 
 {% endif %}
-use {{ import }};
+use {{ namespace }}\{{ import }};
 {% endfor %}
 
 class {{ record.name }} extends BaseRecord
