@@ -20,7 +20,7 @@ $ vendor/bin/avro-to-php compile:directory dir/with/avsc/
 - [x] Arrays
 - [x] Unions
 - [x] CLI
-- [ ] Defaults
+- [x] Defaults
 - [ ] Serialization Tests
 - [ ] Enums
 - [ ] Maps
