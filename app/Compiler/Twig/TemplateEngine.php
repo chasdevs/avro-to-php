@@ -5,6 +5,7 @@ namespace App\Compiler\Twig;
 
 
 use App\Compiler\Avro\AvroRecord;
+use Illuminate\Support\Str;
 use Twig\Environment;
 use Twig\Loader\FilesystemLoader;
 use Twig\TemplateWrapper;
@@ -41,6 +42,9 @@ class TemplateEngine
         $loader = new FilesystemLoader(__DIR__ . '/templates');
         $twig = new Environment($loader);
         $twig->addFilter(new TwigFilter('ucFirst', 'ucFirst'));
+        $twig->addFilter(new TwigFilter('spinal', function ($string) {
+            return preg_replace('/_/', '-', Str::snake($string));
+        }));
         return $twig;
     }
 }

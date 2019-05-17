@@ -11,10 +11,15 @@ class ExampleEvent extends BaseRecord
     private $name;
 
     /** @var bool */
-    private $active;
+    private $active = true;
 
     /** @var int */
     private $salary;
+
+    public function subject(): string
+    {
+        return "example-event";
+    }
 
     /** @return string */
     public function getName(): string
@@ -64,7 +69,9 @@ class ExampleEvent extends BaseRecord
         ];
     }
 
-    public const schema = <<<SCHEMA
+    public function schema(): string
+    {
+        return <<<SCHEMA
 {
     "type": "record",
     "name": "ExampleEvent",
@@ -87,5 +94,6 @@ class ExampleEvent extends BaseRecord
     ]
 }
 SCHEMA;
+    }
 
 }
