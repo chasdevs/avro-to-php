@@ -1,0 +1,77 @@
+<?php
+
+{% if record.phpNamespace %}
+namespace {{ namespace }}\{{ record.phpNamespace }};
+{% else %}
+namespace {{ namespace }};sss
+{% endif %}
+
+use {{ namespace }}\BaseRecord;
+{% for import in record.imports -%}
+{% if loop.first %}
+
+{% endif %}
+use {{ namespace }}\{{ import }};
+{% endfor %}
+
+class {{ record.name }} extends BaseRecord
+{
+
+    {% for field in record.fields -%}
+    /** @var {{ field.phpDocType }} */
+    {% if field.phpDefault -%}
+    private ${{ field.name }} = {{ field.phpDefault|raw }};
+    {%- else -%}
+    private ${{ field.name }};
+    {%- endif %}
+
+
+    {% endfor -%}
+
+    public function subject(): string
+    {
+        return "{{ record.name | spinal }}";
+    }
+
+    {% for field in record.fields -%}
+    /** @return {{ field.phpDocType }} */
+    {% if field.phpType -%}
+    public function get{{ field.name | ucFirst }}(): {{ field.phpType }}
+    {% else -%}
+    public function get{{ field.name | ucFirst }}()
+    {% endif -%}
+    {
+        return $this->{{ field.name }};
+    }
+
+    /** @param {{ field.phpDocType }} ${{ field.name }} */
+    {% if field.phpType -%}
+    public function set{{ field.name | ucFirst }}({{ field.phpType }} ${{ field.name }}): {{ record.name }}
+    {% else -%}
+    public function set{{ field.name | ucFirst }}(${{ field.name }}): {{ record.name }}
+    {% endif -%}
+    {
+        $this->{{ field.name }} = ${{ field.name }};
+        return $this;
+    }
+
+    {% endfor -%}
+    public function jsonSerialize()
+    {
+        return [
+            {%- for field in record.fields %}
+
+            "{{ field.name }}" => $this->encode($this->{{ field.name }}),
+            {%- endfor %}
+
+        ];
+    }
+
+    public function schema(): string
+    {
+        return <<<SCHEMA
+{{ record.schema|raw }}
+SCHEMA;
+    }
+
+}

@@ -1,18 +1,25 @@
 <?php
 
-namespace Storyblocks\Example;
+namespace Tests\Expected\Storyblocks\Example;
 
-class ExampleEvent
+use Tests\Expected\BaseRecord;
+
+class ExampleEvent extends BaseRecord
 {
 
     /** @var string */
     private $name;
 
     /** @var bool */
-    private $active;
+    private $active = true;
 
     /** @var int */
     private $salary;
+
+    public function subject(): string
+    {
+        return "example-event";
+    }
 
     /** @return string */
     public function getName(): string
@@ -53,7 +60,18 @@ class ExampleEvent
         return $this;
     }
 
-    public const schema = <<<SCHEMA
+    public function jsonSerialize()
+    {
+        return [
+            "name" => $this->encode($this->name),
+            "active" => $this->encode($this->active),
+            "salary" => $this->encode($this->salary),
+        ];
+    }
+
+    public function schema(): string
+    {
+        return <<<SCHEMA
 {
     "type": "record",
     "name": "ExampleEvent",
@@ -76,5 +94,6 @@ class ExampleEvent
     ]
 }
 SCHEMA;
+    }
 
 }

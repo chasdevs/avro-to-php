@@ -1,8 +1,10 @@
 <?php
 
-namespace Testrecords;
+namespace Tests\Expected;
 
-class RecordWithArray
+use Tests\Expected\BaseRecord;
+
+class RecordWithArray extends BaseRecord
 {
 
     /** @var Thing[] */
@@ -37,11 +39,18 @@ class RecordWithArray
         return $this;
     }
 
+    public function jsonSerialize()
+    {
+        return [
+            "things" => $this->encode($this->things),
+            "numbers" => $this->encode($this->numbers),
+        ];
+    }
+
     public const schema = <<<SCHEMA
 {
     "type": "record",
     "name": "RecordWithArray",
-    "namespace": "testrecords",
     "fields": [
         {
             "name": "things",

@@ -1,34 +1,45 @@
 <?php
 
-namespace Testrecords;
+namespace Tests\Expected;
 
-class Thing
+use Tests\Expected\BaseRecord;
+
+class Thing extends BaseRecord
 {
 
     /** @var int */
     private $id;
 
-    public function getId(): int
+    /** @return int */
+    public function getId(): string
     {
         return $this->id;
     }
 
-    public function setId(int $id): void
+    /** @param int $id */
+    public function setId(int $id): Thing
     {
         $this->id = $id;
+        return $this;
+    }
+
+    public function jsonSerialize()
+    {
+        return [
+            "id" => $this->encode($this->id),
+        ];
     }
 
     public const schema = <<<SCHEMA
 {
-  "type": "record",
-  "name": "Thing",
-  "namespace": "testrecords",
-  "fields": [
-    {
-      "name": "id",
-      "type": "int"
-    }
-  ]
+    "type": "record",
+    "name": "Thing",
+    "fields": [
+        {
+            "name": "id",
+            "type": "int"
+        }
+    ]
 }
 SCHEMA;
 

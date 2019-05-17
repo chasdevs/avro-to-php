@@ -9,22 +9,23 @@ use PHPUnit\Framework\TestCase;
 class CompilerTest extends TestCase
 {
 
+    private const NAMESPACE = 'Tests\Expected';
     private const FIXTURES = __DIR__ . '/../fixtures';
     private const outDir = __DIR__ . '/../data/compiled';
     private const avscDir = __DIR__ . '/../fixtures/avsc/sample-events';
 
-    private const expectedExampleRecord = self::FIXTURES.'/expected/ExampleEvent.php';
-    private const exampleRecord = self::FIXTURES.'/avsc/ExampleEvent.avsc';
-    private const expectedRecordWithArray = self::FIXTURES.'/expected/RecordWithArray.php';
-    private const recordWithArray = self::FIXTURES.'/avsc/RecordWithArray.avsc';
-    private const expectedRecordWithUnion = self::FIXTURES.'/expected/RecordWithUnion.php';
-    private const recordWithUnion = self::FIXTURES.'/avsc/RecordWithUnion.avsc';
+    private const expectedBaseRecord = self::FIXTURES . '/expected/BaseRecord.php';
+    private const expectedExampleRecord = self::FIXTURES . '/expected/ExampleEvent.php';
+    private const exampleRecord = self::FIXTURES . '/avsc/ExampleEvent.avsc';
+    private const expectedRecordWithArray = self::FIXTURES . '/expected/RecordWithArray.php';
+    private const recordWithArray = self::FIXTURES . '/avsc/RecordWithArray.avsc';
+    private const expectedRecordWithUnion = self::FIXTURES . '/expected/RecordWithUnion.php';
+    private const recordWithUnion = self::FIXTURES . '/avsc/RecordWithUnion.avsc';
 
     public static function setUpBeforeClass()
     {
         Utils::rmDir(self::outDir);
     }
-
 
     public function testCompile()
     {
@@ -37,6 +38,7 @@ class CompilerTest extends TestCase
             Utils::resolve(self::outDir, 'Sample/User/V1/UserEvent.php'),
             Utils::resolve(self::outDir, 'Sample/User/V2/UserEvent.php'),
             Utils::resolve(self::outDir, 'Sample/Common/SharedMeta.php'),
+            Utils::resolve(self::outDir, 'BaseRecord.php'),
         ], $output);
 
     }
@@ -46,7 +48,18 @@ class CompilerTest extends TestCase
         $expected = file_get_contents(Utils::resolve(self::expectedExampleRecord));
 
         $compiler = new Compiler();
-        $actual = $compiler->compileFile(self::exampleRecord);
+        $actual = $compiler->compileFile(self::exampleRecord, self::NAMESPACE);
+
+        $this->assertIsString($actual);
+        $this->assertEquals($expected, $actual);
+    }
+
+    public function testCompileBaseRecord()
+    {
+        $expected = file_get_contents(Utils::resolve(self::expectedBaseRecord));
+
+        $compiler = new Compiler();
+        $actual = $compiler->compileBaseRecord(self::NAMESPACE);
 
         $this->assertIsString($actual);
         $this->assertEquals($expected, $actual);
@@ -57,7 +70,7 @@ class CompilerTest extends TestCase
         $expected = file_get_contents(Utils::resolve(self::expectedRecordWithArray));
 
         $compiler = new Compiler();
-        $actual = $compiler->compileFile(self::recordWithArray);
+        $actual = $compiler->compileFile(self::recordWithArray, self::NAMESPACE);
 
         $this->assertIsString($actual);
         $this->assertEquals($expected, $actual);
@@ -68,7 +81,7 @@ class CompilerTest extends TestCase
         $expected = file_get_contents(Utils::resolve(self::expectedRecordWithUnion));
 
         $compiler = new Compiler();
-        $actual = $compiler->compileFile(self::recordWithUnion);
+        $actual = $compiler->compileFile(self::recordWithUnion, self::NAMESPACE);
 
         $this->assertIsString($actual);
         $this->assertEquals($expected, $actual);

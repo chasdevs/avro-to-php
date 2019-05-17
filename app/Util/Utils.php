@@ -9,16 +9,13 @@ use RegexIterator;
 class Utils
 {
 
-    /**
-     * @param string $path
-     * @throws \Throwable
-     */
-    static function ensureDir(string $path): void
+    static function ensureDir(string $path): string
     {
         $path = preg_match('/\.\w+$/', $path) ? dirname($path) : $path;
         if (!file_exists($path)) {
             mkdir($path, 0777, true);
         }
+        return realpath($path);
     }
 
     /**

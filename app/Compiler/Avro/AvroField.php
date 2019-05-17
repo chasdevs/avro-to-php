@@ -22,6 +22,9 @@ class AvroField {
     /** @var mixed|null */
     public $default;
 
+    /** @var mixed */
+    public $phpDefault;
+
     public function __construct(string $name, ?string $doc, AvroTypeInterface $type, $default) {
         $this->name = $name;
         $this->doc = $doc;
@@ -29,6 +32,20 @@ class AvroField {
         $this->default = $default;
         $this->phpType = $this->type->getPhpType();
         $this->phpDocType = $this->type->getPhpDocType();
+        $this->phpDefault = $this->configureDefault();
+    }
+
+    private function configureDefault() {
+        $default = $this->default;
+
+        switch (gettype($default)) {
+            case 'string':
+                return "\"$default\"";
+            case 'boolean':
+                return $default === true ? 'true' : 'false';
+            default:
+                return $default;
+        }
     }
 
     public static function create(\stdClass $field): AvroField {
