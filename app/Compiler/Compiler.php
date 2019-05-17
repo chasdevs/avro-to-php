@@ -30,7 +30,7 @@ class Compiler
         $baseRecord = $this->compileBaseRecord($namespace);
         $path = Utils::joinPaths($outDir, 'BaseRecord.php');
         if ($dryRun) {
-            Log::warning('(Dry-Run) Compiling base record.', ['path' => $path]);
+            Log::info('(Dry-Run) Compiling base record.', ['path' => $path]);
         } else {
             file_put_contents($path, $baseRecord);
         }
@@ -41,9 +41,8 @@ class Compiler
 
             $compiledPath = Utils::joinPaths($outDir, $record->getCompilePath());
 
-            //TODO: dry-run
             if ($dryRun) {
-                Log::warning('(Dry-Run) Compiling record.', ['record' => $record->name, 'path' => $compiledPath]);
+                Log::info('(Dry-Run) Compiling record.', ['record' => $record->name, 'path' => $compiledPath]);
             } else {
                 Utils::ensureDir($compiledPath);
                 file_put_contents($compiledPath, $this->compileRecord($record, $namespace));
