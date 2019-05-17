@@ -9,7 +9,7 @@ use LaravelZero\Framework\Commands\Command;
 class CompileDirectory extends Command
 {
 
-    protected $signature = 'compile:directory {directory} {outputDirectory?}';
+    protected $signature = 'compile:directory {directory} {outputDirectory=./compiled} {--d|dry-run}';
 
     protected $description = 'Compile a directory containing Avro .avsc files to PHP classes.';
 
@@ -17,13 +17,14 @@ class CompileDirectory extends Command
     {
         $sourceDir = $this->argument('directory');
         $outputDir = $this->argument('outputDirectory');
+        $dryRun = $this->option('dry-run');
 
         $source = Utils::resolve($sourceDir);
-        $target = Utils::resolve($outputDir);
 
-        $this->comment('Compiling Avro files in ' . $source . ' to ' . $target . '.');
-        $compiler->compile($source, $target);
-        $this->info('Done!');
+
+        $this->comment('Compiling Avro files in ' . $source . ' to ' . $outputDir . ($dryRun ? ' (Dry-Run)' : ''));
+        $compiler->compile($source, $outputDir, $dryRun);
+        $this->comment('Done!');
     }
 
 }

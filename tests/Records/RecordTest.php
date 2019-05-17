@@ -2,8 +2,8 @@
 
 namespace Tests\Records;
 
-use Testrecords\RecordWithArray;
-use Testrecords\Thing;
+use Tests\Expected\RecordWithArray;
+use Tests\Expected\Thing;
 use Tests\TestCase;
 
 class RecordTest extends TestCase
