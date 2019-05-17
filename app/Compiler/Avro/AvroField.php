@@ -40,7 +40,7 @@ class AvroField {
 
         switch (gettype($default)) {
             case 'string':
-                return '"'.$default.'"';
+                return "\"$default\"";
             case 'boolean':
                 return $default === true ? 'true' : 'false';
             default:
