@@ -29,13 +29,17 @@ class AvroRecord implements AvroTypeInterface
     /** @var string[] */
     public $imports;
 
-    public function __construct(string $name, ?string $namespace, ?string $doc, array $fields, string $schema)
+    /** @var string[] */
+    public $aliases;
+
+    public function __construct(string $name, ?string $namespace, ?string $doc, array $fields, string $schema, ?array $aliases)
     {
         $this->name = $name;
         $this->namespace = $namespace;
         $this->doc = $doc;
         $this->fields = $fields;
         $this->schema = $schema;
+        $this->aliases = $aliases;
         $this->configurePhpNamespace();
         $this->configureImports();
     }
@@ -88,14 +92,10 @@ class AvroRecord implements AvroTypeInterface
             throw new NotImplementedException('order field not implemented in compiler.');
         }
 
-        if (isset($record->aliases)) {
-            throw new NotImplementedException('aliases field not implemented in compiler.');
-        }
-
         $fields = array_map(function (\stdClass $field) {
             return AvroField::create($field);
         }, $record->fields);
 
-        return new self($record->name, $record->namespace ?? null, $record->doc ?? null, $fields, json_encode($record, JSON_PRETTY_PRINT));
+        return new self($record->name, $record->namespace ?? null, $record->doc ?? null, $fields, json_encode($record, JSON_PRETTY_PRINT), $record->aliases ?? null);
     }
 }
