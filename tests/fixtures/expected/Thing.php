@@ -30,7 +30,9 @@ class Thing extends BaseRecord
         ];
     }
 
-    public const schema = <<<SCHEMA
+    public function schema(): string
+    {
+        return <<<SCHEMA
 {
     "type": "record",
     "name": "Thing",
@@ -42,5 +44,6 @@ class Thing extends BaseRecord
     ]
 }
 SCHEMA;
+    }
 
 }

@@ -30,7 +30,9 @@ class RecordWithUnion extends BaseRecord
         ];
     }
 
-    public const schema = <<<SCHEMA
+    public function schema(): string
+    {
+        return <<<SCHEMA
 {
     "type": "record",
     "name": "RecordWithUnion",
@@ -45,5 +47,6 @@ class RecordWithUnion extends BaseRecord
     ]
 }
 SCHEMA;
+    }
 
 }

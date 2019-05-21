@@ -16,11 +16,6 @@ class ExampleEvent extends BaseRecord
     /** @var int */
     private $salary;
 
-    public function subject(): string
-    {
-        return "example-event";
-    }
-
     /** @return string */
     public function getName(): string
     {

@@ -47,7 +47,9 @@ class RecordWithArray extends BaseRecord
         ];
     }
 
-    public const schema = <<<SCHEMA
+    public function schema(): string
+    {
+        return <<<SCHEMA
 {
     "type": "record",
     "name": "RecordWithArray",
@@ -78,5 +80,6 @@ class RecordWithArray extends BaseRecord
     ]
 }
 SCHEMA;
+    }
 
 }

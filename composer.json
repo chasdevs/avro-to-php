@@ -45,7 +45,8 @@
     "scripts": {
         "post-create-project-cmd": [
             "@php application app:rename"
-        ]
+        ],
+        "test": "vendor/bin/phpunit tests"
     },
     "minimum-stability": "dev",
     "prefer-stable": true,

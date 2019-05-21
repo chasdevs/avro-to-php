@@ -3,7 +3,7 @@
 {% if record.phpNamespace %}
 namespace {{ namespace }}\{{ record.phpNamespace }};
 {% else %}
-namespace {{ namespace }};sss
+namespace {{ namespace }};
 {% endif %}
 
 use {{ namespace }}\BaseRecord;
@@ -27,11 +27,6 @@ class {{ record.name }} extends BaseRecord
 
 
     {% endfor -%}
-
-    public function subject(): string
-    {
-        return "{{ record.name | spinal }}";
-    }
 
     {% for field in record.fields -%}
     /** @return {{ field.phpDocType }} */
