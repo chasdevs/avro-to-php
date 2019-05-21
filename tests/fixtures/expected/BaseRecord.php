@@ -31,10 +31,15 @@ abstract class BaseRecord implements JsonSerializable
         $refl = new ReflectionClass($this);
 
         foreach ($array as $propertyToSet => $value) {
-            $prop = $refl->getProperty($propertyToSet);
-            $prop->setAccessible(true);
+
+            try {
+                $prop = $refl->getProperty($propertyToSet);
+            } catch (\ReflectionException $e) {
+                continue;
+            }
 
             if ($prop instanceof ReflectionProperty) {
+                $prop->setAccessible(true);
                 $prop->setValue($this, $value);
             }
         }
