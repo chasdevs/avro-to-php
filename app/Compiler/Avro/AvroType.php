@@ -18,6 +18,7 @@ use MyCLabs\Enum\Enum;
  * @method static AvroType MAP()
  * @method static AvroType FIXED()
  * @method static AvroType NULL()
+ * @method static AvroType TIMESTAMP_MILLIS()
  */
 class AvroType extends Enum implements AvroTypeInterface
 {
@@ -31,6 +32,9 @@ class AvroType extends Enum implements AvroTypeInterface
     private const BYTES = 'bytes';
     private const STRING = 'string';
     private const NULL = 'null';
+
+    // Logical Types
+    private const TIMESTAMP_MILLIS = 'timestamp-millis';
 
     // Complex Types
     private const RECORD = 'record';
@@ -52,7 +56,8 @@ class AvroType extends Enum implements AvroTypeInterface
             self::DOUBLE => 'float',
             self::BYTES => 'string',
             self::STRING => 'string',
-            self::NULL => 'null'
+            self::NULL => 'null',
+            self::TIMESTAMP_MILLIS => 'int'
         ];
         return $map[$this->getValue()];
     }

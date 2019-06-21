@@ -1,0 +1,8 @@
+{
+  "type" : "record",
+  "name" : "RecordWithLogicalTypes",
+  "fields" : [ {
+    "name" : "timestamp",
+    "type" : [ "timestamp-millis" ]
+  } ]
+}
