@@ -24,7 +24,7 @@ $ vendor/bin/avro-to-php compile:directory dir/with/avsc/
 - [ ] Serialization Tests
 - [ ] Enums
 - [ ] Maps
-- [ ] Logical types
+- [x] Logical types (only tested with timestamp-millis)
 - [ ] Fixed
 - [ ] Sort Order
 - [ ] Aliases
