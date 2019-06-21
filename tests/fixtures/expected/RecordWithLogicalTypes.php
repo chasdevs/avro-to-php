@@ -11,13 +11,13 @@ class RecordWithLogicalTypes extends BaseRecord
     private $timestamp;
 
     /** @return int */
-    public function getTimestamp()
+    public function getTimestamp(): int
     {
         return $this->timestamp;
     }
 
     /** @param int $timestamp */
-    public function setTimestamp($timestamp): RecordWithLogicalTypes
+    public function setTimestamp(int $timestamp): RecordWithLogicalTypes
     {
         $this->timestamp = $timestamp;
         return $this;
@@ -39,9 +39,10 @@ class RecordWithLogicalTypes extends BaseRecord
     "fields": [
         {
             "name": "timestamp",
-            "type": [
-                "timestamp-millis"
-            ]
+            "type": {
+                "type": "long",
+                "logicalType": "timestamp-millis"
+            }
         }
     ]
 }

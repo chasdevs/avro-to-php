@@ -3,6 +3,9 @@
   "name" : "RecordWithLogicalTypes",
   "fields" : [ {
     "name" : "timestamp",
-    "type" : [ "timestamp-millis" ]
+    "type" : {
+      "type" : "long",
+      "logicalType" : "timestamp-millis"
+    }
   } ]
 }
