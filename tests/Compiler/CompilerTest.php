@@ -21,6 +21,8 @@ class CompilerTest extends TestCase
     private const recordWithArray = self::FIXTURES . '/avsc/RecordWithArray.avsc';
     private const expectedRecordWithUnion = self::FIXTURES . '/expected/RecordWithUnion.php';
     private const recordWithUnion = self::FIXTURES . '/avsc/RecordWithUnion.avsc';
+    private const expectedRecordWithLogicalTypes = self::FIXTURES . '/expected/RecordWithLogicalTypes.php';
+    private const recordWithLogicalTypes = self::FIXTURES . '/avsc/RecordWithLogicalTypes.avsc';
 
     public static function setUpBeforeClass()
     {
@@ -82,6 +84,17 @@ class CompilerTest extends TestCase
 
         $compiler = new Compiler();
         $actual = $compiler->compileFile(self::recordWithUnion, self::NAMESPACE);
+
+        $this->assertIsString($actual);
+        $this->assertEquals($expected, $actual);
+    }
+
+    public function testCompileRecordWithLogicalTypes()
+    {
+        $expected = file_get_contents(Utils::resolve(self::expectedRecordWithLogicalTypes));
+
+        $compiler = new Compiler();
+        $actual = $compiler->compileFile(self::recordWithLogicalTypes, self::NAMESPACE);
 
         $this->assertIsString($actual);
         $this->assertEquals($expected, $actual);
