@@ -15,13 +15,14 @@ class Compiler
      * Main compilation function. Takes an input directory with Avro .avsc files and outputs the compiled PHP classes into the output directory.
      * @param string $sourceDir
      * @param string $outDir
+     * @param string [$namespace=null] - Defaults to the basename of the output folder.
      * @param bool [$dryRun=false]
      */
-    public function compile(string $sourceDir, string $outDir, bool $dryRun = false): void
+    public function compile(string $sourceDir, string $outDir, string $namespace = null, bool $dryRun = false): void
     {
 
         $outDir = Utils::ensureDir($outDir);
-        $namespace = ucfirst(basename($outDir)) ?: 'CompiledRecords';
+        $namespace = ucfirst(strtolower($namespace)) ?: ucfirst(basename($outDir));
 
         // Find all avsc files.
         $avscFiles = Utils::find($sourceDir, '/.*\.avsc$/');

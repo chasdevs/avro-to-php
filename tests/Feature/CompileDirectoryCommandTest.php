@@ -14,4 +14,12 @@ class CompileDirectoryCommandTest extends TestCase
         $this->artisan("compile:directory {$sourceDir} {$dataDir}/command-output -d")
              ->assertExitCode(0);
     }
+
+    public function testCompileDirectoryWithNamespace()
+    {
+        $sourceDir = Utils::resolve(__DIR__, '../fixtures/avsc');
+        $dataDir = Utils::resolve(__DIR__, '../data');
+        $this->artisan("compile:directory {$sourceDir} {$dataDir}/command-output --namespace Bob -d")
+             ->assertExitCode(0);
+    }
 }
