@@ -6,12 +6,12 @@ Compile Avro .avsc files into usable PHP classes.
 
 ### Installation
 ```bash
-$ composer require chasdevs/avro-to-php
+composer require chasdevs/avro-to-php
 ```
 
 ### Usage
 ```bash
-$ vendor/bin/avro-to-php compile:directory dir/with/avsc/
+vendor/bin/avro-to-php compile dir/with/avsc/
 ```
 
 ### Roadmap

@@ -9,7 +9,7 @@ use LaravelZero\Framework\Commands\Command;
 class Compile extends Command
 {
 
-    protected $signature = 'compile {file} {outputDirectory=.} {--p|print}';
+    protected $signature = 'compile:file {file} {outputDirectory=.} {--p|print}';
 
     protected $description = 'Compile an Avro .avsc files into a typed PHP class.';
 
