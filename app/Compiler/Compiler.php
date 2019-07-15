@@ -22,7 +22,7 @@ class Compiler
     {
 
         $outDir = Utils::ensureDir($outDir);
-        $namespace = ucfirst(strtolower($namespace)) ?: ucfirst(basename($outDir));
+        $namespace = $namespace ?: ucfirst(basename($outDir));
 
         // Find all avsc files.
         $avscFiles = Utils::find($sourceDir, '/.*\.avsc$/');

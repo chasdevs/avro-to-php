@@ -23,7 +23,7 @@ class CompileDirectory extends Command
         $source = Utils::resolve($sourceDir);
 
         $this->comment('Compiling Avro files in ' . $source . ' to ' . $outputDir . ($namespace ? " using namespace $namespace" : '') . ($dryRun ? ' (Dry-Run)' : ''));
-        $compiler->compile($source, $outputDir, $dryRun);
+        $compiler->compile($source, $outputDir, $namespace, $dryRun);
         $this->comment('Done!');
     }
 
