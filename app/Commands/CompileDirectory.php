@@ -9,7 +9,7 @@ use LaravelZero\Framework\Commands\Command;
 class CompileDirectory extends Command
 {
 
-    protected $signature = 'compile:directory {directory} {outputDirectory=./compiled} {--d|dry-run} {--namespace=}';
+    protected $signature = 'compile {directory} {outputDirectory=./compiled} {--d|dry-run} {--namespace=}';
 
     protected $description = 'Compile a directory containing Avro .avsc files to PHP classes.';
 
