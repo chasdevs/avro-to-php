@@ -6,7 +6,6 @@ use App\Compiler\Avro\AvroRecord;
 use App\Compiler\Twig\TemplateEngine;
 use App\Util\Utils;
 use Illuminate\Support\Facades\Log;
-use LaravelZero\Framework\Commands\Command;
 
 class Compiler
 {
@@ -22,7 +21,7 @@ class Compiler
     {
 
         $outDir = Utils::ensureDir($outDir);
-        $namespace = $namespace ?: ucfirst(basename($outDir));
+        $namespace = $namespace ?: $this->directoryToNamespace($outDir);
 
         // Find all avsc files.
         $avscFiles = Utils::find($sourceDir, '/.*\.avsc$/');
@@ -77,6 +76,14 @@ class Compiler
     private function templateEngine(): TemplateEngine
     {
         return (new TemplateEngine());
+    }
+
+    private function directoryToNamespace(string $directory): string {
+        $namespace = basename($directory);
+        $namespace = str_replace('_', '|', $namespace);
+        $namespace = str_replace('-', '|', $namespace);
+        $namespace = str_replace('|', '', ucwords($namespace, '|'));
+        return $namespace;
     }
 
 }
