@@ -2,7 +2,9 @@
 
 namespace Tests\Records;
 
+use Tests\Expected\Flavor;
 use Tests\Expected\RecordWithArray;
+use Tests\Expected\RecordWithEnum;
 use Tests\Expected\Thing;
 use Tests\TestCase;
 
@@ -21,13 +23,18 @@ class RecordTest extends TestCase
             ->setNumbers([1, 3])
             ->setThings($things);
 
-        $expected = ['numbers' => [1, 3], 'things' => [
+        $this->assertEquals(['numbers' => [1, 3], 'things' => [
             ['id' => 1],
             ['id' => 2],
-        ]];
-        $data = $record->data();
+        ]], $record->data());
+    }
 
-        $this->assertEquals($expected, $data);
+    public function testEnum()
+    {
+        $record = (new RecordWithEnum())
+            ->setFavoriteFlavor(Flavor::STRAWBERRY());
+
+        $this->assertEquals(['favoriteFlavor' => 'STRAWBERRY'], $record->data());
     }
 
 }
