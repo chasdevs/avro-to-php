@@ -6,7 +6,7 @@
     "type" : {
       "type" : "enum",
       "name" : "Flavor",
-      "symbols" : [ "STRAWBERRY", "VANILLA", "CHOCOLATE" ]
+      "symbols" : [ "VANILLA", "CHOCOLATE", "STRAWBERRY" ]
     }
   } ]
 }

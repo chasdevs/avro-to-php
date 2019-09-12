@@ -1,9 +1,9 @@
 protocol x {
 
   enum Flavor {
-      STRAWBERRY,
       VANILLA,
-      CHOCOLATE
+      CHOCOLATE,
+      STRAWBERRY
   }
 
   record RecordWithEnum {
