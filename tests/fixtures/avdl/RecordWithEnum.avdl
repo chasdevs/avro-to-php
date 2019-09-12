@@ -1,0 +1,13 @@
+protocol x {
+
+  enum Flavor {
+      STRAWBERRY,
+      VANILLA,
+      CHOCOLATE
+  }
+
+  record RecordWithEnum {
+    Flavor favoriteFlavor;
+  }
+
+}

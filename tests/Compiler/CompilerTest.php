@@ -23,6 +23,8 @@ class CompilerTest extends TestCase
     private const recordWithUnion = self::FIXTURES . '/avsc/RecordWithUnion.avsc';
     private const expectedRecordWithLogicalTypes = self::FIXTURES . '/expected/RecordWithLogicalTypes.php';
     private const recordWithLogicalTypes = self::FIXTURES . '/avsc/RecordWithLogicalTypes.avsc';
+    private const expectedRecordWithEnum = self::FIXTURES . '/expected/RecordWithEnum.php';
+    private const recordWithEnum = self::FIXTURES . '/avsc/RecordWithEnum.avsc';
 
     public static function setUpBeforeClass()
     {
@@ -95,6 +97,17 @@ class CompilerTest extends TestCase
 
         $compiler = new Compiler();
         $actual = $compiler->compileFile(self::recordWithLogicalTypes, self::NAMESPACE);
+
+        $this->assertIsString($actual);
+        $this->assertEquals($expected, $actual);
+    }
+
+    public function testCompileRecordWithEnum()
+    {
+        $expected = file_get_contents(Utils::resolve(self::expectedRecordWithEnum));
+
+        $compiler = new Compiler();
+        $actual = $compiler->compileFile(self::recordWithEnum, self::NAMESPACE);
 
         $this->assertIsString($actual);
         $this->assertEquals($expected, $actual);
