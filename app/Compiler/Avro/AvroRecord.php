@@ -84,7 +84,7 @@ class AvroRecord implements AvroTypeInterface
     public static function parse(string $json): AvroRecord
     {
         $decoded = json_decode($json);
-        return self::create($decoded, $json);
+        return self::create($decoded);
     }
 
     public static function create(\stdClass $record): AvroRecord {

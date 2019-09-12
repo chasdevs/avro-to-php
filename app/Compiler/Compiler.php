@@ -3,6 +3,7 @@
 namespace App\Compiler;
 
 use App\Compiler\Avro\AvroRecord;
+use App\Compiler\Avro\AvroTypeFactory;
 use App\Compiler\Twig\TemplateEngine;
 use App\Util\Utils;
 use Illuminate\Support\Facades\Log;
@@ -42,7 +43,7 @@ class Compiler
             $compiledPath = Utils::joinPaths($outDir, $record->getCompilePath());
 
             if ($dryRun) {
-                Log::info('(Dry-Run) Compiling record.', ['record' => $record->name, 'path' => $compiledPath]);
+                Log::info('(Dry-Run) Compiling file.', ['file' => $record->name, 'compiledPath' => $compiledPath]);
             } else {
                 Utils::ensureDir($compiledPath);
                 file_put_contents($compiledPath, $this->compileRecord($record, $namespace));
@@ -70,6 +71,7 @@ class Compiler
     private function parseRecord(string $avscPath): AvroRecord
     {
         $avsc = file_get_contents($avscPath);
+        //TODO: Also parse an avro enum
         return AvroRecord::parse($avsc);
     }
 
