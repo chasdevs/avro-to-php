@@ -1,0 +1,20 @@
+<?php
+
+{% if record.phpNamespace %}
+namespace {{ namespace }}\{{ record.phpNamespace }};
+{% else %}
+namespace {{ namespace }};
+{% endif %}
+
+use MyCLabs\Enum\Enum;
+
+/**
+{% for field in record.fields -%}
+ * @method static ${{ record.name }} ${{ field.name }}()
+{% endfor -%}
+ */
+{
+    {% for field in record.fields -%}
+    private const ${{ field.name }} = '${{ field.name }}';
+    {% endfor -%}
+}

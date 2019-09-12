@@ -11,13 +11,13 @@ class RecordWithEnum extends BaseRecord
     private $favoriteFlavor;
 
     /** @return Flavor */
-    public function getFavoriteFlavor()
+    public function getFavoriteFlavor(): Flavor
     {
         return $this->favoriteFlavor;
     }
 
     /** @param Flavor $favoriteFlavor */
-    public function setFavoriteFlavor($favoriteFlavor): RecordWithEnum
+    public function setFavoriteFlavor(Flavor $favoriteFlavor): RecordWithEnum
     {
         $this->favoriteFlavor = $favoriteFlavor;
         return $this;
@@ -39,10 +39,14 @@ class RecordWithEnum extends BaseRecord
     "fields": [
         {
             "name": "favoriteFlavor",
-            "type" : {
-              "type" : "enum",
-              "name" : "Flavor",
-              "symbols" : [ "STRAWBERRY", "VANILLA", "CHOCOLATE" ]
+            "type": {
+                "type": "enum",
+                "name": "Flavor",
+                "symbols": [
+                    "VANILLA",
+                    "CHOCOLATE",
+                    "STRAWBERRY"
+                ]
             }
         }
     ]

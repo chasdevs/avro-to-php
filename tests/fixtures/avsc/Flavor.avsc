@@ -1,0 +1,5 @@
+{
+  "type" : "enum",
+  "name" : "Flavor",
+  "symbols" : [ "VANILLA", "CHOCOLATE", "STRAWBERRY" ]
+}
