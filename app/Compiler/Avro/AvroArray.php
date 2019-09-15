@@ -2,6 +2,8 @@
 
 namespace App\Compiler\Avro;
 
+use App\Compiler\Errors\NotImplementedException;
+
 class AvroArray implements AvroTypeInterface
 {
 
@@ -26,5 +28,15 @@ class AvroArray implements AvroTypeInterface
     public function getPhpDocType(): string
     {
         return $this->items->getPhpType().'[]';
+    }
+
+    public function getType(): AvroType
+    {
+        return AvroType::ARRAY();
+    }
+
+    public function getCompilePath(): string
+    {
+        throw new NotImplementedException('Cannot compile type directly.');
     }
 }

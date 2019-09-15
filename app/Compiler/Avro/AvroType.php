@@ -2,6 +2,7 @@
 
 namespace App\Compiler\Avro;
 
+use App\Compiler\Errors\NotImplementedException;
 use MyCLabs\Enum\Enum;
 
 /**
@@ -17,6 +18,7 @@ use MyCLabs\Enum\Enum;
  * @method static AvroType ARRAY()
  * @method static AvroType MAP()
  * @method static AvroType FIXED()
+ * @method static AvroType UNION()
  * @method static AvroType NULL()
  * @method static AvroType LOGICAL_TYPE()
  */
@@ -42,6 +44,7 @@ class AvroType extends Enum implements AvroTypeInterface
     private const ARRAY = 'array';
     private const MAP = 'map';
     private const FIXED = 'fixed';
+    private const UNION = 'union';
 
     public function is(string $value) {
         return $this->equals(new AvroType($value));
@@ -64,5 +67,15 @@ class AvroType extends Enum implements AvroTypeInterface
     public function getPhpDocType(): string
     {
         return $this->getPhpType();
+    }
+
+    public function getType(): AvroType
+    {
+        return $this;
+    }
+
+    public function getCompilePath(): string
+    {
+        throw new NotImplementedException('Cannot compile type directly.');
     }
 }

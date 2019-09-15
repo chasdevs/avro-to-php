@@ -2,6 +2,8 @@
 
 namespace App\Compiler\Avro;
 
+use App\Compiler\Errors\NotImplementedException;
+
 class AvroUnion implements AvroTypeInterface
 {
 
@@ -34,5 +36,15 @@ class AvroUnion implements AvroTypeInterface
         }, $this->types);
 
         return join('|', $phpDocTypes);
+    }
+
+    public function getType(): AvroType
+    {
+        return AvroType::UNION();
+    }
+
+    public function getCompilePath(): string
+    {
+        throw new NotImplementedException('Cannot compile type directly.');
     }
 }

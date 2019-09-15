@@ -2,6 +2,8 @@
 
 namespace App\Compiler\Avro;
 
+use App\Compiler\Errors\NotImplementedException;
+
 class AvroLogicalType implements AvroTypeInterface
 {
 
@@ -11,15 +13,15 @@ class AvroLogicalType implements AvroTypeInterface
     /** @var string */
     public $logicalType;
 
-    public function __construct(AvroTypeInterface $type, string $logicalType)
+    public function __construct(AvroType $type, string $logicalType)
     {
         $this->type = $type;
         $this->logicalType = $logicalType;
     }
 
-    public static function create(\stdClass $type): AvroLogicalType
+    public static function create(\stdClass $typeDef): AvroLogicalType
     {
-        return new self(new AvroType($type->type), $type->logicalType);
+        return new self(new AvroType($typeDef->type), $typeDef->logicalType);
     }
 
     public function getPhpType(): string
@@ -30,5 +32,20 @@ class AvroLogicalType implements AvroTypeInterface
     public function getPhpDocType(): string
     {
         return $this->type->getPhpDocType();
+    }
+
+    public function getName(): string
+    {
+        throw new NotImplementedException("Unnamed type: ".$this->type);
+    }
+
+    public function getCompilePath(): string
+    {
+        throw new NotImplementedException("Uncompilable type: ".$this->type);
+    }
+
+    public function getType(): AvroType
+    {
+        return AvroType::LOGICAL_TYPE();
     }
 }

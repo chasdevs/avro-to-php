@@ -4,8 +4,8 @@ namespace App\Compiler\Avro;
 
 class AvroEnum implements AvroTypeInterface
 {
-    /** @var string */
-    public $name;
+
+    use AvroNamedType;
 
     /** @var string[] */
     public $symbols;
@@ -14,14 +14,17 @@ class AvroEnum implements AvroTypeInterface
      * @param string $name
      * @param string[] $symbols
      */
-    public function __construct(string $name, array $symbols)
+    public function __construct(string $name, ?string $namespace, array $symbols)
     {
         $this->name = $name;
+        $this->namespace = $namespace;
         $this->symbols = $symbols;
+        $this->configurePhpNamespace();
     }
 
-    public static function create(\stdClass $array): AvroEnum {
-        return new self($array->name, $array->symbols);
+    public static function create(\stdClass $typeRaw): AvroEnum
+    {
+        return new self($typeRaw->name, $typeRaw->namespace ?? null, $typeRaw->symbols);
     }
 
     public function getPhpType(): string
@@ -32,5 +35,10 @@ class AvroEnum implements AvroTypeInterface
     public function getPhpDocType(): string
     {
         return $this->getPhpType();
+    }
+
+    public function getType(): AvroType
+    {
+        return AvroType::ENUM();
     }
 }

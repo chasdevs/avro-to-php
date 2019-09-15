@@ -8,11 +8,7 @@ use App\Util\Utils;
 class AvroRecord implements AvroTypeInterface
 {
 
-    /** @var string */
-    public $name;
-
-    /** @var string|null */
-    public $namespace;
+    use AvroNamedType;
 
     /** @var string */
     public $doc;
@@ -22,9 +18,6 @@ class AvroRecord implements AvroTypeInterface
 
     /** @var string */
     public $schema;
-
-    /** @var string */
-    public $phpNamespace;
 
     /** @var string[] */
     public $imports;
@@ -44,14 +37,6 @@ class AvroRecord implements AvroTypeInterface
         $this->configureImports();
     }
 
-    private function configurePhpNamespace() {
-        $parts = preg_split('/\./', $this->namespace);
-        $newParts = array_map(function (string $p) {
-            return ucfirst($p);
-        }, $parts);
-        $this->phpNamespace = join('\\', $newParts);
-    }
-
     private function configureImports() {
         $imports = [];
         foreach($this->fields as $field) {
@@ -62,12 +47,7 @@ class AvroRecord implements AvroTypeInterface
         $this->imports = $imports;
     }
 
-    public function getCompilePath(): string {
-        $namespace = preg_replace("/\\\/", DIRECTORY_SEPARATOR, $this->phpNamespace);
-        return Utils::joinPaths($namespace, $this->name.'.php');
-    }
-
-    public function getQualifiedPhpType(): string {
+    private function getQualifiedPhpType(): string {
         return $this->phpNamespace . '\\' . $this->name;
     }
 
@@ -97,5 +77,10 @@ class AvroRecord implements AvroTypeInterface
         }, $record->fields);
 
         return new self($record->name, $record->namespace ?? null, $record->doc ?? null, $fields, json_encode($record, JSON_PRETTY_PRINT), $record->aliases ?? null);
+    }
+
+    public function getType(): AvroType
+    {
+        return AvroType::RECORD();
     }
 }
