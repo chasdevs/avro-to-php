@@ -3,12 +3,16 @@
 namespace Tests\Expected;
 
 use Tests\Expected\BaseRecord;
+use Tests\Expected\Thing;
 
 class RecordWithUnion extends BaseRecord
 {
 
     /** @var string|null */
     private $optionalString;
+
+    /** @var int|Thing */
+    private $intOrThing;
 
     /** @return string|null */
     public function getOptionalString()
@@ -23,10 +27,24 @@ class RecordWithUnion extends BaseRecord
         return $this;
     }
 
+    /** @return int|Thing */
+    public function getIntOrThing()
+    {
+        return $this->intOrThing;
+    }
+
+    /** @param int|Thing $intOrThing */
+    public function setIntOrThing($intOrThing): RecordWithUnion
+    {
+        $this->intOrThing = $intOrThing;
+        return $this;
+    }
+
     public function jsonSerialize()
     {
         return [
             "optionalString" => $this->encode($this->optionalString),
+            "intOrThing" => $this->encode($this->intOrThing),
         ];
     }
 
@@ -42,6 +60,22 @@ class RecordWithUnion extends BaseRecord
             "type": [
                 "string",
                 "null"
+            ]
+        },
+        {
+            "name": "intOrThing",
+            "type": [
+                "int",
+                {
+                    "type": "record",
+                    "name": "Thing",
+                    "fields": [
+                        {
+                            "name": "id",
+                            "type": "int"
+                        }
+                    ]
+                }
             ]
         }
     ]
