@@ -3,6 +3,7 @@
 namespace Tests\Expected;
 
 use Tests\Expected\BaseRecord;
+use Tests\Expected\Flavor;
 
 class RecordWithEnum extends BaseRecord
 {

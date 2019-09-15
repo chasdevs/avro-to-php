@@ -2,10 +2,10 @@
 
 namespace App\Compiler\Avro;
 
-class AvroEnum implements AvroTypeInterface
+class AvroEnum implements AvroTypeInterface, AvroNameInterface
 {
 
-    use AvroNamedType;
+    use HasName;
 
     /** @var string[] */
     public $symbols;

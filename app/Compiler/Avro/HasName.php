@@ -6,7 +6,7 @@ namespace App\Compiler\Avro;
 
 use App\Util\Utils;
 
-trait AvroNamedType
+trait HasName
 {
 
     /** @var string */
@@ -21,6 +21,10 @@ trait AvroNamedType
     public function getCompilePath(): string {
         $namespace = preg_replace("/\\\/", DIRECTORY_SEPARATOR, $this->phpNamespace);
         return Utils::joinPaths($namespace, $this->name.'.php');
+    }
+
+    public function getQualifiedPhpType(): string {
+        return ltrim($this->phpNamespace . '\\' . $this->name, '\\');
     }
 
     protected function configurePhpNamespace() {

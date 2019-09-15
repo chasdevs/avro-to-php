@@ -5,10 +5,10 @@ namespace App\Compiler\Avro;
 use App\Compiler\Errors\NotImplementedException;
 use App\Util\Utils;
 
-class AvroRecord implements AvroTypeInterface
+class AvroRecord implements AvroTypeInterface, AvroNameInterface
 {
 
-    use AvroNamedType;
+    use HasName;
 
     /** @var string */
     public $doc;
@@ -40,15 +40,11 @@ class AvroRecord implements AvroTypeInterface
     private function configureImports() {
         $imports = [];
         foreach($this->fields as $field) {
-            if ($field->type instanceof AvroRecord) {
+            if ($field->type instanceof AvroNameInterface) {
                 $imports[] = $field->type->getQualifiedPhpType();
             }
         }
         $this->imports = $imports;
-    }
-
-    private function getQualifiedPhpType(): string {
-        return $this->phpNamespace . '\\' . $this->name;
     }
 
     public function getPhpType(): string

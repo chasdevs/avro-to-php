@@ -5,7 +5,7 @@ namespace App\Compiler\Twig;
 
 
 use App\Compiler\Avro\AvroEnum;
-use App\Compiler\Avro\AvroNamedType;
+use App\Compiler\Avro\HasName;
 use App\Compiler\Avro\AvroRecord;
 use App\Compiler\Avro\AvroTypeInterface;
 use Illuminate\Support\Str;
