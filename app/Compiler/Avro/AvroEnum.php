@@ -41,4 +41,10 @@ class AvroEnum implements AvroTypeInterface, AvroNameInterface
     {
         return AvroType::ENUM();
     }
+
+    public function getImports(): array
+    {
+        return [$this->getQualifiedPhpType()];
+    }
+
 }

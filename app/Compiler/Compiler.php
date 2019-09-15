@@ -3,9 +3,8 @@
 namespace App\Compiler;
 
 use App\Compiler\Avro\AvroEnum;
-use App\Compiler\Avro\HasName;
+use App\Compiler\Avro\AvroNameInterface;
 use App\Compiler\Avro\AvroRecord;
-use App\Compiler\Avro\AvroType;
 use App\Compiler\Avro\AvroTypeFactory;
 use App\Compiler\Avro\AvroTypeInterface;
 use App\Compiler\Errors\NotImplementedException;
@@ -22,6 +21,7 @@ class Compiler
      * @param string $outDir
      * @param string [$namespace=null] - Defaults to the basename of the output folder.
      * @param bool [$dryRun=false]
+     * @throws
      */
     public function compile(string $sourceDir, string $outDir, string $namespace = null, bool $dryRun = false): void
     {
@@ -51,7 +51,7 @@ class Compiler
                 Log::info('(Dry-Run) Compiling file.', ['file' => $avscFile, 'compiledPath' => $compiledPath]);
             } else {
                 Utils::ensureDir($compiledPath);
-                file_put_contents($compiledPath, $this->renderType($type, $namespace));
+                file_put_contents($compiledPath, $this->renderNamedType($type, $namespace));
             }
         }
 
@@ -60,10 +60,10 @@ class Compiler
     public function compileFile(string $avscFile, string $namespace): string
     {
         $type = $this->parseFile($avscFile);
-        return $this->renderType($type, $namespace);
+        return $this->renderNamedType($type, $namespace);
     }
 
-    public function renderType(AvroTypeInterface $type, string $namespace): string
+    public function renderNamedType(AvroNameInterface $type, string $namespace): string
     {
         if ($type instanceof AvroRecord) {
             return $this->templateEngine()->renderRecord($type, $namespace);
@@ -79,11 +79,11 @@ class Compiler
         return $this->templateEngine()->renderBaseRecord($namespace);
     }
 
-    private function parseFile(string $avscPath): AvroTypeInterface
+    private function parseFile(string $avscPath): AvroNameInterface
     {
         $avsc = file_get_contents($avscPath);
         $typeRaw = json_decode($avsc);
-        return AvroTypeFactory::create($typeRaw);
+        return AvroTypeFactory::createNamedType($typeRaw);
     }
 
     private function templateEngine(): TemplateEngine

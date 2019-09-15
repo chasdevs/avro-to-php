@@ -20,7 +20,7 @@ class AvroRecord implements AvroTypeInterface, AvroNameInterface
     public $schema;
 
     /** @var string[] */
-    public $imports;
+    public $imports = [];
 
     /** @var string[] */
     public $aliases;
@@ -38,13 +38,9 @@ class AvroRecord implements AvroTypeInterface, AvroNameInterface
     }
 
     private function configureImports() {
-        $imports = [];
         foreach($this->fields as $field) {
-            if ($field->type instanceof AvroNameInterface) {
-                $imports[] = $field->type->getQualifiedPhpType();
-            }
+            $this->imports += $field->type->getImports();
         }
-        $this->imports = $imports;
     }
 
     public function getPhpType(): string
@@ -78,5 +74,10 @@ class AvroRecord implements AvroTypeInterface, AvroNameInterface
     public function getType(): AvroType
     {
         return AvroType::RECORD();
+    }
+
+    public function getImports(): array
+    {
+        return [$this->getQualifiedPhpType()];
     }
 }

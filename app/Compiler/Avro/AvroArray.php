@@ -35,8 +35,9 @@ class AvroArray implements AvroTypeInterface
         return AvroType::ARRAY();
     }
 
-    public function getCompilePath(): string
+    public function getImports(): array
     {
-        throw new NotImplementedException('Cannot compile type directly.');
+        return $this->items->getImports();
     }
+
 }

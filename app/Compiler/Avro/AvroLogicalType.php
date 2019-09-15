@@ -39,13 +39,13 @@ class AvroLogicalType implements AvroTypeInterface
         throw new NotImplementedException("Unnamed type: ".$this->type);
     }
 
-    public function getCompilePath(): string
-    {
-        throw new NotImplementedException("Uncompilable type: ".$this->type);
-    }
-
     public function getType(): AvroType
     {
         return AvroType::LOGICAL_TYPE();
+    }
+
+    public function getImports(): array
+    {
+        return [];
     }
 }

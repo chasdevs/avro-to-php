@@ -43,8 +43,12 @@ class AvroUnion implements AvroTypeInterface
         return AvroType::UNION();
     }
 
-    public function getCompilePath(): string
+    public function getImports(): array
     {
-        throw new NotImplementedException('Cannot compile type directly.');
+        return array_reduce($this->types, function(array $carry, AvroTypeInterface $type) {
+            $carry += $type->getImports();
+            return $carry;
+        }, []);
     }
+
 }
