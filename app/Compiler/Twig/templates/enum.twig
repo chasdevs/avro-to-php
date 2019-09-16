@@ -1,0 +1,21 @@
+<?php
+
+{% if enum.phpNamespace %}
+namespace {{ namespace }}\{{ enum.phpNamespace }};
+{% else %}
+namespace {{ namespace }};
+{% endif %}
+
+use MyCLabs\Enum\Enum;
+
+/**
+ {% for symbol in enum.symbols -%}
+ * @method static {{ enum.name }} {{ symbol }}()
+ {% endfor -%}
+ */
+class {{ enum.name }} extends Enum
+{
+{% for symbol in enum.symbols %}
+    private const {{ symbol }} = '{{ symbol }}';
+{% endfor %}
+}

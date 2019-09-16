@@ -1,7 +1,12 @@
 protocol x {
 
+  record Thing {
+    int id;
+  }
+
   record RecordWithUnion {
     union { string, null } optionalString;
+    union { int, Thing } intOrThing;
   }
 
 }

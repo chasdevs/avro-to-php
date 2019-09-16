@@ -5,14 +5,10 @@ namespace App\Compiler\Avro;
 use App\Compiler\Errors\NotImplementedException;
 use App\Util\Utils;
 
-class AvroRecord implements AvroTypeInterface
+class AvroRecord implements AvroTypeInterface, AvroNameInterface
 {
 
-    /** @var string */
-    public $name;
-
-    /** @var string|null */
-    public $namespace;
+    use HasName;
 
     /** @var string */
     public $doc;
@@ -23,11 +19,8 @@ class AvroRecord implements AvroTypeInterface
     /** @var string */
     public $schema;
 
-    /** @var string */
-    public $phpNamespace;
-
     /** @var string[] */
-    public $imports;
+    public $imports = [];
 
     /** @var string[] */
     public $aliases;
@@ -44,31 +37,10 @@ class AvroRecord implements AvroTypeInterface
         $this->configureImports();
     }
 
-    private function configurePhpNamespace() {
-        $parts = preg_split('/\./', $this->namespace);
-        $newParts = array_map(function (string $p) {
-            return ucfirst($p);
-        }, $parts);
-        $this->phpNamespace = join('\\', $newParts);
-    }
-
     private function configureImports() {
-        $imports = [];
         foreach($this->fields as $field) {
-            if ($field->type instanceof AvroRecord) {
-                $imports[] = $field->type->getQualifiedPhpType();
-            }
+            $this->imports += $field->type->getImports();
         }
-        $this->imports = $imports;
-    }
-
-    public function getCompilePath(): string {
-        $namespace = preg_replace("/\\\/", DIRECTORY_SEPARATOR, $this->phpNamespace);
-        return Utils::joinPaths($namespace, $this->name.'.php');
-    }
-
-    public function getQualifiedPhpType(): string {
-        return $this->phpNamespace . '\\' . $this->name;
     }
 
     public function getPhpType(): string
@@ -84,7 +56,7 @@ class AvroRecord implements AvroTypeInterface
     public static function parse(string $json): AvroRecord
     {
         $decoded = json_decode($json);
-        return self::create($decoded, $json);
+        return self::create($decoded);
     }
 
     public static function create(\stdClass $record): AvroRecord {
@@ -97,5 +69,15 @@ class AvroRecord implements AvroTypeInterface
         }, $record->fields);
 
         return new self($record->name, $record->namespace ?? null, $record->doc ?? null, $fields, json_encode($record, JSON_PRETTY_PRINT), $record->aliases ?? null);
+    }
+
+    public function getType(): AvroType
+    {
+        return AvroType::RECORD();
+    }
+
+    public function getImports(): array
+    {
+        return [$this->getQualifiedPhpType()];
     }
 }

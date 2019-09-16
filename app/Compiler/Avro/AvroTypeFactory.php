@@ -6,18 +6,30 @@ use App\Compiler\Errors\NotImplementedException;
 
 class AvroTypeFactory {
 
-    public static function create($type): AvroTypeInterface {
-        if (is_object($type) && AvroType::RECORD()->is($type->type)) {
-            return AvroRecord::create($type);
-        } else if (is_object($type) && AvroType::ARRAY()->is($type->type)) {
-            return AvroArray::create($type);
-        } else if (is_object($type) && property_exists($type, "logicalType")) {
-            return AvroLogicalType::create($type);
-        } else if (is_array($type)) {
-            return AvroUnion::create($type);
-        } else if (is_string($type)) {
+    public static function create($avsc): AvroTypeInterface {
+        if (is_object($avsc) && AvroType::RECORD()->is($avsc->type)) {
+            return AvroRecord::create($avsc);
+        } else if (is_object($avsc) && AvroType::ARRAY()->is($avsc->type)) {
+            return AvroArray::create($avsc);
+        } else if (is_object($avsc) && AvroType::ENUM()->is($avsc->type)) {
+            return AvroEnum::create($avsc);
+        } else if (is_object($avsc) && property_exists($avsc, "logicalType")) {
+            return AvroLogicalType::create($avsc);
+        } else if (is_array($avsc)) {
+            return AvroUnion::create($avsc);
+        } else if (is_string($avsc)) {
             // primitive type
-            return new AvroType($type);
+            return new AvroType($avsc);
+        } else {
+            throw new NotImplementedException('Unknown Avro Type');
+        }
+    }
+
+    public static function createNamedType($avsc): AvroNameInterface {
+        if (is_object($avsc) && AvroType::RECORD()->is($avsc->type)) {
+            return AvroRecord::create($avsc);
+        } else if (is_object($avsc) && AvroType::ENUM()->is($avsc->type)) {
+            return AvroEnum::create($avsc);
         } else {
             throw new NotImplementedException('Unknown Avro Type');
         }

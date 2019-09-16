@@ -2,6 +2,8 @@
 
 namespace App\Compiler\Avro;
 
+use App\Compiler\Errors\NotImplementedException;
+
 class AvroArray implements AvroTypeInterface
 {
 
@@ -27,4 +29,15 @@ class AvroArray implements AvroTypeInterface
     {
         return $this->items->getPhpType().'[]';
     }
+
+    public function getType(): AvroType
+    {
+        return AvroType::ARRAY();
+    }
+
+    public function getImports(): array
+    {
+        return $this->items->getImports();
+    }
+
 }

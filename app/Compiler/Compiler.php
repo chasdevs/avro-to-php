@@ -2,7 +2,12 @@
 
 namespace App\Compiler;
 
+use App\Compiler\Avro\AvroEnum;
+use App\Compiler\Avro\AvroNameInterface;
 use App\Compiler\Avro\AvroRecord;
+use App\Compiler\Avro\AvroTypeFactory;
+use App\Compiler\Avro\AvroTypeInterface;
+use App\Compiler\Errors\NotImplementedException;
 use App\Compiler\Twig\TemplateEngine;
 use App\Util\Utils;
 use Illuminate\Support\Facades\Log;
@@ -16,6 +21,7 @@ class Compiler
      * @param string $outDir
      * @param string [$namespace=null] - Defaults to the basename of the output folder.
      * @param bool [$dryRun=false]
+     * @throws
      */
     public function compile(string $sourceDir, string $outDir, string $namespace = null, bool $dryRun = false): void
     {
@@ -37,15 +43,15 @@ class Compiler
 
         // Compile each avsc file.
         foreach ($avscFiles as $avscFile) {
-            $record = $this->parseRecord($avscFile);
+            $type = $this->parseFile($avscFile);
 
-            $compiledPath = Utils::joinPaths($outDir, $record->getCompilePath());
+            $compiledPath = Utils::joinPaths($outDir, $type->getCompilePath());
 
             if ($dryRun) {
-                Log::info('(Dry-Run) Compiling record.', ['record' => $record->name, 'path' => $compiledPath]);
+                Log::info('(Dry-Run) Compiling file.', ['file' => $avscFile, 'compiledPath' => $compiledPath]);
             } else {
                 Utils::ensureDir($compiledPath);
-                file_put_contents($compiledPath, $this->compileRecord($record, $namespace));
+                file_put_contents($compiledPath, $this->renderNamedType($type, $namespace));
             }
         }
 
@@ -53,13 +59,19 @@ class Compiler
 
     public function compileFile(string $avscFile, string $namespace): string
     {
-        $record = $this->parseRecord($avscFile);
-        return $this->compileRecord($record, $namespace);
+        $type = $this->parseFile($avscFile);
+        return $this->renderNamedType($type, $namespace);
     }
 
-    public function compileRecord(AvroRecord $record, string $namespace): string
+    public function renderNamedType(AvroNameInterface $type, string $namespace): string
     {
-        return $this->templateEngine()->renderRecord($record, $namespace);
+        if ($type instanceof AvroRecord) {
+            return $this->templateEngine()->renderRecord($type, $namespace);
+        } else if ($type instanceof AvroEnum) {
+            return $this->templateEngine()->renderEnum($type, $namespace);
+        } else {
+            throw new NotImplementedException('Rendering not implemented for type.');
+        }
     }
 
     public function compileBaseRecord(string $namespace): string
@@ -67,10 +79,11 @@ class Compiler
         return $this->templateEngine()->renderBaseRecord($namespace);
     }
 
-    private function parseRecord(string $avscPath): AvroRecord
+    private function parseFile(string $avscPath): AvroNameInterface
     {
         $avsc = file_get_contents($avscPath);
-        return AvroRecord::parse($avsc);
+        $typeRaw = json_decode($avsc);
+        return AvroTypeFactory::createNamedType($typeRaw);
     }
 
     private function templateEngine(): TemplateEngine

@@ -1,0 +1,12 @@
+{
+  "type" : "record",
+  "name" : "RecordWithEnum",
+  "fields" : [ {
+    "name" : "favoriteFlavor",
+    "type" : {
+      "type" : "enum",
+      "name" : "Flavor",
+      "symbols" : [ "VANILLA", "CHOCOLATE", "STRAWBERRY" ]
+    }
+  } ]
+}

@@ -3,6 +3,7 @@
 namespace Tests\Expected;
 
 use Tests\Expected\BaseRecord;
+use Tests\Expected\Thing;
 
 class RecordWithArray extends BaseRecord
 {

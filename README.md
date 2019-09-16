@@ -21,10 +21,10 @@ vendor/bin/avro-to-php compile dir/with/avsc/
 - [x] Unions
 - [x] CLI
 - [x] Defaults
-- [ ] Serialization Tests
-- [ ] Enums
-- [ ] Maps
+- [x] Enums
 - [x] Logical types (only tested with timestamp-millis)
+- [ ] Maps
 - [ ] Fixed
 - [ ] Sort Order
 - [ ] Aliases
+- [ ] Serialization Tests
