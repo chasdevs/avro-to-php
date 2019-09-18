@@ -53,7 +53,7 @@ class RecordTest extends TestCase
 
     }
 
-    public function testDecodeRecord()
+    public function testDecodeRecordWithRecord()
     {
 
         $thing = new Thing();
@@ -66,6 +66,23 @@ class RecordTest extends TestCase
         $decodedRecord->decode(['thing1' => ['id' => 1]]);
 
         $this->assertEquals(1, $decodedRecord->getThing1()->getId());
+        $this->assertEquals($expected, $decodedRecord);
+
+    }
+
+    public function testDecodeRecordWithArray()
+    {
+
+        $thing = new Thing();
+        $thing->setId(1);
+
+        $expected = new RecordWithArray();
+        $expected->setThings([$thing]);
+
+        $decodedRecord = new RecordWithArray();
+        $decodedRecord->decode(['things' => [['id' => 1]]]);
+
+        $this->assertEquals(1, $decodedRecord->getThings()[0]->getId());
         $this->assertEquals($expected, $decodedRecord);
 
     }
