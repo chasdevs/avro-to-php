@@ -2,7 +2,7 @@
   "type" : "record",
   "name" : "RecordWithRecord",
   "fields" : [ {
-    "name" : "thing",
+    "name" : "thing1",
     "type" : {
       "type" : "record",
       "name" : "Thing",
@@ -11,5 +11,8 @@
         "type" : "int"
       } ]
     }
+  }, {
+    "name" : "thing2",
+    "type" : "Thing"
   } ]
 }

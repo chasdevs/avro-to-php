@@ -5,7 +5,8 @@ protocol x {
   }
 
   record RecordWithRecord {
-    Thing thing;
+    Thing thing1;
+    Thing thing2;
   }
 
 }
