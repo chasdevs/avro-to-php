@@ -5,6 +5,7 @@ namespace Tests\Records;
 use Tests\Expected\Flavor;
 use Tests\Expected\RecordWithArray;
 use Tests\Expected\RecordWithEnum;
+use Tests\Expected\RecordWithRecord;
 use Tests\Expected\Thing;
 use Tests\TestCase;
 
@@ -35,6 +36,38 @@ class RecordTest extends TestCase
             ->setFavoriteFlavor(Flavor::STRAWBERRY());
 
         $this->assertEquals(['favoriteFlavor' => 'STRAWBERRY'], $record->data());
+    }
+
+    public function testDecodeEnum()
+    {
+
+        $expected = new RecordWithEnum();
+        $expected->setFavoriteFlavor(Flavor::VANILLA());
+
+        $decodedRecord = new RecordWithEnum();
+        $decodedRecord->decode(['favoriteFlavor' => 'VANILLA']);
+
+        var_dump($decodedRecord);
+        $this->assertEquals($expected, $decodedRecord);
+        $this->assertEquals(Flavor::VANILLA(), $decodedRecord->getFavoriteFlavor());
+
+    }
+
+    public function testDecodeRecord()
+    {
+
+        $thing = new Thing();
+        $thing->setId(1);
+
+        $expected = new RecordWithRecord();
+        $expected->setThing($thing);
+
+        $decodedRecord = new RecordWithRecord();
+        $decodedRecord->decode(['thing' => ['id' => 1]]);
+
+        $this->assertEquals(1, $decodedRecord->getThing()->getId());
+        $this->assertEquals($expected, $decodedRecord);
+
     }
 
 }

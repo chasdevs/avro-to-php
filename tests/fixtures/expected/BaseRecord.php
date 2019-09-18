@@ -38,6 +38,9 @@ abstract class BaseRecord implements JsonSerializable
                 continue;
             }
 
+            //TODO: Lookup property if it is a record (somehow), then run 'decode'  on it;
+            //TODO: Lookup property if it is a enum (somehow), then set it;
+
             if ($prop instanceof ReflectionProperty) {
                 $prop->setAccessible(true);
                 $prop->setValue($this, $value);
