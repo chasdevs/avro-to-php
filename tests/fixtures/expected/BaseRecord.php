@@ -10,6 +10,12 @@ use ReflectionProperty;
 
 abstract class BaseRecord implements JsonSerializable
 {
+
+    /**
+     * In order to decode an arbitrary array of data into typed sub-records, a record must store a map of property name to qualified type.
+     */
+    protected $propClassMap = [];
+
     public abstract function schema(): string;
 
     public function name(): string
@@ -30,7 +36,6 @@ abstract class BaseRecord implements JsonSerializable
 
     /**
      * @param array[string]mixed $array - Array holding arbitrary data to be decoded into this object.
-     * @throws ReflectionException
      */
     public function decode(array $array)
     {
@@ -57,11 +62,6 @@ abstract class BaseRecord implements JsonSerializable
             $prop->setValue($this, $value);
         }
     }
-
-    /**
-     * In order to decode an arbitrary array of data into typed sub-records, a record must store a map of property name to qualified type.
-     */
-    protected $propClassMap = [];
 
     /**
      * @param string $propName - The property name we are trying to decode.
