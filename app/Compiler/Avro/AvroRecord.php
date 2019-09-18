@@ -22,7 +22,7 @@ class AvroRecord implements AvroTypeInterface, AvroNameInterface
     /** @var string[] */
     public $imports = [];
 
-    /** @var array[string]string */
+    /** @var string[] */
     public $propClassMap = [];
 
     /** @var string[] */

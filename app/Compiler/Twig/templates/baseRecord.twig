@@ -35,7 +35,7 @@ abstract class BaseRecord implements JsonSerializable
     }
 
     /**
-     * @param array[string]mixed $array - Array holding arbitrary data to be decoded into this object.
+     * @param array $array - Array holding arbitrary data to be decoded into this object.
      */
     public function decode(array $array)
     {
