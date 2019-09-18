@@ -26,7 +26,7 @@ class Thing extends BaseRecord
     public function jsonSerialize()
     {
         return [
-            "id" => $this->encode($this->id),
+            "id" => $this->encode($this->id)
         ];
     }
 

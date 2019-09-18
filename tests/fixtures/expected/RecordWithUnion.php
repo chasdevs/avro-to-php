@@ -44,7 +44,7 @@ class RecordWithUnion extends BaseRecord
     {
         return [
             "optionalString" => $this->encode($this->optionalString),
-            "intOrThing" => $this->encode($this->intOrThing),
+            "intOrThing" => $this->encode($this->intOrThing)
         ];
     }
 

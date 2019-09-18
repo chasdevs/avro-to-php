@@ -60,7 +60,7 @@ class ExampleEvent extends BaseRecord
         return [
             "name" => $this->encode($this->name),
             "active" => $this->encode($this->active),
-            "salary" => $this->encode($this->salary),
+            "salary" => $this->encode($this->salary)
         ];
     }
 
