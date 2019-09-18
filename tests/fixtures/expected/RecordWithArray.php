@@ -44,7 +44,7 @@ class RecordWithArray extends BaseRecord
     {
         return [
             "things" => $this->encode($this->things),
-            "numbers" => $this->encode($this->numbers),
+            "numbers" => $this->encode($this->numbers)
         ];
     }
 

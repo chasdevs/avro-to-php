@@ -1,0 +1,18 @@
+{
+  "type" : "record",
+  "name" : "RecordWithRecord",
+  "fields" : [ {
+    "name" : "thing1",
+    "type" : {
+      "type" : "record",
+      "name" : "Thing",
+      "fields" : [ {
+        "name" : "id",
+        "type" : "int"
+      } ]
+    }
+  }, {
+    "name" : "thing2",
+    "type" : "Thing"
+  } ]
+}

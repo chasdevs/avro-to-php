@@ -1,0 +1,12 @@
+protocol x {
+
+  record Thing {
+    int id;
+  }
+
+  record RecordWithRecord {
+    Thing thing1;
+    Thing thing2;
+  }
+
+}

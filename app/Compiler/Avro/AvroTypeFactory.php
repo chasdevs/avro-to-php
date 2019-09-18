@@ -6,9 +6,13 @@ use App\Compiler\Errors\NotImplementedException;
 
 class AvroTypeFactory {
 
+    private static $recordCache = [];
+
     public static function create($avsc): AvroTypeInterface {
         if (is_object($avsc) && AvroType::RECORD()->is($avsc->type)) {
-            return AvroRecord::create($avsc);
+            $record = AvroRecord::create($avsc);
+            self::$recordCache[$record->name] = $record;
+            return $record;
         } else if (is_object($avsc) && AvroType::ARRAY()->is($avsc->type)) {
             return AvroArray::create($avsc);
         } else if (is_object($avsc) && AvroType::ENUM()->is($avsc->type)) {
@@ -17,6 +21,8 @@ class AvroTypeFactory {
             return AvroLogicalType::create($avsc);
         } else if (is_array($avsc)) {
             return AvroUnion::create($avsc);
+        } else if (key_exists($avsc, self::$recordCache)) {
+            return self::$recordCache[$avsc];
         } else if (is_string($avsc)) {
             // primitive type
             return new AvroType($avsc);

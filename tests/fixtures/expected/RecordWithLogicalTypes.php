@@ -26,7 +26,7 @@ class RecordWithLogicalTypes extends BaseRecord
     public function jsonSerialize()
     {
         return [
-            "timestamp" => $this->encode($this->timestamp),
+            "timestamp" => $this->encode($this->timestamp)
         ];
     }
 

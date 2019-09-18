@@ -27,7 +27,7 @@ class RecordWithEnum extends BaseRecord
     public function jsonSerialize()
     {
         return [
-            "favoriteFlavor" => $this->encode($this->favoriteFlavor),
+            "favoriteFlavor" => $this->encode($this->favoriteFlavor)
         ];
     }
 
@@ -54,5 +54,9 @@ class RecordWithEnum extends BaseRecord
 }
 SCHEMA;
     }
+
+    protected $propClassMap = [
+        "favoriteFlavor" => "Tests\Expected\Flavor"
+    ];
 
 }
