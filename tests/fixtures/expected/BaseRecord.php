@@ -46,6 +46,7 @@ abstract class BaseRecord implements JsonSerializable
             try {
                 $prop = $refl->getProperty($propertyToSet);
             } catch (ReflectionException $e) {
+                $this->{$propertyToSet} = $value;
                 continue;
             }
 
