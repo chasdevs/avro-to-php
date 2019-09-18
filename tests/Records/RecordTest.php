@@ -60,12 +60,12 @@ class RecordTest extends TestCase
         $thing->setId(1);
 
         $expected = new RecordWithRecord();
-        $expected->setThing($thing);
+        $expected->setThing1($thing);
 
         $decodedRecord = new RecordWithRecord();
-        $decodedRecord->decode(['thing' => ['id' => 1]]);
+        $decodedRecord->decode(['thing1' => ['id' => 1]]);
 
-        $this->assertEquals(1, $decodedRecord->getThing()->getId());
+        $this->assertEquals(1, $decodedRecord->getThing1()->getId());
         $this->assertEquals($expected, $decodedRecord);
 
     }
