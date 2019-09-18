@@ -27,6 +27,8 @@ class CompilerTest extends TestCase
     private const recordWithEnum = self::FIXTURES . '/avsc/RecordWithEnum.avsc';
     private const expectedEnum = self::FIXTURES . '/expected/Flavor.php';
     private const enum = self::FIXTURES . '/avsc/Flavor.avsc';
+    private const expectedRecordWithRecord = self::FIXTURES . '/expected/RecordWithRecord.php';
+    private const recordWithRecord = self::FIXTURES . '/avsc/RecordWithRecord.avsc';
 
     public static function setUpBeforeClass()
     {
@@ -110,6 +112,17 @@ class CompilerTest extends TestCase
 
         $compiler = new Compiler();
         $actual = $compiler->compileFile(self::recordWithEnum, self::NAMESPACE);
+
+        $this->assertIsString($actual);
+        $this->assertEquals($expected, $actual);
+    }
+
+    public function testCompileRecordWithRecord()
+    {
+        $expected = file_get_contents(Utils::resolve(self::expectedRecordWithRecord));
+
+        $compiler = new Compiler();
+        $actual = $compiler->compileFile(self::recordWithRecord, self::NAMESPACE);
 
         $this->assertIsString($actual);
         $this->assertEquals($expected, $actual);

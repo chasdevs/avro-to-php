@@ -36,12 +36,12 @@ class RecordWithRecord extends BaseRecord
         return <<<SCHEMA
 {
     "type": "record",
-    "name": "RecordWithArray",
+    "name": "RecordWithRecord",
     "fields": [
         {
             "name": "thing",
             "type": {
-            "type": "record",
+                "type": "record",
                 "name": "Thing",
                 "fields": [
                     {
