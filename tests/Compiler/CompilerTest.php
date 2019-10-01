@@ -43,8 +43,7 @@ class CompilerTest extends TestCase
         // verify folder structure
         $output = Utils::find(self::outDir, '/.*/');
         $this->assertEquals([
-            Utils::resolve(self::outDir, 'Sample/User/V1/UserEvent.php'),
-            Utils::resolve(self::outDir, 'Sample/User/V2/UserEvent.php'),
+            Utils::resolve(self::outDir, 'Sample/User/UserEvent.php'),
             Utils::resolve(self::outDir, 'Sample/Common/SharedMeta.php'),
             Utils::resolve(self::outDir, 'BaseRecord.php'),
         ], $output);
