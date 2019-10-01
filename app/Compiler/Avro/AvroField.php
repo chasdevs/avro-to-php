@@ -48,8 +48,8 @@ class AvroField {
         }
     }
 
-    public static function create(\stdClass $field): AvroField {
-        $type = AvroTypeFactory::create($field->type);
+    public static function create(\stdClass $field, ?string $namespace = null): AvroField {
+        $type = AvroTypeFactory::create($field->type, $namespace);
         return new AvroField($field->name, $field->doc ?? null, $type, $field->default ?? null);
     }
 

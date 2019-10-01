@@ -61,7 +61,6 @@ class CommonEvent extends BaseRecord
             "type": {
                 "type": "record",
                 "name": "SharedMeta",
-                "namespace": "sample.common",
                 "fields": [
                     {
                         "name": "uuid",

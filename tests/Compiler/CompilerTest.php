@@ -44,6 +44,7 @@ class CompilerTest extends TestCase
         $output = Utils::find(self::outDir, '/.*/');
         $this->assertEquals([
             Utils::resolve(self::outDir, 'Sample/User/UserEvent.php'),
+            Utils::resolve(self::outDir, 'Sample/Common/CommonEvent.php'),
             Utils::resolve(self::outDir, 'Sample/Common/SharedMeta.php'),
             Utils::resolve(self::outDir, 'BaseRecord.php'),
         ], $output);
