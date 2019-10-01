@@ -1,0 +1,10 @@
+protocol x {
+  import idl "./SharedMeta.avdl";
+
+  @namespace("sample.common")
+  record CommonEvent {
+    sample.common.SharedMeta meta;
+    int xyz;
+  }
+
+}

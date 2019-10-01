@@ -25,7 +25,8 @@ class Utils
      */
     static function resolve(string ...$paths): string
     {
-        return realpath(self::joinPaths(...$paths));
+        $path = self::joinPaths(...$paths);
+        return realpath($path);
     }
 
     /**
