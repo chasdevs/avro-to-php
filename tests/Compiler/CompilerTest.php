@@ -43,8 +43,8 @@ class CompilerTest extends TestCase
         // verify folder structure
         $output = Utils::find(self::outDir, '/.*/');
         $this->assertEquals([
-            Utils::resolve(self::outDir, 'Sample/User/V1/UserEvent.php'),
-            Utils::resolve(self::outDir, 'Sample/User/V2/UserEvent.php'),
+            Utils::resolve(self::outDir, 'Sample/User/UserEvent.php'),
+            Utils::resolve(self::outDir, 'Sample/Common/CommonEvent.php'),
             Utils::resolve(self::outDir, 'Sample/Common/SharedMeta.php'),
             Utils::resolve(self::outDir, 'BaseRecord.php'),
         ], $output);
@@ -134,6 +134,17 @@ class CompilerTest extends TestCase
 
         $compiler = new Compiler();
         $actual = $compiler->compileFile(self::enum, self::NAMESPACE);
+
+        $this->assertIsString($actual);
+        $this->assertEquals($expected, $actual);
+    }
+
+    public function testCompileRecordWithNamespace()
+    {
+        $expected = file_get_contents(Utils::resolve(self::FIXTURES . '/expected/CommonEvent.php'));
+
+        $compiler = new Compiler();
+        $actual = $compiler->compileFile(self::FIXTURES . '/avsc/sample-events/common/CommonEvent.avsc', self::NAMESPACE);
 
         $this->assertIsString($actual);
         $this->assertEquals($expected, $actual);

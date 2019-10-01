@@ -8,9 +8,9 @@ class AvroTypeFactory {
 
     private static $recordCache = [];
 
-    public static function create($avsc): AvroTypeInterface {
+    public static function create($avsc, ?string $namespace = null): AvroTypeInterface {
         if (is_object($avsc) && AvroType::RECORD()->is($avsc->type)) {
-            $record = AvroRecord::create($avsc);
+            $record = AvroRecord::create($avsc, $namespace);
             self::$recordCache[$record->name] = $record;
             return $record;
         } else if (is_object($avsc) && AvroType::ARRAY()->is($avsc->type)) {

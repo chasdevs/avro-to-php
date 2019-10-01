@@ -1,0 +1,8 @@
+protocol x {
+
+  @namespace("sample.common")
+  record SharedMeta {
+    string uuid;
+  }
+
+}

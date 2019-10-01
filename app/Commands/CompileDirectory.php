@@ -21,6 +21,9 @@ class CompileDirectory extends Command
         $namespace = $this->option('namespace');
 
         $source = Utils::resolve($sourceDir);
+        if (!$source) {
+            throw new \RuntimeException('Could not find directory: '.$sourceDir);
+        }
 
         $this->comment('Compiling Avro files in ' . $source . ' to ' . $outputDir . ($namespace ? " using namespace $namespace" : '') . ($dryRun ? ' (Dry-Run)' : ''));
         $compiler->compile($source, $outputDir, $namespace, $dryRun);

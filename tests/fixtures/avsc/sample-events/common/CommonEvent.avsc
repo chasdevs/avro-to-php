@@ -1,0 +1,19 @@
+{
+  "type" : "record",
+  "name" : "CommonEvent",
+  "namespace" : "sample.common",
+  "fields" : [ {
+    "name" : "meta",
+    "type" : {
+      "type" : "record",
+      "name" : "SharedMeta",
+      "fields" : [ {
+        "name" : "uuid",
+        "type" : "string"
+      } ]
+    }
+  }, {
+    "name" : "xyz",
+    "type" : "int"
+  } ]
+}

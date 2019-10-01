@@ -1,0 +1,9 @@
+{
+  "type" : "record",
+  "name" : "SharedMeta",
+  "namespace" : "sample.common",
+  "fields" : [ {
+    "name" : "uuid",
+    "type" : "string"
+  } ]
+}
