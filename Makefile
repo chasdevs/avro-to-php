@@ -23,5 +23,5 @@ test:
 	@echo -e "$(OK) test"
 
 release:
-	./avro-to-php app:build
+	@./release.sh
 	@echo -e "$(WARN) release: Need to create a git tag and push."

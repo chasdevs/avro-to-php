@@ -4,7 +4,7 @@ VER=$1
 
 if [[ -z "$VER" ]]; then
   echo "Enter semver version."
-  exit 1
+  read $VER
 fi
 
 ./avro-to-php app:build avro-to-php
