@@ -1,7 +1,7 @@
 {
   "type" : "record",
   "name" : "UserEvent",
-  "namespace" : "sample.user.v1",
+  "namespace" : "sample.user",
   "fields" : [ {
     "name" : "meta",
     "type" : {

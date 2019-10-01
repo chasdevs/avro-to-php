@@ -139,4 +139,15 @@ class CompilerTest extends TestCase
         $this->assertEquals($expected, $actual);
     }
 
+    public function testCompileRecordWithNamespace()
+    {
+        $expected = file_get_contents(Utils::resolve(self::FIXTURES . '/expected/UserEvent.php'));
+
+        $compiler = new Compiler();
+        $actual = $compiler->compileFile(self::FIXTURES . '/avsc/sample-events/user/UserEvent.avsc', self::NAMESPACE);
+
+        $this->assertIsString($actual);
+        $this->assertEquals($expected, $actual);
+    }
+
 }

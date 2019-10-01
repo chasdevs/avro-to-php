@@ -1,6 +1,8 @@
-@namespace("sample.common")
 protocol x {
+
+  @namespace("sample.common")
   record SharedMeta {
     string uuid;
   }
+
 }
