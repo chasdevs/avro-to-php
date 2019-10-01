@@ -12,6 +12,8 @@ ERROR=$(ERROR_COLOR)[ERROR]$(NO_COLOR)
 WARN=$(WARN_COLOR)[WARNING]$(NO_COLOR)
 ERROR_STRING=$(ERROR_COLOR)%s$(NO_COLOR) # printf '$(ERROR_STRING) %s' 'Error text in red.' 'Rest of text in no color.'
 
+VER?=0.0.12
+
 .PHONY: init test release
 
 init:
@@ -23,5 +25,11 @@ test:
 	@echo -e "$(OK) test"
 
 release:
-	@./release.sh
-	@echo -e "$(WARN) release: Need to create a git tag and push."
+	@./release.sh $(VER)
+	@echo -e "$(OK) released to github and packagist"
+
+image:
+	docker build -t chasdevs/avro-to-php --no-cache .
+	docker tag chasdevs/avro-to-php chasdevs/avro-to-php:$(VER)
+	docker push chasdevs/avro-to-php:latest
+	docker push chasdevs/avro-to-php:$(VER)

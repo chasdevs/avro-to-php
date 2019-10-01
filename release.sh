@@ -8,7 +8,8 @@ if [[ -z "$VER" ]]; then
 fi
 
 ./avro-to-php app:build avro-to-php
-git commit -am "$VER"
+git add .
+git commit -m "$VER"
 git tag "$VER"
 git push && git push --tag
 
