@@ -77,7 +77,7 @@ class AvroRecord implements AvroTypeInterface, AvroNameInterface
         }
 
         $fields = array_map(function (\stdClass $field) use ($record) {
-            return AvroField::create($field, $record->namespace);
+            return AvroField::create($field, $record->namespace ?? null);
         }, $record->fields);
 
         return new self($record->name, $record->namespace ?? $namespace ?? null, $record->doc ?? null, $fields, json_encode($record, JSON_PRETTY_PRINT), $record->aliases ?? null);
