@@ -10,7 +10,7 @@ fi
 ./avro-to-php app:build avro-to-php
 git commit -am "$VER"
 git tag "$VER"
-git push --follow-tags
+git push && git push --tag
 
 docker build -t chasdevs/avro-to-php --no-cache .
 docker tag chasdevs/avro-to-php chasdevs/avro-to-php:"$VER"
