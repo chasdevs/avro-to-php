@@ -47,7 +47,6 @@ class RecordTest extends TestCase
         $decodedRecord = new RecordWithEnum();
         $decodedRecord->decode(['favoriteFlavor' => 'VANILLA']);
 
-        var_dump($decodedRecord);
         $this->assertEquals($expected, $decodedRecord);
         $this->assertEquals(Flavor::VANILLA(), $decodedRecord->getFavoriteFlavor());
 

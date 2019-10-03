@@ -24,6 +24,11 @@ abstract class BaseRecord implements JsonSerializable
         return $reflect->getShortName();
     }
 
+    public function setData(array $data)
+    {
+        $this->decode($data);
+    }
+
     public function data(): array
     {
         return $this->encode($this);
