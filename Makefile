@@ -25,7 +25,11 @@ test:
 	@echo -e "$(OK) test"
 
 release:
-	@./release.sh $(VER)
+	./avro-to-php app:build avro-to-php
+	git add .
+	git commit -m "$(VER)"
+	git tag "$(VER)"
+	git push && git push --tag
 	@echo -e "$(OK) released to github and packagist"
 
 image:
