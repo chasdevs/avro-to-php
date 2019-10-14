@@ -14,7 +14,7 @@ ERROR_STRING=$(ERROR_COLOR)%s$(NO_COLOR) # printf '$(ERROR_STRING) %s' 'Error te
 
 VER?=0.0.13
 
-.PHONY: init test release
+.PHONY: init test release image
 
 init:
 	composer install
