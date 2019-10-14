@@ -16,7 +16,7 @@ class AvroTypeFactory {
         } else if (is_object($avsc) && AvroType::ARRAY()->is($avsc->type)) {
             return AvroArray::create($avsc);
         } else if (is_object($avsc) && AvroType::ENUM()->is($avsc->type)) {
-            return AvroEnum::create($avsc);
+            return AvroEnum::create($avsc, $namespace);
         } else if (is_object($avsc) && property_exists($avsc, "logicalType")) {
             return AvroLogicalType::create($avsc);
         } else if (is_array($avsc)) {

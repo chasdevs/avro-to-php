@@ -22,9 +22,9 @@ class AvroEnum implements AvroTypeInterface, AvroNameInterface
         $this->configurePhpNamespace();
     }
 
-    public static function create(\stdClass $typeRaw): AvroEnum
+    public static function create(\stdClass $typeRaw, ?string $namespace = null): AvroEnum
     {
-        return new self($typeRaw->name, $typeRaw->namespace ?? null, $typeRaw->symbols);
+        return new self($typeRaw->name, $typeRaw->namespace ?? $namespace ?? null, $typeRaw->symbols);
     }
 
     public function getPhpType(): string
