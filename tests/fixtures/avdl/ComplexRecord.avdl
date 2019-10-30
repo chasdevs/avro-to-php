@@ -1,0 +1,12 @@
+protocol x {
+
+  import idl "./Thing.avdl";
+  import idl "./nested/Flavor.avdl";
+
+  @namespace("records")
+  record ComplexRecord {
+    records.Thing thing;
+    records.nested.Flavor flavor;
+  }
+
+}

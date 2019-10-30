@@ -43,8 +43,9 @@ class AvroRecord implements AvroTypeInterface, AvroNameInterface
 
     private function configureImports() {
         foreach($this->fields as $field) {
-            $this->imports += $field->type->getImports();
+            $this->imports = array_merge($this->imports, $field->type->getImports());
         }
+        $this->imports = array_unique($this->imports);
     }
 
     private function configurePropClassMap() {

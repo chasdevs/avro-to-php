@@ -54,6 +54,7 @@ class CompilerTest extends TestCase
             ['RecordWithEnum'],
             ['RecordWithRecord'],
             ['Flavor', self::FIXTURES."/avsc/records/nested/"],
+            ['ComplexRecord'],
         ];
     }
 
