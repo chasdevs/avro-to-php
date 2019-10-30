@@ -1,13 +1,10 @@
 protocol x {
 
-  enum Flavor {
-      VANILLA,
-      CHOCOLATE,
-      STRAWBERRY
-  }
+  import idl "./nested/Flavor.avdl";
 
+  @namespace("records")
   record RecordWithEnum {
-    Flavor favoriteFlavor;
+    records.nested.Flavor favoriteFlavor;
   }
 
 }

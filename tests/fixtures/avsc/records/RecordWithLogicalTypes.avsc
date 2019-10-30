@@ -1,6 +1,7 @@
 {
   "type" : "record",
   "name" : "RecordWithLogicalTypes",
+  "namespace" : "records",
   "fields" : [ {
     "name" : "timestamp",
     "type" : {

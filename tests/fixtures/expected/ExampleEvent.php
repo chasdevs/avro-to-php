@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Expected\Storyblocks\Example;
+namespace Tests\Expected\Records;
 
 use Tests\Expected\BaseRecord;
 
@@ -70,7 +70,7 @@ class ExampleEvent extends BaseRecord
 {
     "type": "record",
     "name": "ExampleEvent",
-    "namespace": "storyblocks.example",
+    "namespace": "records",
     "doc": "This is an example schema.",
     "fields": [
         {

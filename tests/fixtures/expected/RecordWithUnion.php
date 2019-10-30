@@ -1,9 +1,9 @@
 <?php
 
-namespace Tests\Expected;
+namespace Tests\Expected\Records;
 
 use Tests\Expected\BaseRecord;
-use Tests\Expected\Thing;
+use Tests\Expected\Records\Thing;
 
 class RecordWithUnion extends BaseRecord
 {
@@ -54,6 +54,7 @@ class RecordWithUnion extends BaseRecord
 {
     "type": "record",
     "name": "RecordWithUnion",
+    "namespace": "records",
     "fields": [
         {
             "name": "optionalString",

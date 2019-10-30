@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Expected;
+namespace Tests\Expected\Records;
 
 use Tests\Expected\BaseRecord;
 

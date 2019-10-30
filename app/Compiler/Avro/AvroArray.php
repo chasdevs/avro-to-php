@@ -15,8 +15,8 @@ class AvroArray implements AvroTypeInterface
         $this->items = $items;
     }
 
-    public static function create(\stdClass $array): AvroArray {
-        $type = AvroTypeFactory::create($array->items);
+    public static function create(\stdClass $array, ?string $namespace): AvroArray {
+        $type = AvroTypeFactory::create($array->items, $namespace);
         return new self($type);
     }
 

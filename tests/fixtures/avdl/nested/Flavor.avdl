@@ -1,0 +1,10 @@
+protocol x {
+
+  @namespace("records.nested")
+  enum Flavor {
+      VANILLA,
+      CHOCOLATE,
+      STRAWBERRY
+  }
+
+}

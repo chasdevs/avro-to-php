@@ -15,10 +15,10 @@ class AvroUnion implements AvroTypeInterface
         $this->types = $types;
     }
 
-    public static function create(array $types): AvroUnion {
+    public static function create(array $types, ?string $namespace): AvroUnion {
 
-        $types = array_map(function ($type) {
-            return AvroTypeFactory::create($type);
+        $types = array_map(function ($type) use ($namespace) {
+            return AvroTypeFactory::create($type, $namespace);
         }, $types);
 
         return new self($types);

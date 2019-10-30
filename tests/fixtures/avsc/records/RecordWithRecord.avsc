@@ -1,6 +1,7 @@
 {
   "type" : "record",
   "name" : "RecordWithRecord",
+  "namespace" : "records",
   "fields" : [ {
     "name" : "thing1",
     "type" : {

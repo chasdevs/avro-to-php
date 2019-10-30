@@ -1,12 +1,11 @@
 protocol x {
 
-  record Thing {
-    int id;
-  }
+  import idl "./Thing.avdl";
 
+  @namespace("records")
   record RecordWithUnion {
     union { string, null } optionalString;
-    union { int, Thing } intOrThing;
+    union { int, records.Thing } intOrThing;
   }
 
 }

@@ -1,9 +1,9 @@
 <?php
 
-namespace Tests\Expected;
+namespace Tests\Expected\Records;
 
 use Tests\Expected\BaseRecord;
-use Tests\Expected\Flavor;
+use Tests\Expected\Records\Nested\Flavor;
 
 class RecordWithEnum extends BaseRecord
 {
@@ -37,12 +37,14 @@ class RecordWithEnum extends BaseRecord
 {
     "type": "record",
     "name": "RecordWithEnum",
+    "namespace": "records",
     "fields": [
         {
             "name": "favoriteFlavor",
             "type": {
                 "type": "enum",
                 "name": "Flavor",
+                "namespace": "records.nested",
                 "symbols": [
                     "VANILLA",
                     "CHOCOLATE",
@@ -56,7 +58,7 @@ SCHEMA;
     }
 
     protected $propClassMap = [
-        "favoriteFlavor" => "Tests\Expected\Flavor"
+        "favoriteFlavor" => "Tests\Expected\Records\Nested\Flavor"
     ];
 
 }

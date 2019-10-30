@@ -1,11 +1,10 @@
 protocol x {
 
-  record Thing {
-    int id;
-  }
+  import idl "./Thing.avdl";
 
+  @namespace("records")
   record RecordWithArray {
-    array<Thing> things;
+    array<records.Thing> things;
     array<int> numbers;
   }
 

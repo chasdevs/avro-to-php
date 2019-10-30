@@ -1,12 +1,11 @@
 protocol x {
 
-  record Thing {
-    int id;
-  }
+  import idl "./Thing.avdl";
 
+  @namespace("records")
   record RecordWithRecord {
-    Thing thing1;
-    Thing thing2;
+    records.Thing thing1;
+    records.Thing thing2;
   }
 
 }

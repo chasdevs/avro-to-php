@@ -37,3 +37,6 @@ image:
 	docker tag chasdevs/avro-to-php chasdevs/avro-to-php:$(VER)
 	docker push chasdevs/avro-to-php:latest
 	docker push chasdevs/avro-to-php:$(VER)
+
+avsc:
+	gradle generateAvsc

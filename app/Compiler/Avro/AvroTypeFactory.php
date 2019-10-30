@@ -14,13 +14,13 @@ class AvroTypeFactory {
             self::$recordCache[$record->name] = $record;
             return $record;
         } else if (is_object($avsc) && AvroType::ARRAY()->is($avsc->type)) {
-            return AvroArray::create($avsc);
+            return AvroArray::create($avsc, $namespace);
         } else if (is_object($avsc) && AvroType::ENUM()->is($avsc->type)) {
             return AvroEnum::create($avsc, $namespace);
         } else if (is_object($avsc) && property_exists($avsc, "logicalType")) {
             return AvroLogicalType::create($avsc);
         } else if (is_array($avsc)) {
-            return AvroUnion::create($avsc);
+            return AvroUnion::create($avsc, $namespace);
         } else if (key_exists($avsc, self::$recordCache)) {
             return self::$recordCache[$avsc];
         } else if (is_string($avsc)) {

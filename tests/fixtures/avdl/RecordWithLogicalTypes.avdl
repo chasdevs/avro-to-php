@@ -1,0 +1,6 @@
+protocol x {
+  @namespace("records")
+  record RecordWithLogicalTypes {
+    timestamp_ms timestamp;
+  }
+}

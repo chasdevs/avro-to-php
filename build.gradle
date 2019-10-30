@@ -1,0 +1,24 @@
+plugins {
+	id 'java'
+	id 'com.commercehub.gradle.plugin.avro' version '0.17.0'
+}
+
+ext {
+	avdlSrcDir = 'tests/fixtures/avdl'
+	avprGenDir = 'compiled/avpr'
+	avscGenDir = 'tests/fixtures/avsc'
+}
+
+task generateAvpr(type: com.commercehub.gradle.plugin.avro.GenerateAvroProtocolTask) {
+	source(file(avdlSrcDir))
+	outputDir = file(avprGenDir)
+}
+
+task generateAvsc(type: com.commercehub.gradle.plugin.avro.GenerateAvroSchemaTask) {
+	dependsOn generateAvpr
+	source(file(avprGenDir))
+	outputDir = file(avscGenDir)
+	doLast {
+		delete avprGenDir
+	}
+}

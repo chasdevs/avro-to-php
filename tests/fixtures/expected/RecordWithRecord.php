@@ -1,9 +1,9 @@
 <?php
 
-namespace Tests\Expected;
+namespace Tests\Expected\Records;
 
 use Tests\Expected\BaseRecord;
-use Tests\Expected\Thing;
+use Tests\Expected\Records\Thing;
 
 class RecordWithRecord extends BaseRecord
 {
@@ -54,6 +54,7 @@ class RecordWithRecord extends BaseRecord
 {
     "type": "record",
     "name": "RecordWithRecord",
+    "namespace": "records",
     "fields": [
         {
             "name": "thing1",
@@ -78,8 +79,8 @@ SCHEMA;
     }
 
     protected $propClassMap = [
-        "thing1" => "Tests\Expected\Thing",
-        "thing2" => "Tests\Expected\Thing"
+        "thing1" => "Tests\Expected\Records\Thing",
+        "thing2" => "Tests\Expected\Records\Thing"
     ];
 
 }

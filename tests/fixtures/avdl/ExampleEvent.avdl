@@ -1,0 +1,9 @@
+protocol x {
+  @namespace("records")
+  /** This is an example schema. */
+  record ExampleEvent {
+    string name;
+    boolean active = true;
+    long salary;
+  }
+}

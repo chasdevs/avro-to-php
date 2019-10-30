@@ -2,11 +2,11 @@
 
 namespace Tests\Records;
 
-use Tests\Expected\Flavor;
-use Tests\Expected\RecordWithArray;
-use Tests\Expected\RecordWithEnum;
-use Tests\Expected\RecordWithRecord;
-use Tests\Expected\Thing;
+use Tests\Expected\Records\Nested\Flavor;
+use Tests\Expected\Records\RecordWithArray;
+use Tests\Expected\Records\RecordWithEnum;
+use Tests\Expected\Records\RecordWithRecord;
+use Tests\Expected\Records\Thing;
 use Tests\TestCase;
 
 class RecordTest extends TestCase

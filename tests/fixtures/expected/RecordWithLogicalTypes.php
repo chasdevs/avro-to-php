@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Expected;
+namespace Tests\Expected\Records;
 
 use Tests\Expected\BaseRecord;
 
@@ -36,6 +36,7 @@ class RecordWithLogicalTypes extends BaseRecord
 {
     "type": "record",
     "name": "RecordWithLogicalTypes",
+    "namespace": "records",
     "fields": [
         {
             "name": "timestamp",

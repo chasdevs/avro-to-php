@@ -1,9 +1,9 @@
 <?php
 
-namespace Tests\Expected;
+namespace Tests\Expected\Records;
 
 use Tests\Expected\BaseRecord;
-use Tests\Expected\Thing;
+use Tests\Expected\Records\Thing;
 
 class RecordWithArray extends BaseRecord
 {
@@ -54,6 +54,7 @@ class RecordWithArray extends BaseRecord
 {
     "type": "record",
     "name": "RecordWithArray",
+    "namespace": "records",
     "fields": [
         {
             "name": "things",

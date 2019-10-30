@@ -1,6 +1,7 @@
 {
   "type" : "record",
   "name" : "RecordWithUnion",
+  "namespace" : "records",
   "fields" : [ {
     "name" : "optionalString",
     "type" : [ "string", "null" ]
