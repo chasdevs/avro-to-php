@@ -28,6 +28,9 @@ class AvroRecord implements AvroTypeInterface, AvroNameInterface
     /** @var string[] */
     public $aliases;
 
+    /** @var array */
+    public $defaults;
+
     public function __construct(string $name, ?string $namespace, ?string $doc, array $fields, string $schema, ?array $aliases)
     {
         $this->name = $name;
@@ -39,6 +42,7 @@ class AvroRecord implements AvroTypeInterface, AvroNameInterface
         $this->configurePhpNamespace();
         $this->configureImports();
         $this->configurePropClassMap();
+        $this->configureDefaults();
     }
 
     private function configureImports() {
@@ -52,6 +56,14 @@ class AvroRecord implements AvroTypeInterface, AvroNameInterface
         foreach($this->fields as $field) {
             if ($field->type instanceof AvroNameInterface) {
                 $this->propClassMap[$field->name] = $field->type->getQualifiedPhpType();
+            }
+        }
+    }
+
+    private function configureDefaults() {
+        foreach($this->fields as $field) {
+            if ($field->type instanceof AvroRecord && $field->default) {
+                $this->defaults[$field->name] = json_decode(json_encode($field->default), true);
             }
         }
     }

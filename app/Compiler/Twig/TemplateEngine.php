@@ -8,6 +8,7 @@ use App\Compiler\Avro\AvroEnum;
 use App\Compiler\Avro\HasName;
 use App\Compiler\Avro\AvroRecord;
 use App\Compiler\Avro\AvroTypeInterface;
+use App\Util\Utils;
 use Illuminate\Support\Str;
 use Twig\Environment;
 use Twig\Loader\FilesystemLoader;
@@ -60,6 +61,32 @@ class TemplateEngine
         $twig->addFilter(new TwigFilter('spinal', function ($string) {
             return preg_replace('/_/', '-', Str::snake($string));
         }));
+        $twig->addFilter(new TwigFilter('assoc', [$this, 'renderAssociativeArray']));
         return $twig;
+    }
+
+    public function renderAssociativeArray($array, $indent = 4, $pad = 4): string {
+        if (is_array($array)) {
+            $string = "[";
+            foreach($array as $key => $value) {
+                $value = $this->renderAssociativeArray($value, $indent + 4);
+                if ($indent) {
+                    $start = PHP_EOL . $this->indent($pad + $indent);
+                    $end = array_key_last($array) == $key ? '' : ',';
+                } else {
+                    $start = array_key_first($array) == $key ? '' : ' ';
+                    $end = ",";
+                }
+                $string .= "$start\"$key\" => $value$end";
+            }
+            $string .= $indent ? PHP_EOL . $this->indent($pad + $indent - 4) . "]" : "]";
+            return $string;
+        } else {
+            return Utils::renderPhpDefault($array);
+        }
+    }
+
+    private function indent($spaces) {
+        return implode("", array_map(function () { return " "; }, range(1, $spaces)));
     }
 }

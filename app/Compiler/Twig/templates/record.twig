@@ -17,13 +17,18 @@ class {{ record.name }} extends BaseRecord
     {% for field in record.fields -%}
     /** @var {{ field.phpDocType }} */
     {% if field.phpDefault -%}
-    private ${{ field.name }} = {{ field.phpDefault|raw }};
+    private ${{ field.name }} = {{ field.phpDefault | raw }};
     {%- else -%}
     private ${{ field.name }};
     {%- endif %}
 
 
     {% endfor -%}
+    {%- if record.defaults is not empty -%}
+    protected $defaults = {{ record.defaults | assoc | raw }};
+
+    {% endif -%}
+
 
     {% for field in record.fields -%}
     /** @return {{ field.phpDocType }} */
