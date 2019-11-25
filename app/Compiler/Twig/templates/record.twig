@@ -24,6 +24,16 @@ class {{ record.name }} extends BaseRecord
 
 
     {% endfor -%}
+    {%- if record.defaults is not empty -%}
+    protected $defaults = [
+    {%- for field, default in record.defaults %}
+
+        "{{ field }}" => {{ default }}{% if not loop.last %},{% endif %}
+        {%- endfor %}
+
+    ];
+    {%- endif -%}
+
 
     {% for field in record.fields -%}
     /** @return {{ field.phpDocType }} */

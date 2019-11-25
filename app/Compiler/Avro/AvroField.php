@@ -32,10 +32,10 @@ class AvroField {
         $this->default = $default;
         $this->phpType = $this->type->getPhpType();
         $this->phpDocType = $this->type->getPhpDocType();
-        $this->phpDefault = $this->configureDefault();
+        $this->phpDefault = $this->configurePhpDefault();
     }
 
-    private function configureDefault() {
+    private function configurePhpDefault() {
         $default = $this->default;
 
         switch (gettype($default)) {
@@ -43,8 +43,8 @@ class AvroField {
                 return "\"$default\"";
             case 'boolean':
                 return $default === true ? 'true' : 'false';
-            case 'stdClass':
-                return "TODO";
+            case 'object':
+                return null;
             default:
                 return $default;
         }
