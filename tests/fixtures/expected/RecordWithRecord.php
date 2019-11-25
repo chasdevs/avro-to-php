@@ -15,7 +15,9 @@ class RecordWithRecord extends BaseRecord
     private $thing2;
 
     protected $defaults = [
-        "thing2" => ["id" => 0],
+        "thing2" => [
+            "id" => 0
+        ]
     ];
 
     /** @return Thing */
@@ -75,7 +77,10 @@ class RecordWithRecord extends BaseRecord
         },
         {
             "name": "thing2",
-            "type": "Thing"
+            "type": "Thing",
+            "default": {
+                "id": 0
+            }
         }
     ]
 }

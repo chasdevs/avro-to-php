@@ -91,4 +91,17 @@ class Utils
 
         return rmdir($dir);
     }
+
+    public static function renderPhpDefault($default) {
+        switch (gettype($default)) {
+            case 'string':
+                return "\"$default\"";
+            case 'boolean':
+                return $default === true ? 'true' : 'false';
+            case 'object':
+                return null;
+            default:
+                return $default;
+        }
+    }
 }

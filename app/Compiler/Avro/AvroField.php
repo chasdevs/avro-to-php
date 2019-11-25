@@ -2,6 +2,8 @@
 
 namespace App\Compiler\Avro;
 
+use App\Util\Utils;
+
 class AvroField {
 
     /** @var string */
@@ -32,22 +34,7 @@ class AvroField {
         $this->default = $default;
         $this->phpType = $this->type->getPhpType();
         $this->phpDocType = $this->type->getPhpDocType();
-        $this->phpDefault = $this->configurePhpDefault();
-    }
-
-    private function configurePhpDefault() {
-        $default = $this->default;
-
-        switch (gettype($default)) {
-            case 'string':
-                return "\"$default\"";
-            case 'boolean':
-                return $default === true ? 'true' : 'false';
-            case 'object':
-                return null;
-            default:
-                return $default;
-        }
+        $this->phpDefault = Utils::renderPhpDefault($default);
     }
 
     public static function create(\stdClass $field, ?string $namespace = null): AvroField {

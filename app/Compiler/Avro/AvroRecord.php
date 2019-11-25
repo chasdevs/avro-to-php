@@ -63,7 +63,7 @@ class AvroRecord implements AvroTypeInterface, AvroNameInterface
     private function configureDefaults() {
         foreach($this->fields as $field) {
             if ($field->type instanceof AvroRecord && $field->default) {
-                $this->defaults[$field->name] = json_decode(json_encode($field->default), true);;
+                $this->defaults[$field->name] = json_decode(json_encode($field->default), true);
             }
         }
     }
