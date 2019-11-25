@@ -34,12 +34,18 @@ class AvroField {
         $this->default = $default;
         $this->phpType = $this->type->getPhpType();
         $this->phpDocType = $this->type->getPhpDocType();
-        $this->phpDefault = Utils::renderPhpDefault($default);
+        $this->configurePhpDefault();
     }
 
     public static function create(\stdClass $field, ?string $namespace = null): AvroField {
         $type = AvroTypeFactory::create($field->type, $namespace);
         return new AvroField($field->name, $field->doc ?? null, $type, $field->default ?? null);
+    }
+
+    private function configurePhpDefault() {
+        if (isset($this->default) && !is_object($this->default)) {
+            $this->phpDefault = Utils::renderPhpDefault($this->default);
+        }
     }
 
 }

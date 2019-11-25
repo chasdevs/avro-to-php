@@ -17,7 +17,7 @@ class {{ record.name }} extends BaseRecord
     {% for field in record.fields -%}
     /** @var {{ field.phpDocType }} */
     {% if field.phpDefault -%}
-    private ${{ field.name }} = {{ field.phpDefault|raw }};
+    private ${{ field.name }} = {{ field.phpDefault | raw }};
     {%- else -%}
     private ${{ field.name }};
     {%- endif %}

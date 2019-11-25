@@ -98,8 +98,8 @@ class Utils
                 return "\"$default\"";
             case 'boolean':
                 return $default === true ? 'true' : 'false';
-            case 'object':
-                return null;
+            case 'NULL':
+                return 'null';
             default:
                 return $default;
         }
