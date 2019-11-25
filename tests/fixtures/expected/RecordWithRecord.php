@@ -14,6 +14,10 @@ class RecordWithRecord extends BaseRecord
     /** @var Thing */
     private $thing2;
 
+    protected $defaults = [
+        "thing2" => ["id" => 0],
+    ];
+
     /** @return Thing */
     public function getThing1(): Thing
     {

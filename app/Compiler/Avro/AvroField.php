@@ -43,6 +43,8 @@ class AvroField {
                 return "\"$default\"";
             case 'boolean':
                 return $default === true ? 'true' : 'false';
+            case 'stdClass':
+                return "TODO";
             default:
                 return $default;
         }

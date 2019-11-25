@@ -69,4 +69,20 @@ class RecordTest extends TestCase
 
     }
 
+    public function testRecordDefaults()
+    {
+        $record = new RecordWithRecord(["thing1" => []]);
+
+        $expectedThing1 = new Thing();
+        $expectedThing2 = new Thing(["id" => 0]);
+
+        $this->assertEquals($expectedThing1, $record->getThing1());
+        $this->assertEquals($expectedThing2, $record->getThing2());
+
+        $record = new RecordWithRecord(["thing2" => ["id" => 1]]);
+        $expectedThing2 = new Thing(["id" => 1]);
+
+        $this->assertEquals($expectedThing2, $record->getThing2());
+    }
+
 }

@@ -16,6 +16,23 @@ abstract class BaseRecord implements JsonSerializable
      */
     protected $propClassMap = [];
 
+    /**
+     * For more complex defaults, such as records within records, we can set
+     */
+    protected $defaults = [];
+
+    public function __construct(array $data = [])
+    {
+        if ($this->defaults) {
+            $this->decode($this->defaults);
+        }
+
+        if ($data) {
+            $this->decode($data);
+        }
+    }
+
+
     public abstract function schema(): string;
 
     public function name(): string

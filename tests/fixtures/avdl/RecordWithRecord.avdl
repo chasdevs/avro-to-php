@@ -5,7 +5,7 @@ protocol x {
   @namespace("records")
   record RecordWithRecord {
     records.Thing thing1;
-    records.Thing thing2;
+    records.Thing thing2 = {"id": 0};
   }
 
 }
