@@ -32,7 +32,6 @@ abstract class BaseRecord implements JsonSerializable
         }
     }
 
-
     public abstract function schema(): string;
 
     public function name(): string
