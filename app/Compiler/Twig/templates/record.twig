@@ -26,7 +26,8 @@ class {{ record.name }} extends BaseRecord
     {% endfor -%}
     {%- if record.defaults is not empty -%}
     protected $defaults = {{ record.defaults | assoc | raw }};
-    {%- endif %}
+
+    {% endif -%}
 
 
     {% for field in record.fields -%}
