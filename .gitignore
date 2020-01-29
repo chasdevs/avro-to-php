@@ -2,3 +2,4 @@ vendor
 .idea
 compiled
 .gradle
+xdebug.log
