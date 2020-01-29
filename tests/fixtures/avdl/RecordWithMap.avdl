@@ -1,0 +1,10 @@
+protocol x {
+
+  import idl "./Thing.avdl";
+
+  @namespace("records")
+  record RecordWithMap {
+    map<records.Thing> thingMap;
+  }
+
+}

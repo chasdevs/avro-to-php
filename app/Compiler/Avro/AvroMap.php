@@ -25,7 +25,7 @@ class AvroMap implements AvroTypeInterface
 
     public function getPhpDocType(): string
     {
-        return $this->getPhpType();
+        return $this->values->getPhpDocType().'[]';
     }
 
     public function getType(): AvroType
