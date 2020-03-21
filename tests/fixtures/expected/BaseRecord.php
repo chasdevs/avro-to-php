@@ -2,6 +2,11 @@
 
 namespace Tests\Expected;
 
+use App\Compiler\Avro\AvroField;
+use App\Compiler\Avro\AvroRecord;
+use App\Compiler\Avro\AvroType;
+use App\Compiler\Avro\AvroType as AvroTypeAlias;
+use App\Compiler\Avro\AvroTypeFactory;
 use JsonSerializable;
 use MyCLabs\Enum\Enum;
 use ReflectionClass;
@@ -56,10 +61,21 @@ abstract class BaseRecord implements JsonSerializable
     }
 
     /**
+     * TODO: Create a more elegant solution here; read in the expected schema and decode each field using AvroRecord, etc.
      * @param array $array - Array holding arbitrary data to be decoded into this object.
+     * @throws ReflectionException
+     * @throws \App\Compiler\Errors\NotImplementedException
      */
     public function decode(array $array)
     {
+
+        $record = AvroRecord::create(json_decode($this->schema()));
+
+        /** @var AvroField[] $fieldMap */
+        $fieldMap = collect($record->fields)->mapWithKeys(function (AvroField $field) {
+            return [$field->name => $field];
+        });
+
         $refl = new ReflectionClass($this);
 
         foreach ($array as $propertyToSet => $value) {
@@ -75,6 +91,14 @@ abstract class BaseRecord implements JsonSerializable
             }
 
             $propName = $prop->getName();
+            $field = $fieldMap[$propName];
+
+            // New method: Identify the type based on $fieldMap and decode accordingly
+            if (AvroType::MAP()->is($field->type)) {
+                //decode map. Recursion!
+            }
+
+            // Old method: Decode sub-records and enums by looking up the property name in the propMap on the php record.
             if (key_exists($propName, $this->propClassMap)) {
                 $value = $this->getValueForComplexPropType($propName, $value);
             }
