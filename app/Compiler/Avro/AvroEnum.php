@@ -52,7 +52,7 @@ class AvroEnum implements AvroTypeInterface, AvroNameInterface
 
     public function decode($data, ?string $namespace = '')
     {
-        $class = $this->getQualifiedPhpType();
+        $class = $this->getQualifiedPhpType($namespace);
         return new $class($data);
     }
 }

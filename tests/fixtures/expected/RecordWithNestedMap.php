@@ -3,6 +3,7 @@
 namespace Tests\Expected\Records;
 
 use Tests\Expected\BaseRecord;
+use Tests\Expected\Records\Thing;
 
 class RecordWithNestedMap extends BaseRecord
 {
@@ -61,9 +62,5 @@ class RecordWithNestedMap extends BaseRecord
 }
 SCHEMA;
     }
-
-    protected $propClassMap = [
-        "thingMapMap" => "Tests\Expected\Records\Thing"
-    ];
 
 }

@@ -18,7 +18,7 @@ class SerializeTest extends TestCase
 
     public function testRecordWithNestedMapSerializes()
     {
-        $record1 = new RecordWithNestedMap(["thingMapMap" => ["key1" => ["id" => 1]]]);
+        $record1 = new RecordWithNestedMap(["thingMapMap" => ["key1" => ["key2" => ["id" => 1]]]]);
         $this->assertSerializes($record1);
 
         $record2 = new RecordWithNestedMap();

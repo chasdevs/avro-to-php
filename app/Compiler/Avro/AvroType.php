@@ -81,6 +81,6 @@ class AvroType extends Enum implements AvroTypeInterface
 
     public function decode($data, ?string $namespace = '')
     {
-        // TODO: Implement decode() method.
+        return $data;
     }
 }
