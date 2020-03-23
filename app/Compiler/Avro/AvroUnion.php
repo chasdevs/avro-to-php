@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Compiler\Avro;
+namespace AvroToPhp\Compiler\Avro;
 
-use App\Compiler\Errors\NotImplementedException;
+use AvroToPhp\Compiler\Errors\NotImplementedException;
 
 class AvroUnion implements AvroTypeInterface
 {
@@ -15,7 +15,8 @@ class AvroUnion implements AvroTypeInterface
         $this->types = $types;
     }
 
-    public static function create(array $types, ?string $namespace): AvroUnion {
+    public static function create(array $types, ?string $namespace): AvroUnion
+    {
 
         $types = array_map(function ($type) use ($namespace) {
             return AvroTypeFactory::create($type, $namespace);
@@ -45,10 +46,15 @@ class AvroUnion implements AvroTypeInterface
 
     public function getImports(): array
     {
-        return array_reduce($this->types, function(array $carry, AvroTypeInterface $type) {
+        return array_reduce($this->types, function (array $carry, AvroTypeInterface $type) {
             $carry += $type->getImports();
             return $carry;
         }, []);
+    }
+
+    public function decode($data, ?string $namespace = '')
+    {
+        return $data;
     }
 
 }

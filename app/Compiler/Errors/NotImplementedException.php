@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Compiler\Errors;
+namespace AvroToPhp\Compiler\Errors;
 
 use Exception;
 

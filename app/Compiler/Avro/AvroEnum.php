@@ -1,6 +1,9 @@
 <?php
 
-namespace App\Compiler\Avro;
+namespace AvroToPhp\Compiler\Avro;
+
+use MyCLabs\Enum\Enum;
+use Tests\Expected\BaseRecord;
 
 class AvroEnum implements AvroTypeInterface, AvroNameInterface
 {
@@ -47,4 +50,9 @@ class AvroEnum implements AvroTypeInterface, AvroNameInterface
         return [$this->getQualifiedPhpType()];
     }
 
+    public function decode($data, ?string $namespace = '')
+    {
+        $class = $this->getQualifiedPhpType($namespace);
+        return new $class($data);
+    }
 }

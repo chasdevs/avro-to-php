@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Compiler\Avro;
+namespace AvroToPhp\Compiler\Avro;
 
-use App\Compiler\Errors\NotImplementedException;
+use AvroToPhp\Compiler\Errors\NotImplementedException;
 
 class AvroLogicalType implements AvroTypeInterface
 {
@@ -47,5 +47,10 @@ class AvroLogicalType implements AvroTypeInterface
     public function getImports(): array
     {
         return [];
+    }
+
+    public function decode($data, ?string $namespace = '')
+    {
+        return $data;
     }
 }

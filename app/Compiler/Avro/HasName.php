@@ -1,10 +1,10 @@
 <?php
 
 
-namespace App\Compiler\Avro;
+namespace AvroToPhp\Compiler\Avro;
 
 
-use App\Util\Utils;
+use AvroToPhp\Util\Utils;
 
 trait HasName
 {
@@ -23,8 +23,8 @@ trait HasName
         return Utils::joinPaths($namespace, $this->name.'.php');
     }
 
-    public function getQualifiedPhpType(): string {
-        return ltrim($this->phpNamespace . '\\' . $this->name, '\\');
+    public function getQualifiedPhpType($namespacePrefix = null): string {
+        return ltrim($namespacePrefix . '\\' . $this->phpNamespace . '\\' . $this->name, '\\');
     }
 
     protected function configurePhpNamespace() {

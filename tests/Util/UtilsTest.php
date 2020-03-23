@@ -2,7 +2,7 @@
 
 namespace Tests\Util;
 
-use App\Util\Utils;
+use AvroToPhp\Util\Utils;
 use PHPUnit\Framework\TestCase;
 
 class UtilsTest extends TestCase {

@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Compiler\Avro;
+namespace AvroToPhp\Compiler\Avro;
 
-use App\Compiler\Errors\NotImplementedException;
+use AvroToPhp\Compiler\Errors\NotImplementedException;
 
 class AvroArray implements AvroTypeInterface
 {
@@ -38,6 +38,13 @@ class AvroArray implements AvroTypeInterface
     public function getImports(): array
     {
         return $this->items->getImports();
+    }
+
+    public function decode($data, ?string $namespace = '')
+    {
+        return collect($data)->map(function($item) {
+            return $this->items->decode($item);
+        });
     }
 
 }

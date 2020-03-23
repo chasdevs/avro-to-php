@@ -1,14 +1,14 @@
 <?php
 
 
-namespace App\Compiler\Twig;
+namespace AvroToPhp\Compiler\Twig;
 
 
-use App\Compiler\Avro\AvroEnum;
-use App\Compiler\Avro\HasName;
-use App\Compiler\Avro\AvroRecord;
-use App\Compiler\Avro\AvroTypeInterface;
-use App\Util\Utils;
+use AvroToPhp\Compiler\Avro\AvroEnum;
+use AvroToPhp\Compiler\Avro\HasName;
+use AvroToPhp\Compiler\Avro\AvroRecord;
+use AvroToPhp\Compiler\Avro\AvroTypeInterface;
+use AvroToPhp\Util\Utils;
 use Illuminate\Support\Str;
 use Twig\Environment;
 use Twig\Loader\FilesystemLoader;

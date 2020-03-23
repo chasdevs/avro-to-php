@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Compiler\Avro;
+namespace AvroToPhp\Compiler\Avro;
 
-use App\Compiler\Errors\NotImplementedException;
+use AvroToPhp\Compiler\Errors\NotImplementedException;
 use MyCLabs\Enum\Enum;
 
 /**
@@ -79,4 +79,8 @@ class AvroType extends Enum implements AvroTypeInterface
         return [];
     }
 
+    public function decode($data, ?string $namespace = '')
+    {
+        return $data;
+    }
 }

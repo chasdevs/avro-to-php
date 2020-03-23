@@ -1,7 +1,7 @@
 <?php
 
 
-namespace App\Compiler\Avro;
+namespace AvroToPhp\Compiler\Avro;
 
 
 interface AvroTypeInterface
@@ -10,4 +10,5 @@ interface AvroTypeInterface
     public function getPhpType(): string;
     public function getPhpDocType(): string;
     public function getImports(): array;
+    public function decode($data, ?string $namespace = '');
 }

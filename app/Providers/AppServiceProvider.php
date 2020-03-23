@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Providers;
+namespace AvroToPhp\Providers;
 
-use App\Compiler\Compiler;
+use AvroToPhp\Compiler\Compiler;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider

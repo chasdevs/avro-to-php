@@ -71,17 +71,4 @@ class {{ record.name }} extends BaseRecord
 SCHEMA;
     }
 
-    {%- if record.propClassMap is not empty %}
-
-
-    protected $propClassMap = [
-        {%- for field, class in record.propClassMap %}
-
-        "{{ field }}" => "{{ namespace }}\{{ class }}"{% if not loop.last %},{% endif %}
-        {%- endfor %}
-
-    ];
-    {%- endif %}
-
-
 }

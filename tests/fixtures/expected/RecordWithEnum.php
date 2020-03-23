@@ -57,8 +57,4 @@ class RecordWithEnum extends BaseRecord
 SCHEMA;
     }
 
-    protected $propClassMap = [
-        "favoriteFlavor" => "Tests\Expected\Records\Nested\Flavor"
-    ];
-
 }

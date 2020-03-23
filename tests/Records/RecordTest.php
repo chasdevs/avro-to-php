@@ -5,6 +5,7 @@ namespace Tests\Records;
 use Tests\Expected\Records\Nested\Flavor;
 use Tests\Expected\Records\RecordWithArray;
 use Tests\Expected\Records\RecordWithEnum;
+use Tests\Expected\Records\RecordWithNestedMap;
 use Tests\Expected\Records\RecordWithRecord;
 use Tests\Expected\Records\Thing;
 use Tests\TestCase;
@@ -80,6 +81,14 @@ class RecordTest extends TestCase
         $expectedThing2 = new Thing(["id" => 1]);
 
         $this->assertEquals($expectedThing2, $record->getThing2());
+    }
+
+    public function testNestedMap()
+    {
+        $record = new RecordWithNestedMap(["thingMapMap" => ["key1" => ["key2" => ["id" => 1]]]]);
+        $expectedThing = new Thing(["id" => 1]);
+
+        $this->assertEquals($expectedThing, $record->getThingMapMap()["key1"]["key2"]);
     }
 
 }

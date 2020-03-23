@@ -2,8 +2,8 @@
 
 namespace Tests\Compiler;
 
-use App\Compiler\Compiler;
-use App\Util\Utils;
+use AvroToPhp\Compiler\Compiler;
+use AvroToPhp\Util\Utils;
 use PHPUnit\Framework\TestCase;
 
 class CompilerTest extends TestCase
@@ -55,7 +55,8 @@ class CompilerTest extends TestCase
             ['RecordWithRecord'],
             ['Flavor', self::FIXTURES."/avsc/records/nested/"],
             ['ComplexRecord'],
-            ['RecordWithMap']
+            ['RecordWithMap'],
+            ['RecordWithNestedMap']
         ];
     }
 

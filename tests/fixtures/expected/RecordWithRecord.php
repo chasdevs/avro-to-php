@@ -87,9 +87,4 @@ class RecordWithRecord extends BaseRecord
 SCHEMA;
     }
 
-    protected $propClassMap = [
-        "thing1" => "Tests\Expected\Records\Thing",
-        "thing2" => "Tests\Expected\Records\Thing"
-    ];
-
 }

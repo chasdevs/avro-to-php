@@ -1,9 +1,12 @@
 <?php
 
-namespace App\Compiler\Avro;
+namespace AvroToPhp\Compiler\Avro;
 
-use App\Compiler\Errors\NotImplementedException;
-use App\Util\Utils;
+use AvroToPhp\Compiler\Errors\NotImplementedException;
+use AvroToPhp\Util\Utils;
+use MyCLabs\Enum\Enum;
+use ReflectionClass;
+use Tests\Expected\BaseRecord;
 
 class AvroRecord implements AvroTypeInterface, AvroNameInterface
 {
@@ -104,5 +107,14 @@ class AvroRecord implements AvroTypeInterface, AvroNameInterface
     public function getImports(): array
     {
         return [$this->getQualifiedPhpType()];
+    }
+
+    public function decode($data, ?string $namespace = '')
+    {
+        $class = $this->getQualifiedPhpType($namespace);
+        /** @var BaseRecord */
+        $record = new $class;
+        $record->decode($data);
+        return $record;
     }
 }
