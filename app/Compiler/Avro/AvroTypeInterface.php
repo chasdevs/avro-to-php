@@ -1,7 +1,7 @@
 <?php
 
 
-namespace App\Compiler\Avro;
+namespace AvroToPhp\Compiler\Avro;
 
 
 interface AvroTypeInterface

@@ -2,7 +2,7 @@
 
 namespace Tests\Feature;
 
-use App\Util\Utils;
+use AvroToPhp\Util\Utils;
 use Tests\TestCase;
 
 class CompileDirectoryCommandTest extends TestCase

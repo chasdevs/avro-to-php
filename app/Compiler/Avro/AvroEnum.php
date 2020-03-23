@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Compiler\Avro;
+namespace AvroToPhp\Compiler\Avro;
 
 use MyCLabs\Enum\Enum;
 use Tests\Expected\BaseRecord;

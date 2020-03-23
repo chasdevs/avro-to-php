@@ -1,15 +1,15 @@
 <?php
 
-namespace App\Compiler;
+namespace AvroToPhp\Compiler;
 
-use App\Compiler\Avro\AvroEnum;
-use App\Compiler\Avro\AvroNameInterface;
-use App\Compiler\Avro\AvroRecord;
-use App\Compiler\Avro\AvroTypeFactory;
-use App\Compiler\Avro\AvroTypeInterface;
-use App\Compiler\Errors\NotImplementedException;
-use App\Compiler\Twig\TemplateEngine;
-use App\Util\Utils;
+use AvroToPhp\Compiler\Avro\AvroEnum;
+use AvroToPhp\Compiler\Avro\AvroNameInterface;
+use AvroToPhp\Compiler\Avro\AvroRecord;
+use AvroToPhp\Compiler\Avro\AvroTypeFactory;
+use AvroToPhp\Compiler\Avro\AvroTypeInterface;
+use AvroToPhp\Compiler\Errors\NotImplementedException;
+use AvroToPhp\Compiler\Twig\TemplateEngine;
+use AvroToPhp\Util\Utils;
 use Illuminate\Support\Facades\Log;
 
 class Compiler

@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Compiler\Avro;
+namespace AvroToPhp\Compiler\Avro;
 
-use App\Util\Utils;
+use AvroToPhp\Util\Utils;
 
 class AvroField {
 

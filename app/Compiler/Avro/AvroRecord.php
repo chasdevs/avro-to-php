@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Compiler\Avro;
+namespace AvroToPhp\Compiler\Avro;
 
-use App\Compiler\Errors\NotImplementedException;
-use App\Util\Utils;
+use AvroToPhp\Compiler\Errors\NotImplementedException;
+use AvroToPhp\Util\Utils;
 use MyCLabs\Enum\Enum;
 use ReflectionClass;
 use Tests\Expected\BaseRecord;

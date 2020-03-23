@@ -2,8 +2,8 @@
 
 namespace Tests\Expected;
 
-use App\Compiler\Avro\AvroField;
-use App\Compiler\Avro\AvroRecord;
+use AvroToPhp\Compiler\Avro\AvroField;
+use AvroToPhp\Compiler\Avro\AvroRecord;
 use JsonSerializable;
 use ReflectionClass;
 use ReflectionException;
@@ -54,7 +54,7 @@ abstract class BaseRecord implements JsonSerializable
     /**
      * @param array $data - Array holding arbitrary data to be decoded into this object.
      * @throws ReflectionException
-     * @throws \App\Compiler\Errors\NotImplementedException
+     * @throws \AvroToPhp\Compiler\Errors\NotImplementedException
      */
     public function decode(array $data)
     {

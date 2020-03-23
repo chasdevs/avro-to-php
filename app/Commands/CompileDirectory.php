@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Commands;
+namespace AvroToPhp\Commands;
 
-use App\Compiler\Compiler;
-use App\Util\Utils;
+use AvroToPhp\Compiler\Compiler;
+use AvroToPhp\Util\Utils;
 use LaravelZero\Framework\Commands\Command;
 
 class CompileDirectory extends Command

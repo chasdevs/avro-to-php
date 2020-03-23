@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Compiler\Avro;
+namespace AvroToPhp\Compiler\Avro;
 
 class AvroMap implements AvroTypeInterface
 {

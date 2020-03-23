@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Compiler\Avro;
+namespace AvroToPhp\Compiler\Avro;
 
-use App\Compiler\Errors\NotImplementedException;
+use AvroToPhp\Compiler\Errors\NotImplementedException;
 
 class AvroUnion implements AvroTypeInterface
 {

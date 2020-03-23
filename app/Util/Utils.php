@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Util;
+namespace AvroToPhp\Util;
 
 use RecursiveDirectoryIterator;
 use RecursiveIteratorIterator;
