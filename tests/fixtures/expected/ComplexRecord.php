@@ -88,9 +88,4 @@ class ComplexRecord extends BaseRecord
 SCHEMA;
     }
 
-    protected $propClassMap = [
-        "thing" => "Tests\Expected\Records\Thing",
-        "flavor" => "Tests\Expected\Records\Nested\Flavor"
-    ];
-
 }
