@@ -48,4 +48,9 @@ class AvroLogicalType implements AvroTypeInterface
     {
         return [];
     }
+
+    public function decode($data, ?string $namespace = '')
+    {
+        // TODO: Implement decode() method.
+    }
 }

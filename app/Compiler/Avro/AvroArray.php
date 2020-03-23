@@ -40,4 +40,9 @@ class AvroArray implements AvroTypeInterface
         return $this->items->getImports();
     }
 
+    public function decode($data, ?string $namespace = '')
+    {
+        // TODO: Implement decode() method.
+    }
+
 }

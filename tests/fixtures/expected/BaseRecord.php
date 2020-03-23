@@ -69,7 +69,7 @@ abstract class BaseRecord implements JsonSerializable
     public function decode(array $array)
     {
 
-        $record = AvroRecord::create(json_decode($this->schema()));
+        $record = AvroRecord::create(json_decode($this->schema()), 'one.two');
 
         /** @var AvroField[] $fieldMap */
         $fieldMap = collect($record->fields)->mapWithKeys(function (AvroField $field) {
@@ -94,12 +94,11 @@ abstract class BaseRecord implements JsonSerializable
             $field = $fieldMap[$propName];
 
             // New method: Identify the type based on $fieldMap and decode accordingly
-            if (AvroType::MAP()->is($field->type)) {
-                //decode map. Recursion!
-            }
-
-            // Old method: Decode sub-records and enums by looking up the property name in the propMap on the php record.
-            if (key_exists($propName, $this->propClassMap)) {
+            if (AvroType::MAP()->is($field->type->getType())) {
+                //decode map
+                $value = $field->type->decode($value, __NAMESPACE__);
+            } else if (key_exists($propName, $this->propClassMap)) {
+                // Old method: Decode sub-records and enums by looking up the property name in the propMap on the php record.
                 $value = $this->getValueForComplexPropType($propName, $value);
             }
 

@@ -51,4 +51,9 @@ class AvroUnion implements AvroTypeInterface
         }, []);
     }
 
+    public function decode($data, ?string $namespace = '')
+    {
+        // TODO: Implement decode() method.
+    }
+
 }
