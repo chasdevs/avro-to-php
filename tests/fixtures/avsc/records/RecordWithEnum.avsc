@@ -10,5 +10,8 @@
       "namespace" : "records.nested",
       "symbols" : [ "VANILLA", "CHOCOLATE", "STRAWBERRY" ]
     }
+  }, {
+    "name" : "favoriteFlavor2",
+    "type" : "records.nested.Flavor"
   } ]
 }

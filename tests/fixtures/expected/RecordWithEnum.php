@@ -11,6 +11,9 @@ class RecordWithEnum extends BaseRecord
     /** @var Flavor */
     private $favoriteFlavor;
 
+    /** @var Flavor */
+    private $favoriteFlavor2;
+
     /** @return Flavor */
     public function getFavoriteFlavor(): Flavor
     {
@@ -24,10 +27,24 @@ class RecordWithEnum extends BaseRecord
         return $this;
     }
 
+    /** @return Flavor */
+    public function getFavoriteFlavor2(): Flavor
+    {
+        return $this->favoriteFlavor2;
+    }
+
+    /** @param Flavor $favoriteFlavor2 */
+    public function setFavoriteFlavor2(Flavor $favoriteFlavor2): RecordWithEnum
+    {
+        $this->favoriteFlavor2 = $favoriteFlavor2;
+        return $this;
+    }
+
     public function jsonSerialize()
     {
         return [
-            "favoriteFlavor" => $this->encode($this->favoriteFlavor)
+            "favoriteFlavor" => $this->encode($this->favoriteFlavor),
+            "favoriteFlavor2" => $this->encode($this->favoriteFlavor2)
         ];
     }
 
@@ -51,6 +68,10 @@ class RecordWithEnum extends BaseRecord
                     "STRAWBERRY"
                 ]
             }
+        },
+        {
+            "name": "favoriteFlavor2",
+            "type": "records.nested.Flavor"
         }
     ]
 }

@@ -87,7 +87,7 @@ class AvroRecord implements AvroTypeInterface, AvroNameInterface
         return self::create($decoded);
     }
 
-    public static function create(\stdClass $record, ?string $namespace = null): AvroRecord {
+    public static function     create(\stdClass $record, ?string $namespace = null): AvroRecord {
         if (isset($record->order)) {
             throw new NotImplementedException('order field not implemented in compiler.');
         }

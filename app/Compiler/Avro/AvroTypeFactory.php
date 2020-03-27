@@ -6,26 +6,28 @@ use AvroToPhp\Compiler\Errors\NotImplementedException;
 
 class AvroTypeFactory {
 
-    private static $recordCache = [];
+    private static $typeCache = [];
     private static $namespaceCache = [];
 
     public static function create($avsc, ?string $namespace = null): AvroTypeInterface {
         if (is_object($avsc) && AvroType::RECORD()->is($avsc->type)) {
             $record = AvroRecord::create($avsc, $namespace);
-            self::cacheRecord($record);
+            self::cacheType($record);
             return $record;
         } else if (is_object($avsc) && AvroType::ARRAY()->is($avsc->type)) {
             return AvroArray::create($avsc, $namespace);
         } else if (is_object($avsc) && AvroType::ENUM()->is($avsc->type)) {
-            return AvroEnum::create($avsc, $namespace);
+            $enum = AvroEnum::create($avsc, $namespace);
+            self::cacheType($enum);
+            return $enum;
         } else if (is_object($avsc) && AvroType::MAP()->is($avsc->type)) {
             return AvroMap::create($avsc, $namespace);
         } else if (is_object($avsc) && property_exists($avsc, "logicalType")) {
             return AvroLogicalType::create($avsc);
         } else if (is_array($avsc)) {
             return AvroUnion::create($avsc, $namespace);
-        } else if (key_exists($avsc, self::$recordCache)) {
-            return self::$recordCache[$avsc];
+        } else if (key_exists($avsc, self::$typeCache)) {
+            return self::$typeCache[$avsc];
         } else if (key_exists($avsc, self::$namespaceCache)) {
             return self::$namespaceCache[$avsc];
         } else if (is_string($avsc)) {
@@ -46,10 +48,10 @@ class AvroTypeFactory {
         }
     }
 
-    private static function cacheRecord(AvroRecord $record) {
-        self::$recordCache[$record->name] = $record;
+    private static function cacheType(AvroNameInterface $type) {
+        self::$typeCache[$type->name] = $type;
 
-        $qualifiedName = collect([$record->namespace, $record->name])->filter()->join('.');
-        self::$namespaceCache[$qualifiedName] = $record;
+        $qualifiedName = collect([$type->namespace, $type->name])->filter()->join('.');
+        self::$namespaceCache[$qualifiedName] = $type;
     }
 }

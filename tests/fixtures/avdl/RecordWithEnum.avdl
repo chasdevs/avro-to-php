@@ -5,6 +5,7 @@ protocol x {
   @namespace("records")
   record RecordWithEnum {
     records.nested.Flavor favoriteFlavor;
+    records.nested.Flavor favoriteFlavor2;
   }
 
 }
