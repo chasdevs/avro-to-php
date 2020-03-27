@@ -31,12 +31,14 @@ release:
 	git tag "$(VER)"
 	git push && git push --tag
 	@echo -e "$(OK) released to github and packagist"
+	make image
 
 image:
 	docker build -t chasdevs/avro-to-php --no-cache .
 	docker tag chasdevs/avro-to-php chasdevs/avro-to-php:$(VER)
 	docker push chasdevs/avro-to-php:latest
 	docker push chasdevs/avro-to-php:$(VER)
+	# $(OK) Published to dockerhub
 
 avsc:
 	gradle generateAvsc
