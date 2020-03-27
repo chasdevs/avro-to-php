@@ -12,7 +12,7 @@ ERROR=$(ERROR_COLOR)[ERROR]$(NO_COLOR)
 WARN=$(WARN_COLOR)[WARNING]$(NO_COLOR)
 ERROR_STRING=$(ERROR_COLOR)%s$(NO_COLOR) # printf '$(ERROR_STRING) %s' 'Error text in red.' 'Rest of text in no color.'
 
-VER?=0.0.18
+VER?=1.0.1
 
 .PHONY: init test release image
 
