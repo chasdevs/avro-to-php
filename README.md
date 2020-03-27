@@ -1,7 +1,5 @@
 # Avro to PHP
 
-:construction: This is a work-in-progress! :construction:
-
 Compile Avro .avsc files into usable PHP classes.
 
 ### Installation
@@ -23,8 +21,8 @@ vendor/bin/avro-to-php compile dir/with/avsc/
 - [x] Defaults
 - [x] Enums
 - [x] Logical types (only tested with timestamp-millis)
-- [ ] Maps
+- [x] Maps
+- [x] Serialization Tests
 - [ ] Fixed
 - [ ] Sort Order
 - [ ] Aliases
-- [ ] Serialization Tests

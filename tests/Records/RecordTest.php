@@ -36,7 +36,7 @@ class RecordTest extends TestCase
         $record = (new RecordWithEnum())
             ->setFavoriteFlavor(Flavor::STRAWBERRY());
 
-        $this->assertEquals(['favoriteFlavor' => 'STRAWBERRY'], $record->data());
+        $this->assertEquals(['favoriteFlavor' => 'STRAWBERRY', 'favoriteFlavor2' => null], $record->data());
     }
 
     public function testDecodeEnum()
