@@ -54,6 +54,15 @@ class AvroUnion implements AvroTypeInterface
 
     public function decode($data, ?string $namespace = '')
     {
+        //TODO: Handle multiple enum types
+
+        // return the first non-null type
+        foreach($this->types as $type) {
+           if (!$type->getType()->is(AvroType::NULL())) {
+               return $type->decode($data, $namespace);
+           }
+        }
+
         return $data;
     }
 
