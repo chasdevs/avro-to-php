@@ -13,5 +13,8 @@
   }, {
     "name" : "favoriteFlavor2",
     "type" : "records.nested.Flavor"
+  }, {
+    "name" : "nullableFlavor",
+    "type" : [ "null", "records.nested.Flavor" ]
   } ]
 }
