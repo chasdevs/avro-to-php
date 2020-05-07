@@ -6,6 +6,7 @@ protocol x {
   record RecordWithEnum {
     records.nested.Flavor favoriteFlavor;
     records.nested.Flavor favoriteFlavor2;
+    union {null, records.nested.Flavor} nullableFlavor;
   }
 
 }

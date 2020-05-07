@@ -36,7 +36,7 @@ class RecordTest extends TestCase
         $record = (new RecordWithEnum())
             ->setFavoriteFlavor(Flavor::STRAWBERRY());
 
-        $this->assertEquals(['favoriteFlavor' => 'STRAWBERRY', 'favoriteFlavor2' => null], $record->data());
+        $this->assertEquals(['favoriteFlavor' => 'STRAWBERRY', 'favoriteFlavor2' => null, 'nullableFlavor' => null], $record->data());
     }
 
     public function testDecodeEnum()
@@ -50,7 +50,21 @@ class RecordTest extends TestCase
 
         $this->assertEquals($expected, $decodedRecord);
         $this->assertEquals(Flavor::VANILLA(), $decodedRecord->getFavoriteFlavor());
+        $this->assertInstanceOf(Flavor::class, $decodedRecord->getFavoriteFlavor());
 
+    }
+
+    public function testDecodeNullableEnum()
+    {
+        $expected = new RecordWithEnum();
+        $expected->setNullableFlavor(Flavor::STRAWBERRY());
+
+        $decodedRecord = new RecordWithEnum();
+        $decodedRecord->decode(['nullableFlavor' => 'STRAWBERRY']);
+
+        $this->assertEquals($expected, $decodedRecord);
+        $this->assertEquals(Flavor::STRAWBERRY(), $decodedRecord->getNullableFlavor());
+        $this->assertInstanceOf(Flavor::class, $decodedRecord->getNullableFlavor());
     }
 
     public function testDecodeRecord()

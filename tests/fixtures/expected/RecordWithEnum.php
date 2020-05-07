@@ -14,6 +14,9 @@ class RecordWithEnum extends BaseRecord
     /** @var Flavor */
     private $favoriteFlavor2;
 
+    /** @var null|Flavor */
+    private $nullableFlavor;
+
     /** @return Flavor */
     public function getFavoriteFlavor(): Flavor
     {
@@ -40,11 +43,25 @@ class RecordWithEnum extends BaseRecord
         return $this;
     }
 
+    /** @return null|Flavor */
+    public function getNullableFlavor()
+    {
+        return $this->nullableFlavor;
+    }
+
+    /** @param null|Flavor $nullableFlavor */
+    public function setNullableFlavor($nullableFlavor): RecordWithEnum
+    {
+        $this->nullableFlavor = $nullableFlavor;
+        return $this;
+    }
+
     public function jsonSerialize()
     {
         return [
             "favoriteFlavor" => $this->encode($this->favoriteFlavor),
-            "favoriteFlavor2" => $this->encode($this->favoriteFlavor2)
+            "favoriteFlavor2" => $this->encode($this->favoriteFlavor2),
+            "nullableFlavor" => $this->encode($this->nullableFlavor)
         ];
     }
 
@@ -72,6 +89,13 @@ class RecordWithEnum extends BaseRecord
         {
             "name": "favoriteFlavor2",
             "type": "records.nested.Flavor"
+        },
+        {
+            "name": "nullableFlavor",
+            "type": [
+                "null",
+                "records.nested.Flavor"
+            ]
         }
     ]
 }
