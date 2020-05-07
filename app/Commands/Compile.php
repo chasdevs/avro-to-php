@@ -9,30 +9,25 @@ use LaravelZero\Framework\Commands\Command;
 class Compile extends Command
 {
 
-    protected $signature = 'compile:file {file} {outputDirectory=.} {--p|print}';
+    protected $signature = 'compile {directory} {outputDirectory=./compiled} {--d|dry-run} {--namespace=}';
 
-    protected $description = 'Compile an Avro .avsc files into a typed PHP class.';
+    protected $description = 'Compile a directory containing Avro .avsc files to PHP classes.';
 
     public function handle(Compiler $compiler)
     {
-        $fileArg = $this->argument('file');
+        $sourceDir = $this->argument('directory');
         $outputDir = $this->argument('outputDirectory');
-        $print = $this->hasOption('p');
+        $dryRun = $this->option('dry-run');
+        $namespace = $this->option('namespace');
 
-        $this->comment('Compiling Avro schema to PHP: ' . $fileArg);
-
-        $file = Utils::resolve($fileArg);
-        $compiled = $compiler->compileFile($file);
-
-        if ($print) {
-            $this->comment('Compiler output:');
-            $this->info($compiled);
-        } else {
-            $fileName = pathinfo($fileArg, PATHINFO_FILENAME);
-            $path = Utils::joinPaths($outputDir, $fileName.'.php');
-            file_put_contents($path, $compiled);
-            $this->comment('Compiled PHP class: '.$path);
+        $source = Utils::resolve($sourceDir);
+        if (!$source) {
+            throw new \RuntimeException('Could not find directory: ' . $sourceDir);
         }
+
+        $this->comment('Compiling Avro files in ' . $source . ' to ' . $outputDir . ($namespace ? " using namespace $namespace" : '') . ($dryRun ? ' (Dry-Run)' : ''));
+        $compiler->compile($source, $outputDir, $namespace, $dryRun);
+        $this->comment('Done!');
     }
 
 }

@@ -27,7 +27,7 @@ class Compiler
     {
 
         $outDir = Utils::ensureDir($outDir);
-        $namespace = $namespace ?: $this->directoryToNamespace($outDir);
+        $namespace = $namespace ?: self::directoryToNamespace($outDir);
 
         // Find all avsc files.
         $avscFiles = Utils::find($sourceDir, '/.*\.avsc$/');
@@ -91,7 +91,7 @@ class Compiler
         return (new TemplateEngine());
     }
 
-    private function directoryToNamespace(string $directory): string {
+    public static function directoryToNamespace(string $directory): string {
         $namespace = basename($directory);
         $namespace = str_replace('_', '|', $namespace);
         $namespace = str_replace('-', '|', $namespace);

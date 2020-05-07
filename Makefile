@@ -1,36 +1,36 @@
 SHELL := /bin/bash
 
 # Colors used for more helpful log statements.
-NO_COLOR=\x1b[0m
-OK_COLOR=\x1b[32;01m
-ERROR_COLOR=\x1b[31;01m
-WARN_COLOR=\x1b[33;01m
+END=$(shell printf "\x1b[0m")
+OK_COLOR=$(shell printf "\x1b[32;01m")
+ERROR_COLOR=$(shell printf "\x1b[31;01m")
+WARN_COLOR=$(shell printf "\x1b[33;01m")
 
 # Log levels.
-OK=$(OK_COLOR)[OK]$(NO_COLOR)
-ERROR=$(ERROR_COLOR)[ERROR]$(NO_COLOR)
-WARN=$(WARN_COLOR)[WARNING]$(NO_COLOR)
-ERROR_STRING=$(ERROR_COLOR)%s$(NO_COLOR) # printf '$(ERROR_STRING) %s' 'Error text in red.' 'Rest of text in no color.'
+OK=$(OK_COLOR)[OK]$(END)
+ERROR=$(ERROR_COLOR)[ERROR]$(END)
+WARN=$(WARN_COLOR)[WARNING]$(END)
+ERROR_STRING=$(ERROR_COLOR)%s$(END) # printf '$(ERROR_STRING) %s' 'Error text in red.' 'Rest of text in no color.'
 
-VER?=1.0.1
+VER?=2.0.0
 
 .PHONY: init test release image
 
 init:
 	composer install
-	@echo -e "$(OK) init"
+	# $(OK) init
 
 test:
 	vendor/bin/phpunit tests
-	@echo -e "$(OK) test"
+	# $(OK) test
 
 release:
-	./avro-to-php app:build avro-to-php
+	./avro-to-php app:build --build-version=$(VER) avro-to-php
 	git add .
 	git commit -m "$(VER)"
 	git tag "$(VER)"
 	git push && git push --tag
-	@echo -e "$(OK) released to github and packagist"
+	# $(OK) released to github and packagist
 	make image
 
 image:
