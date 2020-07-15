@@ -2,12 +2,11 @@
 
 namespace AvroToPhp\Compiler;
 
-use AvroToPhp\Compiler\Avro\AvroEnum;
-use AvroToPhp\Compiler\Avro\AvroNameInterface;
-use AvroToPhp\Compiler\Avro\AvroRecord;
-use AvroToPhp\Compiler\Avro\AvroTypeFactory;
-use AvroToPhp\Compiler\Avro\AvroTypeInterface;
-use AvroToPhp\Compiler\Errors\NotImplementedException;
+use AvroParser\AvroEnum;
+use AvroParser\AvroNameInterface;
+use AvroParser\AvroRecord;
+use AvroParser\AvroTypeFactory;
+use AvroParser\NotImplementedException;
 use AvroToPhp\Compiler\Twig\TemplateEngine;
 use AvroToPhp\Util\Utils;
 use Illuminate\Support\Facades\Log;
