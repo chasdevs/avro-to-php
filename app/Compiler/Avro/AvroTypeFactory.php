@@ -2,7 +2,7 @@
 
 namespace AvroToPhp\Compiler\Avro;
 
-use AvroToPhp\Compiler\Errors\NotImplementedException;
+use Exception;
 
 class AvroTypeFactory {
 
@@ -34,7 +34,7 @@ class AvroTypeFactory {
             // primitive type
             return new AvroType($avsc);
         } else {
-            throw new NotImplementedException('Unknown Avro Type');
+            throw new Exception('Unknown Avro Type');
         }
     }
 
@@ -44,7 +44,7 @@ class AvroTypeFactory {
         } else if (is_object($avsc) && AvroType::ENUM()->is($avsc->type)) {
             return AvroEnum::create($avsc);
         } else {
-            throw new NotImplementedException('Unknown Avro Type');
+            throw new Exception('Unknown Avro Type');
         }
     }
 

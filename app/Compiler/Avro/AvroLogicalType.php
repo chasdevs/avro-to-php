@@ -2,7 +2,7 @@
 
 namespace AvroToPhp\Compiler\Avro;
 
-use AvroToPhp\Compiler\Errors\NotImplementedException;
+use AvroNotImplementedException;
 
 class AvroLogicalType implements AvroTypeInterface
 {
@@ -36,7 +36,7 @@ class AvroLogicalType implements AvroTypeInterface
 
     public function getName(): string
     {
-        throw new NotImplementedException("Unnamed type: ".$this->type);
+        throw new AvroNotImplementedException("Unnamed type: ".$this->type);
     }
 
     public function getType(): AvroType

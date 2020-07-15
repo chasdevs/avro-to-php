@@ -2,11 +2,7 @@
 
 namespace AvroToPhp\Compiler\Avro;
 
-use AvroToPhp\Compiler\Errors\NotImplementedException;
-use AvroToPhp\Util\Utils;
-use MyCLabs\Enum\Enum;
-use ReflectionClass;
-use Tests\Expected\BaseRecord;
+use Exception;
 
 class AvroRecord implements AvroTypeInterface, AvroNameInterface
 {
@@ -89,7 +85,7 @@ class AvroRecord implements AvroTypeInterface, AvroNameInterface
 
     public static function     create(\stdClass $record, ?string $namespace = null): AvroRecord {
         if (isset($record->order)) {
-            throw new NotImplementedException('order field not implemented in compiler.');
+            throw new Exception('order field not implemented in compiler.');
         }
 
         $fields = array_map(function (\stdClass $field) use ($record) {
@@ -112,7 +108,6 @@ class AvroRecord implements AvroTypeInterface, AvroNameInterface
     public function decode($data, ?string $namespace = '')
     {
         $class = $this->getQualifiedPhpType($namespace);
-        /** @var BaseRecord */
         $record = new $class;
         $record->decode($data);
         return $record;
