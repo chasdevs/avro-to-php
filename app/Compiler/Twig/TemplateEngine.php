@@ -4,10 +4,10 @@
 namespace AvroToPhp\Compiler\Twig;
 
 
-use AvroToPhp\Compiler\Avro\AvroEnum;
-use AvroToPhp\Compiler\Avro\HasName;
-use AvroToPhp\Compiler\Avro\AvroRecord;
-use AvroToPhp\Compiler\Avro\AvroTypeInterface;
+use AvroParser\AvroEnum;
+use AvroParser\HasName;
+use AvroParser\AvroRecord;
+use AvroParser\AvroTypeInterface;
 use AvroToPhp\Util\Utils;
 use Illuminate\Support\Str;
 use Twig\Environment;

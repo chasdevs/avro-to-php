@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "bd00f06f09c2df90d41a8b6663a6dfdc",
+    "content-hash": "71a219256ccabba589f0bb70b159e954",
     "packages": [
         {
             "name": "beberlei/assert",
@@ -142,6 +142,46 @@
             ],
             "description": "Colored Line Formatter for Monolog",
             "time": "2019-12-09T10:51:42+00:00"
+        },
+        {
+            "name": "chasdevs/avro-parser",
+            "version": "0.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/chasdevs/avro-parser.git",
+                "reference": "acea56ed43ac2febbd90076ee4c3b8040ad25a7d"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/chasdevs/avro-parser/zipball/acea56ed43ac2febbd90076ee4c3b8040ad25a7d",
+                "reference": "acea56ed43ac2febbd90076ee4c3b8040ad25a7d",
+                "shasum": ""
+            },
+            "require": {
+                "myclabs/php-enum": "^1.7",
+                "php": "^7.4"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^9.2"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "AvroParser\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "chasdevs",
+                    "email": "chasdevs@gmail.com"
+                }
+            ],
+            "description": "A lightweight PHP library for parsing Avro .avsc strings into representative objects. Used in chasdevs/avro-to-php.",
+            "time": "2020-07-15T13:01:16+00:00"
         },
         {
             "name": "doctrine/inflector",
