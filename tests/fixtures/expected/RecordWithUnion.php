@@ -14,6 +14,9 @@ class RecordWithUnion extends BaseRecord
     /** @var int|Thing */
     private $intOrThing;
 
+    /** @var null|Thing */
+    private $nullOrThing;
+
     /** @return string|null */
     public function getOptionalString()
     {
@@ -40,11 +43,25 @@ class RecordWithUnion extends BaseRecord
         return $this;
     }
 
+    /** @return null|Thing */
+    public function getNullOrThing()
+    {
+        return $this->nullOrThing;
+    }
+
+    /** @param null|Thing $nullOrThing */
+    public function setNullOrThing($nullOrThing): RecordWithUnion
+    {
+        $this->nullOrThing = $nullOrThing;
+        return $this;
+    }
+
     public function jsonSerialize()
     {
         return [
             "optionalString" => $this->encode($this->optionalString),
-            "intOrThing" => $this->encode($this->intOrThing)
+            "intOrThing" => $this->encode($this->intOrThing),
+            "nullOrThing" => $this->encode($this->nullOrThing)
         ];
     }
 
@@ -77,6 +94,13 @@ class RecordWithUnion extends BaseRecord
                         }
                     ]
                 }
+            ]
+        },
+        {
+            "name": "nullOrThing",
+            "type": [
+                "null",
+                "Thing"
             ]
         }
     ]

@@ -15,5 +15,8 @@
         "type" : "int"
       } ]
     } ]
+  }, {
+    "name" : "nullOrThing",
+    "type" : [ "null", "Thing" ]
   } ]
 }

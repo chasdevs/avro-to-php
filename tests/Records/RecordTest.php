@@ -7,6 +7,7 @@ use Tests\Expected\Records\RecordWithArray;
 use Tests\Expected\Records\RecordWithEnum;
 use Tests\Expected\Records\RecordWithNestedMap;
 use Tests\Expected\Records\RecordWithRecord;
+use Tests\Expected\Records\RecordWithUnion;
 use Tests\Expected\Records\Thing;
 use Tests\TestCase;
 
@@ -82,6 +83,22 @@ class RecordTest extends TestCase
         $this->assertEquals(1, $decodedRecord->getThing1()->getId());
         $this->assertEquals($expected, $decodedRecord);
 
+    }
+
+    public function testDecodeRecordWithNullableRecord()
+    {
+        $thing = new Thing();
+        $thing->setId(1);
+
+        $expected = new RecordWithUnion();
+        $expected->setIntOrThing(1);
+        $expected->setNullOrThing(null);
+
+        $decodedRecord = new RecordWithUnion();
+        $decodedRecord->decode(['intOrThing'=>1,'nullOrThing' => null]);
+
+        $this->assertNull($decodedRecord->getNullOrThing());
+        $this->assertEquals($expected, $decodedRecord);
     }
 
     public function testRecordDefaults()
