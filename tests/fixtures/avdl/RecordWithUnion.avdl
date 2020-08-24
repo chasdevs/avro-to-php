@@ -6,6 +6,7 @@ protocol x {
   record RecordWithUnion {
     union { string, null } optionalString;
     union { int, records.Thing } intOrThing;
+    union { null, records.Thing} nullOrThing;
   }
 
 }
