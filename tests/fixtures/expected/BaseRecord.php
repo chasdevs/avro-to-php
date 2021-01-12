@@ -63,9 +63,10 @@ abstract class BaseRecord implements JsonSerializable
         $record = AvroRecord::create(json_decode($this->schema()), 'one.two');
 
         /** @var AvroField[] $fieldMap */
-        $fieldMap = collect($record->fields)->mapWithKeys(function (AvroField $field) {
-            return [$field->name => $field];
-        });
+        $fieldMap = array_reduce($record->fields, function (array $carry, AvroField $field) {
+            $carry[$field->name] = $field;
+            return $carry;
+        }, []);
 
         $refl = new ReflectionClass($this);
 

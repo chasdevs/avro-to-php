@@ -17,7 +17,7 @@
         "php": "^7.4",
         "ext-json": "*",
         "bramus/monolog-colored-line-formatter": "~3.0",
-        "chasdevs/avro-parser": "^0.0.3",
+        "chasdevs/avro-parser": "^0.0.4",
         "flix-tech/avro-serde-php": "^1.3",
         "illuminate/log": "^7.10",
         "laravel-zero/framework": "^7.2",
