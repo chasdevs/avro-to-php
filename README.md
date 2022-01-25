@@ -2,6 +2,8 @@
 
 Compile Avro .avsc files into usable PHP classes.
 
+Supports PHP >=7.4
+
 ### Installation
 ```bash
 composer require chasdevs/avro-to-php
