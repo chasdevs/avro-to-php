@@ -14,20 +14,20 @@
         }
     ],
     "require": {
-        "php": "^7.4",
+        "php": "^8.1",
         "ext-json": "*",
         "bramus/monolog-colored-line-formatter": "~3.0",
-        "chasdevs/avro-parser": "^0.0.4",
+        "chasdevs/avro-parser": "^0.0.5",
         "flix-tech/avro-serde-php": "^1.3",
-        "illuminate/log": "^7.10",
-        "laravel-zero/framework": "^7.2",
+        "illuminate/log": "^v8.83",
+        "laravel-zero/framework": "^8.10",
         "myclabs/php-enum": "^1.7",
         "twig/twig": "^3.0"
     },
     "require-dev": {
         "mockery/mockery": "^1.0",
         "mvccore/ext-debug-tracy": "^4.3",
-        "phpunit/phpunit": "^7.5"
+        "phpunit/phpunit": "^9.5"
     },
     "autoload": {
         "psr-4": {
@@ -36,7 +36,10 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "Tests\\": "tests/"
+            "Tests\\": "tests/",
+            "Tests\\Expected\\Records\\": "tests/fixtures/expected",
+            "Tests\\Expected\\": "tests/fixtures/expected",
+            "Tests\\Expected\\Records\\Nested\\": "tests/fixtures/expected"
         }
     },
     "config": {

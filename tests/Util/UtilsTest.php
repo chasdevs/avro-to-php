@@ -29,7 +29,7 @@ class UtilsTest extends TestCase {
         Utils::ensureDir($file);
         $this->assertDirectoryExists($dir);
         Utils::rmDir($dir);
-        $this->assertDirectoryNotExists($dir);
+        $this->assertDirectoryDoesNotExist($dir);
     }
 
 }

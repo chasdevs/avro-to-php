@@ -13,7 +13,7 @@ class CompilerTest extends TestCase
     private const FIXTURES = __DIR__ . '/../fixtures';
     private const OUTDIR = __DIR__ . '/../data/compiled';
 
-    public static function setUpBeforeClass()
+    public static function setUpBeforeClass(): void
     {
         Utils::rmDir(self::OUTDIR);
     }
