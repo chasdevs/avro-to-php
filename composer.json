@@ -45,10 +45,7 @@
     "config": {
         "preferred-install": "dist",
         "sort-packages": true,
-        "optimize-autoloader": true,
-        "allow-plugins": {
-            "bamarni/composer-bin-plugin": true
-        }
+        "optimize-autoloader": true
     },
     "scripts": {
         "post-create-project-cmd": [
