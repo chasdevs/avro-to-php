@@ -24,8 +24,7 @@
         "twig/twig": "^3.0"
     },
     "require-dev": {
-        "bamarni/composer-bin-plugin": "^1.8",
-        "mockery/mockery": "^1.0",
+          "mockery/mockery": "^1.0",
         "mvccore/ext-debug-tracy": "^5.0",
         "phpunit/phpunit": "^9.5"
     },
