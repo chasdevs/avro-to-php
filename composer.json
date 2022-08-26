@@ -24,7 +24,7 @@
         "twig/twig": "^3.0"
     },
     "require-dev": {
-          "mockery/mockery": "^1.0",
+        "mockery/mockery": "^1.0",
         "mvccore/ext-debug-tracy": "^5.0",
         "phpunit/phpunit": "^9.5"
     },
