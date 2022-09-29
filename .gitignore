@@ -3,3 +3,4 @@ vendor
 compiled
 .gradle
 xdebug.log
+.phpunit.result.cache
