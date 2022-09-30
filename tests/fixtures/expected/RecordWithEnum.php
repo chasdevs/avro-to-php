@@ -56,7 +56,7 @@ class RecordWithEnum extends BaseRecord
         return $this;
     }
 
-    public function jsonSerialize()
+    public function jsonSerialize(): array
     {
         return [
             "favoriteFlavor" => $this->encode($this->favoriteFlavor),

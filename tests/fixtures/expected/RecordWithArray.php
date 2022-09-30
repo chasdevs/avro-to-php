@@ -40,7 +40,7 @@ class RecordWithArray extends BaseRecord
         return $this;
     }
 
-    public function jsonSerialize()
+    public function jsonSerialize(): array
     {
         return [
             "things" => $this->encode($this->things),

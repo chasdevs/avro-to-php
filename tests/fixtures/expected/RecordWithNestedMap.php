@@ -24,7 +24,7 @@ class RecordWithNestedMap extends BaseRecord
         return $this;
     }
 
-    public function jsonSerialize()
+    public function jsonSerialize(): array
     {
         return [
             "thingMapMap" => $this->encode($this->thingMapMap)
