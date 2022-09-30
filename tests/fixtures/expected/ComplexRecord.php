@@ -41,7 +41,7 @@ class ComplexRecord extends BaseRecord
         return $this;
     }
 
-    public function jsonSerialize()
+    public function jsonSerialize(): array
     {
         return [
             "thing" => $this->encode($this->thing),
