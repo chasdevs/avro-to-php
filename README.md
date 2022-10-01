@@ -16,7 +16,7 @@ vendor/bin/avro-to-php compile dir/with/avsc/
 
 ### Releasing
 1. Update VER in Makefile
-1. Run `make release`
+2. Run `make release`
 
 ### Roadmap
 
