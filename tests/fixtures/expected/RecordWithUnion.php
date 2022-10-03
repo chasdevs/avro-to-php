@@ -56,7 +56,7 @@ class RecordWithUnion extends BaseRecord
         return $this;
     }
 
-    public function jsonSerialize()
+    public function jsonSerialize(): array
     {
         return [
             "optionalString" => $this->encode($this->optionalString),
