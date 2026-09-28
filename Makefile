@@ -14,7 +14,7 @@ ERROR_STRING=$(ERROR_COLOR)%s$(END) # printf '$(ERROR_STRING) %s' 'Error text in
 
 VER?=3.2.0
 
-.PHONY: init test release image
+.PHONY: init test build release image
 
 init:
 	composer install
@@ -24,8 +24,13 @@ test:
 	vendor/bin/phpunit tests
 	# $(OK) test
 
-release:
-	./avro-to-php app:build --build-version=$(VER) avro-to-php
+# PHP_INI_SCAN_DIR with a leading ":" appends ini/ to PHP's default scan directory, so the
+# developer's php.ini and extensions still load. See ini/build.ini for why this is needed.
+build:
+	PHP_INI_SCAN_DIR=":$(CURDIR)/ini" ./avro-to-php app:build --build-version=$(VER) avro-to-php
+	# $(OK) build
+
+release: build
 	git add .
 	git commit -m "$(VER)"
 	git tag "$(VER)"
