@@ -46,9 +46,16 @@ abstract class BaseRecord implements JsonSerializable
         return $this->encode($this);
     }
 
+    /**
+     * Round-trips a value through JSON so nested records and enums collapse to plain arrays and scalars.
+     *
+     * JSON_INVALID_UTF8_SUBSTITUTE replaces malformed UTF-8 byte sequences with U+FFFD. Without it,
+     * json_encode() returns false for any string containing invalid UTF-8, json_decode(false) yields
+     * null, and the field is silently dropped from data().
+     */
     protected function encode($mixed)
     {
-        return json_decode(json_encode($mixed), true);
+        return json_decode(json_encode($mixed, JSON_INVALID_UTF8_SUBSTITUTE), true);
     }
 
     /**
