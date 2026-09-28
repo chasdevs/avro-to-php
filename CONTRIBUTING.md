@@ -13,3 +13,4 @@ email, or any other method with the owners of this repository before making a ch
 ## Release Process
 
 1. A collaborator will update the version number in Makefile and then run `make release`, which will add a new commit and tag to github/packagist, and then build/publish a new image to Dockerhub.
+1. `make build` rebuilds the PHAR on its own. It works on PHP 8.2+ as well as 8.1; see `ini/build.ini` for the deprecation workaround the build applies.
